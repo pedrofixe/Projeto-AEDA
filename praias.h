@@ -29,7 +29,7 @@ class praiaFluvial
 	unsigned int capacidade;
 	bool ServicosPraia;
 	vector<Servicos> ServicosDaPraia;
-}
+};
 
 
 class rio : public praiaFluvial
