@@ -4,6 +4,12 @@
 
 using namespace std;
 
+class Turismo
+{
+	bool CamposDeJogos;
+	bool Alojamentos;
+
+};
 
 class praiaFluvial
 {
@@ -11,8 +17,8 @@ class praiaFluvial
 	string GPS;
 	bool bandeiraAzul;
 	unsigned int capacidade;
-	//pontos turisticos
-
+	bool ServicosPraia;
+	vector<Servicos> ServicosDaPraia;
 }
 
 
@@ -22,8 +28,7 @@ class rio : public praiaFluvial
 	unsigned int caudalMax;
 	unsigned int profundidadeMax;
 
-
-}
+};
 
 
 class albufeira : public praiaFluvial
@@ -31,7 +36,16 @@ class albufeira : public praiaFluvial
 	unsigned int area;
 
 
-}
+};
 
+class Servicos : public praiaFluvial
+{
+	bool Restaurantes;
+	unsigned int Nrestaurantes;
+	bool AluguerDeBarcos;
+
+
+
+};
 
 #endif
