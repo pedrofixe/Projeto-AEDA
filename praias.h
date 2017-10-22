@@ -1,8 +1,18 @@
 #ifndef PRAIAS_INCLUDED
 #define PRAIAS_INCLUDED
 #include <string>
+#include <vector>
 
 using namespace std;
+
+class Servicos
+{
+	bool Restaurantes;
+	unsigned int Nrestaurantes;
+	bool AluguerDeBarcos;
+};
+
+
 
 class Turismo
 {
@@ -34,16 +44,6 @@ class rio : public praiaFluvial
 class albufeira : public praiaFluvial
 {
 	unsigned int area;
-
-
-};
-
-class Servicos : public praiaFluvial
-{
-	bool Restaurantes;
-	unsigned int Nrestaurantes;
-	bool AluguerDeBarcos;
-
 
 
 };
