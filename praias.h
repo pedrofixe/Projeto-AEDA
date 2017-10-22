@@ -1,16 +1,17 @@
 #ifndef PRAIAS_INCLUDED
 #define PRAIAS_INCLUDED
+#include <string>
+
+using namespace std;
 
 
 class praiaFluvial
 {
-	//Concelho
-	//coordenadas
+	string Concelho;
+	string GPS;
 	bool bandeiraAzul;
 	unsigned int capacidade;
 	//pontos turisticos
-
-
 
 }
 
