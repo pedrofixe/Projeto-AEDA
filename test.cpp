@@ -13,7 +13,7 @@ int main()
 
 	GPS coisas(65,32,12);
 
-	cout << "Coordenada : " << coisas;
+	cout << "Coordenadas : " << coisas;
 
 
 	cout << "\n\n";

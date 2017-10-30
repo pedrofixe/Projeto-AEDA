@@ -9,15 +9,16 @@ using namespace std;
 
 class GPS {
 
-	unsigned int grau;
+	unsigned int graus;
 	unsigned int minutos;
 	unsigned int segundos;
 
-	GPS(unsigned int grau, unsigned int minutos, unsigned int segundos);
-	ostream operator <<(ostream & o,const GPS & input);
+	GPS(unsigned int graus, unsigned int minutos, unsigned int segundos);
 	double distance(const GPS & gps2);
 
-}
+};
+	ostream& operator <<(ostream & os,const GPS & input);
+
 
 class CoordenadasErradas {
 	
@@ -25,7 +26,7 @@ class CoordenadasErradas {
 
 public:
 
-	CoorddenadasErradas(GPS input);
+	CoordenadasErradas(GPS input);
 
 	GPS getGPS()
 	{
@@ -33,7 +34,7 @@ public:
 	}
 
 
-}
+};
 
 
 class Servicos
