@@ -1,43 +1,12 @@
-#ifndef PRAIAS_INCLUDED
-#define PRAIAS_INCLUDED
-#include <string>
+#ifndef PRAIAS_H
+#define PRAIAS_H
+
 #include <vector>
-#include <ostream>
-
-using namespace std;
-
-
-class GPS {
-
-	unsigned int graus;
-	unsigned int minutos;
-	unsigned int segundos;
-
-	GPS(unsigned int graus, unsigned int minutos, unsigned int segundos);
-	double distance(const GPS & gps2);
-
-};
-	ostream& operator <<(ostream & os,const GPS & input);
+#include <string>
+#include "GPS.h"
 
 
-class CoordenadasErradas {
-	
-	GPS input;
-
-public:
-
-	CoordenadasErradas(GPS input);
-
-	GPS getGPS()
-	{
-		return input;
-	}
-
-
-};
-
-
-class Servicos
+class Servico
 {
 	bool Restaurantes;
 	unsigned int Nrestaurantes;
@@ -54,12 +23,15 @@ class Turismo
 
 class praiaFluvial
 {
-	praiaFluvial(string concelho, string gps, bool bandeirazul, unsigned int capacidade, bool servicos, vector<Servicos> servicosdapraia);
-	string concelho;
-	string GPS;
+	std::string concelho;
+	GPS gps;
 	bool bandeiraazul;
 	unsigned int capacidade;
-	vector<Servicos> servicosdapraia;
+	std::vector<Servico> servicosdapraia;
+public:
+	praiaFluvial();
+	praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<Servico> servicosdapraia);
+
 };
 
 

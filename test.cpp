@@ -1,7 +1,6 @@
 #include <iostream>
-#include <string>
-#include <vector>
 #include "praias.h"
+#include "GPS.h"
 
 using namespace std;
 
