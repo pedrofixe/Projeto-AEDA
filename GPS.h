@@ -5,17 +5,16 @@
 
 class GPS {
 
-	unsigned int graus;
-	unsigned int minutos;
-	unsigned int segundos;
+	double latitude;
+	double longitude;
 public:
 
 	GPS();
-	GPS(unsigned int graus, unsigned int minutos, unsigned int segundos);
+	GPS(double latitude, double longitude);
 	double distance(const GPS & gps2);
-	unsigned int getGraus() const;
-	unsigned int getMinutos() const;
-	unsigned int getSegundos() const;
+	double getLatitude() const;
+	double getLongitude() const;
+	
 
 };
 std::ostream& operator <<(std::ostream & os,const GPS & input);

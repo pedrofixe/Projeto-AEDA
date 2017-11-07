@@ -23,7 +23,7 @@ double degreesToRadians(double input) {
 
 double GPS::distance(const GPS & gps2) {
 
-	double a = 
+	double a = pow(sin(this->graus - gp2.graus), 2) + cos(this->)
 
 }
 

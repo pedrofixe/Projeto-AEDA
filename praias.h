@@ -6,21 +6,6 @@
 #include "GPS.h"
 
 
-class Servico
-{
-	bool Restaurantes;
-	unsigned int Nrestaurantes;
-	bool AluguerDeBarcos;
-};
-
-
-class Turismo
-{
-	bool CamposDeJogos;
-	bool Alojamentos;
-
-};
-
 class praiaFluvial
 {
 	std::string concelho;
