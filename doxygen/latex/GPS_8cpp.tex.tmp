@@ -1,0 +1,54 @@
+\hypertarget{GPS_8cpp}{}\section{/mnt/\+B09\+E79689\+E7927\+C\+C/\+Users/yurby/\+Desktop/\+Estudos/2º ano/1º Semestre/\+A\+E\+D\+A/\+Projeto-\/\+A\+E\+D\+A/\+G\+PS.cpp File Reference}
+\label{GPS_8cpp}\index{/mnt/\+B09\+E79689\+E7927\+C\+C/\+Users/yurby/\+Desktop/\+Estudos/2º ano/1º Semestre/\+A\+E\+D\+A/\+Projeto-\/\+A\+E\+D\+A/\+G\+P\+S.\+cpp@{/mnt/\+B09\+E79689\+E7927\+C\+C/\+Users/yurby/\+Desktop/\+Estudos/2º ano/1º Semestre/\+A\+E\+D\+A/\+Projeto-\/\+A\+E\+D\+A/\+G\+P\+S.\+cpp}}
+{\ttfamily \#include \char`\"{}G\+P\+S.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+Include dependency graph for G\+P\+S.\+cpp\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{GPS_8cpp_a1daf785e3f68d293c7caa1c756d5cb74}{pi}~atan(1)$\ast$4
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{GPS_8cpp_a81573ec9dc3f0b6f6a431c70dd82ebe1}{degrees\+To\+Radians} (double input)
+\item 
+ostream \& \hyperlink{GPS_8cpp_a97007c93874fce77f4d9e14c92ca88fa}{operator$<$$<$} (ostream \&os, const \hyperlink{classGPS}{G\+PS} \&input)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{G\+P\+S.\+cpp@{G\+P\+S.\+cpp}!pi@{pi}}
+\index{pi@{pi}!G\+P\+S.\+cpp@{G\+P\+S.\+cpp}}
+\subsubsection[{\texorpdfstring{pi}{pi}}]{\setlength{\rightskip}{0pt plus 5cm}\#define pi~atan(1)$\ast$4}\hypertarget{GPS_8cpp_a1daf785e3f68d293c7caa1c756d5cb74}{}\label{GPS_8cpp_a1daf785e3f68d293c7caa1c756d5cb74}
+
+
+Definition at line 5 of file G\+P\+S.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\index{G\+P\+S.\+cpp@{G\+P\+S.\+cpp}!degrees\+To\+Radians@{degrees\+To\+Radians}}
+\index{degrees\+To\+Radians@{degrees\+To\+Radians}!G\+P\+S.\+cpp@{G\+P\+S.\+cpp}}
+\subsubsection[{\texorpdfstring{degrees\+To\+Radians(double input)}{degreesToRadians(double input)}}]{\setlength{\rightskip}{0pt plus 5cm}double degrees\+To\+Radians (
+\begin{DoxyParamCaption}
+\item[{double}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{GPS_8cpp_a81573ec9dc3f0b6f6a431c70dd82ebe1}{}\label{GPS_8cpp_a81573ec9dc3f0b6f6a431c70dd82ebe1}
+
+
+Definition at line 19 of file G\+P\+S.\+cpp.
+
+\index{G\+P\+S.\+cpp@{G\+P\+S.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!G\+P\+S.\+cpp@{G\+P\+S.\+cpp}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(ostream \&os, const G\+P\+S \&input)}{operator<<(ostream &os, const GPS &input)}}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf G\+PS} \&}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{GPS_8cpp_a97007c93874fce77f4d9e14c92ca88fa}{}\label{GPS_8cpp_a97007c93874fce77f4d9e14c92ca88fa}
+
+
+Definition at line 42 of file G\+P\+S.\+cpp.
+
