@@ -23,23 +23,21 @@ double degreesToRadians(double input) {
 
 double GPS::distance(const GPS & gps2) {
 
-	double a = pow(sin(this->graus - gp2.graus), 2) + cos(this->)
+	
 
 }
 
 
 
-unsigned int GPS::getGraus() const {
-	return graus;
+double GPS::getLatitude() const {
+	return latitude;
 }
-unsigned int GPS::getMinutos() const {
-	return minutos;
+double GPS::getLatitude() const {
+	return longitude;
 }
-unsigned int GPS::getSegundos() const {
-	return segundos;
-}
+
 
 ostream & operator<< (ostream & os,const GPS & input) {
 
-	return (os << input.getGraus() << "º" << input.getMinutos() << '\'' << input.getSegundos() << '\"');
+	return (os << input.getLatitude() << " , " << input.getLongitude());
 }
