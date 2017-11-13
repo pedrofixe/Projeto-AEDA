@@ -12,10 +12,8 @@ Include dependency graph for G\+P\+S.\+cpp\+:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \hyperlink{GPS_8cpp_a81573ec9dc3f0b6f6a431c70dd82ebe1}{degrees\+To\+Radians} (double input)
-\item 
 ostream \& \hyperlink{GPS_8cpp_a97007c93874fce77f4d9e14c92ca88fa}{operator$<$$<$} (ostream \&os, const \hyperlink{classGPS}{G\+PS} \&input)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Streams a \hyperlink{classGPS}{G\+PS} type variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
@@ -29,17 +27,6 @@ Definition at line 5 of file G\+P\+S.\+cpp.
 
 
 \subsection{Function Documentation}
-\index{G\+P\+S.\+cpp@{G\+P\+S.\+cpp}!degrees\+To\+Radians@{degrees\+To\+Radians}}
-\index{degrees\+To\+Radians@{degrees\+To\+Radians}!G\+P\+S.\+cpp@{G\+P\+S.\+cpp}}
-\subsubsection[{\texorpdfstring{degrees\+To\+Radians(double input)}{degreesToRadians(double input)}}]{\setlength{\rightskip}{0pt plus 5cm}double degrees\+To\+Radians (
-\begin{DoxyParamCaption}
-\item[{double}]{input}
-\end{DoxyParamCaption}
-)}\hypertarget{GPS_8cpp_a81573ec9dc3f0b6f6a431c70dd82ebe1}{}\label{GPS_8cpp_a81573ec9dc3f0b6f6a431c70dd82ebe1}
-
-
-Definition at line 19 of file G\+P\+S.\+cpp.
-
 \index{G\+P\+S.\+cpp@{G\+P\+S.\+cpp}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!G\+P\+S.\+cpp@{G\+P\+S.\+cpp}}
 \subsubsection[{\texorpdfstring{operator$<$$<$(ostream \&os, const G\+P\+S \&input)}{operator<<(ostream &os, const GPS &input)}}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
@@ -50,5 +37,19 @@ Definition at line 19 of file G\+P\+S.\+cpp.
 )}\hypertarget{GPS_8cpp_a97007c93874fce77f4d9e14c92ca88fa}{}\label{GPS_8cpp_a97007c93874fce77f4d9e14c92ca88fa}
 
 
-Definition at line 42 of file G\+P\+S.\+cpp.
+Streams a \hyperlink{classGPS}{G\+PS} type variable. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em os} & output stream \\
+\hline
+\mbox{\tt in}  & {\em input} & input \hyperlink{classGPS}{G\+PS}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+os with \hyperlink{classGPS}{G\+PS} streamed to it 
+\end{DoxyReturn}
+
+
+Definition at line 85 of file G\+P\+S.\+cpp.
 

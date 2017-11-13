@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['turismo',['Turismo',['../classTurismo.html',1,'']]]
+  ['wrongcoordinates',['WrongCoordinates',['../classWrongCoordinates.html',1,'']]]
 ];

@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+/**
+ * @brief      Class for GPS coordinates.
+ */
 class GPS {
 
 	double latitude;
@@ -14,19 +17,22 @@ public:
 	double distance(const GPS & gps2);
 	double getLatitude() const;
 	double getLongitude() const;
+	double degreesToRadians(const double & input) const;
 	
 
 };
 std::ostream& operator <<(std::ostream & os,const GPS & input);
 
-
-class CoordenadasErradas {
+/**
+ * @brief      Class for handling wrong coordinates in GPS.
+ */
+class WrongCoordinates {
 	
 	GPS input;
 
 public:
 
-	CoordenadasErradas(GPS input);
+	WrongCoordinates(GPS input);
 
 	GPS getGPS()
 	{

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_3c_3c',['operator&lt;&lt;',['../GPS_8cpp.html#a97007c93874fce77f4d9e14c92ca88fa',1,'operator&lt;&lt;(ostream &amp;os, const GPS &amp;input):&#160;GPS.cpp'],['../GPS_8h.html#a2046452c558cee758c000c10ef326d3d',1,'operator&lt;&lt;(std::ostream &amp;os, const GPS &amp;input):&#160;GPS.h']]]
+  ['praiafluvial',['praiaFluvial',['../classpraiaFluvial.html#ab88371de4e3b999d9150d1ee5d7f7673',1,'praiaFluvial::praiaFluvial()'],['../classpraiaFluvial.html#a75582da73fa39908bb5232f06fcede91',1,'praiaFluvial::praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector&lt; Servico &gt; servicosdapraia)']]],
+  ['praiainfo',['praiaInfo',['../classGestorPraias.html#a3ca2b8df0d548fce361692853f819ff1',1,'GestorPraias']]]
 ];

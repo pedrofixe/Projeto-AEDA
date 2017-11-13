@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['test_2ecpp',['test.cpp',['../test_8cpp.html',1,'']]],
-  ['turismo',['Turismo',['../classTurismo.html',1,'']]]
+  ['wrongcoordinates',['WrongCoordinates',['../classWrongCoordinates.html',1,'WrongCoordinates'],['../classWrongCoordinates.html#a38bb5f262b63d291b31d047dc57483c2',1,'WrongCoordinates::WrongCoordinates()']]]
 ];

@@ -2,27 +2,34 @@
 \label{classGPS}\index{G\+PS@{G\+PS}}
 
 
+Class for \hyperlink{classGPS}{G\+PS} coordinates.  
+
+
+
+
 {\ttfamily \#include $<$G\+P\+S.\+h$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classGPS_a0c347a188512d0d5cf7ed5c91b145fc4}{G\+PS} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs the object. \end{DoxyCompactList}\item 
 \hyperlink{classGPS_aef8b0d02153efdf5dc94f3249e79c913}{G\+PS} (double latitude, double longitude)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs the object. \end{DoxyCompactList}\item 
 double \hyperlink{classGPS_ae4ef07b40563fc8e3eff42663b23e4a6}{distance} (const \hyperlink{classGPS}{G\+PS} \&gps2)
-\item 
+\begin{DoxyCompactList}\small\item\em Calculates de distance between two \hyperlink{classGPS}{G\+PS} coordiantes. \end{DoxyCompactList}\item 
 double \hyperlink{classGPS_a3838be0e132205e5964d62feff22a942}{get\+Latitude} () const 
-\item 
+\begin{DoxyCompactList}\small\item\em Gets the latitude. \end{DoxyCompactList}\item 
 double \hyperlink{classGPS_a38f262c800ff15583b0f1a5e52cd8a95}{get\+Longitude} () const 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets the longitude. \end{DoxyCompactList}\item 
+double \hyperlink{classGPS_a4c0a2af15fb71993b8d801a1853d7f59}{degrees\+To\+Radians} (const double \&input) const 
+\begin{DoxyCompactList}\small\item\em Converts degrees to radians. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+Class for \hyperlink{classGPS}{G\+PS} coordinates. 
 
-
-Definition at line 6 of file G\+P\+S.\+h.
+Definition at line 9 of file G\+P\+S.\+h.
 
 
 
@@ -36,7 +43,11 @@ Definition at line 6 of file G\+P\+S.\+h.
 )}\hypertarget{classGPS_a0c347a188512d0d5cf7ed5c91b145fc4}{}\label{classGPS_a0c347a188512d0d5cf7ed5c91b145fc4}
 
 
-Definition at line 9 of file G\+P\+S.\+cpp.
+Constructs the object. 
+
+
+
+Definition at line 12 of file G\+P\+S.\+cpp.
 
 \index{G\+PS@{G\+PS}!G\+PS@{G\+PS}}
 \index{G\+PS@{G\+PS}!G\+PS@{G\+PS}}
@@ -48,7 +59,45 @@ Definition at line 9 of file G\+P\+S.\+cpp.
 )}\hypertarget{classGPS_aef8b0d02153efdf5dc94f3249e79c913}{}\label{classGPS_aef8b0d02153efdf5dc94f3249e79c913}
 
 
+Constructs the object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em latitude} & The latitude \\
+\hline
+\mbox{\tt in}  & {\em longitude} & The longitude \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 21 of file G\+P\+S.\+cpp.
+
+
+
 \subsection{Member Function Documentation}
+\index{G\+PS@{G\+PS}!degrees\+To\+Radians@{degrees\+To\+Radians}}
+\index{degrees\+To\+Radians@{degrees\+To\+Radians}!G\+PS@{G\+PS}}
+\subsubsection[{\texorpdfstring{degrees\+To\+Radians(const double \&input) const }{degreesToRadians(const double &input) const }}]{\setlength{\rightskip}{0pt plus 5cm}double G\+P\+S\+::degrees\+To\+Radians (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{input}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGPS_a4c0a2af15fb71993b8d801a1853d7f59}{}\label{classGPS_a4c0a2af15fb71993b8d801a1853d7f59}
+
+
+Converts degrees to radians. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Input in degrees\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+input in radians 
+\end{DoxyReturn}
+
+
+Definition at line 34 of file G\+P\+S.\+cpp.
+
 \index{G\+PS@{G\+PS}!distance@{distance}}
 \index{distance@{distance}!G\+PS@{G\+PS}}
 \subsubsection[{\texorpdfstring{distance(const G\+P\+S \&gps2)}{distance(const GPS &gps2)}}]{\setlength{\rightskip}{0pt plus 5cm}double G\+P\+S\+::distance (
@@ -58,7 +107,19 @@ Definition at line 9 of file G\+P\+S.\+cpp.
 )}\hypertarget{classGPS_ae4ef07b40563fc8e3eff42663b23e4a6}{}\label{classGPS_ae4ef07b40563fc8e3eff42663b23e4a6}
 
 
-Definition at line 24 of file G\+P\+S.\+cpp.
+Calculates de distance between two \hyperlink{classGPS}{G\+PS} coordiantes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gps2} & The second set of \hyperlink{classGPS}{G\+PS} coordinates\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distance between $\ast$this and gps2 
+\end{DoxyReturn}
+
+
+Definition at line 45 of file G\+P\+S.\+cpp.
 
 \index{G\+PS@{G\+PS}!get\+Latitude@{get\+Latitude}}
 \index{get\+Latitude@{get\+Latitude}!G\+PS@{G\+PS}}
@@ -67,6 +128,17 @@ Definition at line 24 of file G\+P\+S.\+cpp.
 {}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classGPS_a3838be0e132205e5964d62feff22a942}{}\label{classGPS_a3838be0e132205e5964d62feff22a942}
+
+
+Gets the latitude. 
+
+\begin{DoxyReturn}{Returns}
+The latitude. 
+\end{DoxyReturn}
+
+
+Definition at line 65 of file G\+P\+S.\+cpp.
+
 \index{G\+PS@{G\+PS}!get\+Longitude@{get\+Longitude}}
 \index{get\+Longitude@{get\+Longitude}!G\+PS@{G\+PS}}
 \subsubsection[{\texorpdfstring{get\+Longitude() const }{getLongitude() const }}]{\setlength{\rightskip}{0pt plus 5cm}double G\+P\+S\+::get\+Longitude (
@@ -74,6 +146,17 @@ Definition at line 24 of file G\+P\+S.\+cpp.
 {}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classGPS_a38f262c800ff15583b0f1a5e52cd8a95}{}\label{classGPS_a38f262c800ff15583b0f1a5e52cd8a95}
+
+
+Gets the longitude. 
+
+\begin{DoxyReturn}{Returns}
+The longitude. 
+\end{DoxyReturn}
+
+
+Definition at line 73 of file G\+P\+S.\+cpp.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
