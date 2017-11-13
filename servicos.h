@@ -4,6 +4,9 @@
 #include <string>
 #include "GPS.h"
 
+/**
+ * @brief      Class for servico.
+ */
 class servico
 {	
 	std::string nome;
@@ -18,6 +21,9 @@ public:
 };
 
 
+/**
+ * @brief      Class for nadador salvador. Derivates from servico.
+ */
 class nadadorSalvador : public servico
 {
 
@@ -28,6 +34,9 @@ public:
 
 };
 
+/**
+ * @brief      Class for cafe. Derivates from servico.
+ */
 class cafe : public servico
 {
 public:
@@ -37,6 +46,9 @@ public:
 	
 };
 
+/**
+ * @brief      Class for restaurante. Derivates from servico.
+ */
 class restaurante : public servico
 {
 public:
@@ -46,12 +58,15 @@ public:
 	
 };
 
-class campo : public servico
+/**
+ * @brief      Class for campo. Derivates from servico.
+ */
+class campoDesportivo : public servico
 {
 public:
-	campo();
-	campo(std::string nome, GPS gps);
-	~campo();
+	campoDesportivo();
+	campoDesportivo(std::string nome, GPS gps);
+	~campoDesportivo();
 
 };
 
