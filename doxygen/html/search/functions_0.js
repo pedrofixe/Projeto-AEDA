@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['degreestoradians',['degreesToRadians',['../classGPS.html#a4c0a2af15fb71993b8d801a1853d7f59',1,'GPS']]],
-  ['distance',['distance',['../classGPS.html#ae4ef07b40563fc8e3eff42663b23e4a6',1,'GPS']]]
+  ['cafe',['cafe',['../classcafe.html#adba1f6db18925c9bbfe89bc721edf967',1,'cafe::cafe()'],['../classcafe.html#aa9f759d9fe6b0b0e586b783ec50ad64b',1,'cafe::cafe(std::string nome, GPS gps)']]],
+  ['campo',['campo',['../classcampo.html#aab536d023bc5f7675202faa255e4ef29',1,'campo::campo()'],['../classcampo.html#a91786d61a239504821b13652071ae5cb',1,'campo::campo(std::string nome, GPS gps)']]]
 ];

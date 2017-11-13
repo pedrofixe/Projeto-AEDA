@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['praiafluvial',['praiaFluvial',['../praias_8h.html#ab88371de4e3b999d9150d1ee5d7f7673',1,'praiaFluvial():&#160;praias.cpp'],['../praias_8h.html#adb0dd9280eb29d819afa50ccb6aae9a0',1,'praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector&lt; Servico &gt; servicosdapraia):&#160;praias.h']]],
-  ['praiainfo',['praiaInfo',['../classGestorPraias.html#a3ca2b8df0d548fce361692853f819ff1',1,'GestorPraias']]]
+  ['nadadorsalvador',['nadadorSalvador',['../classnadadorSalvador.html#a81cc8699fe9ae9457ee81e81b8e8f7fd',1,'nadadorSalvador::nadadorSalvador()'],['../classnadadorSalvador.html#a12066255a547b7d0d11f7b648ba7730a',1,'nadadorSalvador::nadadorSalvador(std::string nome, GPS gps)']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['turismo',['Turismo',['../classTurismo.html',1,'']]]
+  ['restaurante',['restaurante',['../classrestaurante.html',1,'']]],
+  ['rio',['rio',['../classrio.html',1,'']]]
 ];

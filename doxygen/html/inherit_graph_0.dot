@@ -3,11 +3,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="praiaFluvial",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="albufeira",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classalbufeira.html",tooltip="Class for albufeira. "];
-  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="GestorPraias",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGestorPraias.html"];
-  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="rio",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classrio.html",tooltip="Class for rio. "];
+  Node1 [label="GPS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGPS.html",tooltip="Class for GPS coordinates. "];
 }

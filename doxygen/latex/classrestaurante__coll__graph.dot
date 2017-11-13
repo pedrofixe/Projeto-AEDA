@@ -4,5 +4,5 @@ digraph "restaurante"
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="restaurante",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
   Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="servico",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classservico.html"];
+  Node2 [label="servico",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classservico.html",tooltip="Class for servico. "];
 }
