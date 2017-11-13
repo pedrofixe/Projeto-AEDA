@@ -28,16 +28,13 @@ std::ostream& operator <<(std::ostream & os,const GPS & input);
  */
 class WrongCoordinates {
 	
-	GPS input;
+	GPS gps;
 
 public:
 
-	WrongCoordinates(GPS input);
+	WrongCoordinates(GPS gps);
 
-	GPS getGPS()
-	{
-		return input;
-	}
+	GPS getGPS();
 
 
 };

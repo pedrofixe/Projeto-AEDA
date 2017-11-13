@@ -21,7 +21,7 @@ GPS::GPS()
 GPS::GPS(double latitude, double longitude): latitude(latitude), longitude(longitude)
 {	
 	if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180)
-		throw 
+		throw WrongCoordinates(*this);
 }
 
 /**
@@ -86,3 +86,6 @@ ostream & operator<< (ostream & os,const GPS & input) {
 
 	return (os << input.getLatitude() << " , " << input.getLongitude());
 }
+
+
+//------------------------------WRONGCOORDINATES------------------------------

@@ -20,7 +20,7 @@ class praiaFluvial
 	std::vector<servico> servicosdapraia;
 public:
 	praiaFluvial();
-	praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<Servico> servicosdapraia);
+	praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia);
 	std::string getNome();
 	GPS getGPS();
 	std::string getConcelho();
@@ -61,7 +61,7 @@ class GestorPraias : public praiaFluvial
 	std::vector<praiaFluvial> praias;
 public:
 	GestorPraias();
-	void praiaInfo(string praia);
+	void praiaInfo(std::string praia);
 };
 
 #endif
