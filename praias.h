@@ -4,9 +4,7 @@
 #include <vector>
 #include <string>
 #include "GPS.h"
-
-
-
+#include "servicos.h"
 
 /**
  * @brief      Class for praias fluviais.
@@ -19,7 +17,7 @@ class praiaFluvial
 	GPS gps;
 	bool bandeiraazul;
 	unsigned int capacidade;
-	std::vector<Servico> servicosdapraia;
+	std::vector<servico> servicosdapraia;
 public:
 	praiaFluvial();
 	praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<Servico> servicosdapraia);
@@ -28,8 +26,6 @@ public:
 	std::string getConcelho();
 	bool getBandeiraAzul();
 	unsigned int getCapacidade();
-
-
 };
 
 /**
@@ -47,6 +43,9 @@ public:
 };
 
 
+/**
+* @brief      Class for albufeira.
+*/
 class albufeira : public praiaFluvial
 {
 	unsigned int area;
@@ -54,6 +53,9 @@ public:
 	unsigned int getArea() { return this->area; }
 };
 
+/**
+* @brief      Class for GestorPraias.
+*/
 class GestorPraias : public praiaFluvial
 {
 	std::vector<praiaFluvial> praias;

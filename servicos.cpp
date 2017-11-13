@@ -18,7 +18,7 @@ public:
 
 }
 
-class cafe : public ser
+class cafe : public servico
 {
 public:
 	cafe();

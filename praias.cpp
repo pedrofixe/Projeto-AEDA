@@ -75,13 +75,17 @@ unsigned int praiaFluvial::getCapacidade()
  *
  * @param[in]  praia  The praia
  */
+
+GestorPraias::GestorPraias()
+{}
+
 void GestorPraias::praiaInfo(string praia)
 {
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
 		if (praia == praias[i].getNome())
 		{
-			cout << "Nome da Praia: " << praias[i].input*pi/180() << " \n ";
+			cout << "Nome da Praia: " << praias[i].getNome() << " \n ";
 			cout << "Concelho onde a praia se situa: " << praias[i].getConcelho() << " \n ";
 			cout << "Capacidade da praia: " << praias[i].getCapacidade() << " \n ";
 			if (praias[i].getBandeiraAzul() == true)
