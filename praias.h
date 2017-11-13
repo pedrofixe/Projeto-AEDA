@@ -40,26 +40,26 @@ class rio : public praiaFluvial
 	unsigned int larguraMax;
 	unsigned int caudalMax;
 	unsigned int profundidadeMax;
-
+public:
+	unsigned int getLargura() { return this->larguraMax; }
+	unsigned int getCaudal() { return this->caudalMax; }
+	unsigned int getProfundida() { return this->profundidadeMax; }
 };
 
-/**
- * @brief      Class for albufeira.
- */
+
 class albufeira : public praiaFluvial
 {
 	unsigned int area;
-
-
+public:
+	unsigned int getArea() { return this->area; }
 };
 
 class GestorPraias : public praiaFluvial
 {
 	std::vector<praiaFluvial> praias;
 public:
-	void praiaInfo(std::string praia);
-
-
+	GestorPraias();
+	void praiaInfo(string praia);
 };
 
 #endif
