@@ -2,21 +2,45 @@
 #define SERVICOS_H
 
 
-class Servico
-{
-	bool Restaurantes;
-	unsigned int Nrestaurantes;
-	bool AluguerDeBarcos;
+class servico
+{	
+	std::string nome;
+	GPS gps;
 };
 
 
-class Turismo
+class nadadorSalvador : public servico
 {
-	bool CamposDeJogos;
-	bool Alojamentos;
 
+public:
+	nadadorSalvador();
+	~nadadorSalvador();
+
+}
+
+class cafe : public servico
+{
+public:
+	cafe();
+	~cafe();
+	
 };
 
+class restaurante : public servico
+{
+public:
+	restaurante();
+	~restaurante();
+	
+};
+
+class campo : public servico
+{
+public:
+	servico();
+	~servico();
+
+}
 
 
 #endif
