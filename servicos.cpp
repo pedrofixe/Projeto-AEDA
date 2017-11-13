@@ -8,6 +8,24 @@ class servico
 	GPS gps;
 };
 
+
+class nadadorSalvador : public servico
+{
+
+public:
+	nadadorSalvador();
+	~nadadorSalvador();
+
+}
+
+class cafe : public ser
+{
+public:
+	cafe();
+	~cafe();
+	
+};
+
 class restaurante : public servico
 {
 public:
@@ -15,7 +33,6 @@ public:
 	~restaurante();
 	
 };
-
 
 class campo : public servico
 {
