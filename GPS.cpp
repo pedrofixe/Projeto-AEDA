@@ -89,3 +89,11 @@ ostream & operator<< (ostream & os,const GPS & input) {
 
 
 //------------------------------WRONGCOORDINATES------------------------------
+
+/**
+ * @brief      Constructs the object.
+ *
+ * @param[in]  gps   The gps
+ */
+WrongCoordinates::WrongCoordinates(GPS gps) : gps(gps)
+{}

@@ -35,8 +35,7 @@ public:
 	WrongCoordinates(GPS gps);
 
 	GPS getGPS();
-
-
+	
 };
 
 
