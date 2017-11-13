@@ -10,15 +10,200 @@ This graph shows which files directly or indirectly include this file\+:
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classServico}{Servico}
+class \hyperlink{classservico}{servico}
 \item 
-class \hyperlink{classTurismo}{Turismo}
+class \hyperlink{classrestaurante}{restaurante}
 \item 
-class \hyperlink{classpraiaFluvial}{praia\+Fluvial}
+class \hyperlink{classcampo}{campo}
 \item 
 class \hyperlink{classrio}{rio}
-\item 
+\begin{DoxyCompactList}\small\item\em Class for rio. \end{DoxyCompactList}\item 
 class \hyperlink{classalbufeira}{albufeira}
-\item 
+\begin{DoxyCompactList}\small\item\em Class for albufeira. \end{DoxyCompactList}\item 
 class \hyperlink{classGestorPraias}{Gestor\+Praias}
 \end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{praias_8h_ab88371de4e3b999d9150d1ee5d7f7673}{praia\+Fluvial} ()
+\begin{DoxyCompactList}\small\item\em Constructs the object. \end{DoxyCompactList}\item 
+\hyperlink{praias_8h_adb0dd9280eb29d819afa50ccb6aae9a0}{praia\+Fluvial} (std\+::string \hyperlink{praias_8h_a19a1ec64600e1ce8b5433f5da726817c}{concelho}, \hyperlink{classGPS}{G\+PS} \hyperlink{praias_8h_abe2f3233916c628362cbefbc704d6be1}{gps}, bool \hyperlink{praias_8h_a4956333097cdbef97e8961e2ba28f08f}{bandeiraazul}, unsigned int \hyperlink{praias_8h_aee6d5e3ee76529e1f86aa0ba3bb8af19}{capacidade}, std\+::vector$<$ \hyperlink{classServico}{Servico} $>$ \hyperlink{praias_8h_a7eee4d072c062f2c256e37a8428104c8}{servicosdapraia})
+\item 
+std\+::string \hyperlink{praias_8h_a79762e3121b2339a952c92e82890824f}{get\+Nome} ()
+\begin{DoxyCompactList}\small\item\em Gets the praia\textquotesingle{}s name. \end{DoxyCompactList}\item 
+\hyperlink{classGPS}{G\+PS} \hyperlink{praias_8h_af27fa9d24e63ab1ccd0c35a1acc9725c}{get\+G\+PS} ()
+\item 
+std\+::string \hyperlink{praias_8h_aac6c4fd01595f9455f43b8bddb069d9d}{get\+Concelho} ()
+\begin{DoxyCompactList}\small\item\em Gets the praia\textquotesingle{}s concelho. \end{DoxyCompactList}\item 
+bool \hyperlink{praias_8h_a2bf7f90c2399cde302c55abbfba5987a}{get\+Bandeira\+Azul} ()
+\begin{DoxyCompactList}\small\item\em Gets the praia\textquotesingle{}s bandeira azul. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{praias_8h_a36d0f4e21f5dde2250193c57ce43d907}{get\+Capacidade} ()
+\begin{DoxyCompactList}\small\item\em Gets the praia\textquotesingle{}s capacidade. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcampo}{campo} \hyperlink{praias_8h_abcee35627603d77b9729360ea7be85f5}{nome}
+\begin{DoxyCompactList}\small\item\em Class for praias fluviais. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{praias_8h_a19a1ec64600e1ce8b5433f5da726817c}{concelho}
+\item 
+\hyperlink{classGPS}{G\+PS} \hyperlink{praias_8h_abe2f3233916c628362cbefbc704d6be1}{gps}
+\item 
+bool \hyperlink{praias_8h_a4956333097cdbef97e8961e2ba28f08f}{bandeiraazul}
+\item 
+unsigned int \hyperlink{praias_8h_aee6d5e3ee76529e1f86aa0ba3bb8af19}{capacidade}
+\item 
+std\+::vector$<$ \hyperlink{classServico}{Servico} $>$ \hyperlink{praias_8h_a7eee4d072c062f2c256e37a8428104c8}{servicosdapraia}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{praias.\+h@{praias.\+h}!get\+Bandeira\+Azul@{get\+Bandeira\+Azul}}
+\index{get\+Bandeira\+Azul@{get\+Bandeira\+Azul}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{get\+Bandeira\+Azul()}{getBandeiraAzul()}}]{\setlength{\rightskip}{0pt plus 5cm}bool praia\+Fluvial\+::get\+Bandeira\+Azul (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{praias_8h_a2bf7f90c2399cde302c55abbfba5987a}{}\label{praias_8h_a2bf7f90c2399cde302c55abbfba5987a}
+
+
+Gets the praia\textquotesingle{}s bandeira azul. 
+
+\begin{DoxyReturn}{Returns}
+The praia\textquotesingle{}s bandeira azul. 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file praias.\+cpp.
+
+\index{praias.\+h@{praias.\+h}!get\+Capacidade@{get\+Capacidade}}
+\index{get\+Capacidade@{get\+Capacidade}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{get\+Capacidade()}{getCapacidade()}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int praia\+Fluvial\+::get\+Capacidade (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{praias_8h_a36d0f4e21f5dde2250193c57ce43d907}{}\label{praias_8h_a36d0f4e21f5dde2250193c57ce43d907}
+
+
+Gets the praia\textquotesingle{}s capacidade. 
+
+\begin{DoxyReturn}{Returns}
+The praia\textquotesingle{}s capacidade. 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file praias.\+cpp.
+
+\index{praias.\+h@{praias.\+h}!get\+Concelho@{get\+Concelho}}
+\index{get\+Concelho@{get\+Concelho}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{get\+Concelho()}{getConcelho()}}]{\setlength{\rightskip}{0pt plus 5cm}string praia\+Fluvial\+::get\+Concelho (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{praias_8h_aac6c4fd01595f9455f43b8bddb069d9d}{}\label{praias_8h_aac6c4fd01595f9455f43b8bddb069d9d}
+
+
+Gets the praia\textquotesingle{}s concelho. 
+
+\begin{DoxyReturn}{Returns}
+The praia\textquotesingle{}s concelho. 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file praias.\+cpp.
+
+\index{praias.\+h@{praias.\+h}!get\+G\+PS@{get\+G\+PS}}
+\index{get\+G\+PS@{get\+G\+PS}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{get\+G\+P\+S()}{getGPS()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G\+PS} get\+G\+PS (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{praias_8h_af27fa9d24e63ab1ccd0c35a1acc9725c}{}\label{praias_8h_af27fa9d24e63ab1ccd0c35a1acc9725c}
+\index{praias.\+h@{praias.\+h}!get\+Nome@{get\+Nome}}
+\index{get\+Nome@{get\+Nome}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{get\+Nome()}{getNome()}}]{\setlength{\rightskip}{0pt plus 5cm}string praia\+Fluvial\+::get\+Nome (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{praias_8h_a79762e3121b2339a952c92e82890824f}{}\label{praias_8h_a79762e3121b2339a952c92e82890824f}
+
+
+Gets the praia\textquotesingle{}s name. 
+
+\begin{DoxyReturn}{Returns}
+The praia\textquotesingle{}s name. 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file praias.\+cpp.
+
+\index{praias.\+h@{praias.\+h}!praia\+Fluvial@{praia\+Fluvial}}
+\index{praia\+Fluvial@{praia\+Fluvial}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{praia\+Fluvial()}{praiaFluvial()}}]{\setlength{\rightskip}{0pt plus 5cm}praia\+Fluvial\+::praia\+Fluvial (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{praias_8h_ab88371de4e3b999d9150d1ee5d7f7673}{}\label{praias_8h_ab88371de4e3b999d9150d1ee5d7f7673}
+
+
+Constructs the object. 
+
+
+
+Definition at line 9 of file praias.\+cpp.
+
+\index{praias.\+h@{praias.\+h}!praia\+Fluvial@{praia\+Fluvial}}
+\index{praia\+Fluvial@{praia\+Fluvial}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{praia\+Fluvial(std\+::string concelho, G\+P\+S gps, bool bandeiraazul, unsigned int capacidade, std\+::vector$<$ Servico $>$ servicosdapraia)}{praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector< Servico > servicosdapraia)}}]{\setlength{\rightskip}{0pt plus 5cm}praia\+Fluvial (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{concelho, }
+\item[{{\bf G\+PS}}]{gps, }
+\item[{bool}]{bandeiraazul, }
+\item[{unsigned int}]{capacidade, }
+\item[{std\+::vector$<$ {\bf Servico} $>$}]{servicosdapraia}
+\end{DoxyParamCaption}
+)}\hypertarget{praias_8h_adb0dd9280eb29d819afa50ccb6aae9a0}{}\label{praias_8h_adb0dd9280eb29d819afa50ccb6aae9a0}
+
+
+\subsection{Variable Documentation}
+\index{praias.\+h@{praias.\+h}!bandeiraazul@{bandeiraazul}}
+\index{bandeiraazul@{bandeiraazul}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{bandeiraazul}{bandeiraazul}}]{\setlength{\rightskip}{0pt plus 5cm}bool bandeiraazul}\hypertarget{praias_8h_a4956333097cdbef97e8961e2ba28f08f}{}\label{praias_8h_a4956333097cdbef97e8961e2ba28f08f}
+
+
+Definition at line 41 of file praias.\+h.
+
+\index{praias.\+h@{praias.\+h}!capacidade@{capacidade}}
+\index{capacidade@{capacidade}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{capacidade}{capacidade}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int capacidade}\hypertarget{praias_8h_aee6d5e3ee76529e1f86aa0ba3bb8af19}{}\label{praias_8h_aee6d5e3ee76529e1f86aa0ba3bb8af19}
+
+
+Definition at line 42 of file praias.\+h.
+
+\index{praias.\+h@{praias.\+h}!concelho@{concelho}}
+\index{concelho@{concelho}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{concelho}{concelho}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string concelho}\hypertarget{praias_8h_a19a1ec64600e1ce8b5433f5da726817c}{}\label{praias_8h_a19a1ec64600e1ce8b5433f5da726817c}
+
+
+Definition at line 39 of file praias.\+h.
+
+\index{praias.\+h@{praias.\+h}!gps@{gps}}
+\index{gps@{gps}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{gps}{gps}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf G\+PS} gps}\hypertarget{praias_8h_abe2f3233916c628362cbefbc704d6be1}{}\label{praias_8h_abe2f3233916c628362cbefbc704d6be1}
+
+
+Definition at line 40 of file praias.\+h.
+
+\index{praias.\+h@{praias.\+h}!nome@{nome}}
+\index{nome@{nome}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{nome}{nome}}]{\setlength{\rightskip}{0pt plus 5cm} {\bf campo} nome}\hypertarget{praias_8h_abcee35627603d77b9729360ea7be85f5}{}\label{praias_8h_abcee35627603d77b9729360ea7be85f5}
+
+
+Class for praias fluviais. 
+
+\index{praias.\+h@{praias.\+h}!servicosdapraia@{servicosdapraia}}
+\index{servicosdapraia@{servicosdapraia}!praias.\+h@{praias.\+h}}
+\subsubsection[{\texorpdfstring{servicosdapraia}{servicosdapraia}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Servico}$>$ servicosdapraia}\hypertarget{praias_8h_a7eee4d072c062f2c256e37a8428104c8}{}\label{praias_8h_a7eee4d072c062f2c256e37a8428104c8}
+
+
+Definition at line 43 of file praias.\+h.
+

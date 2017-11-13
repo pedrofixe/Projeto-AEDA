@@ -5,24 +5,8 @@
 #include <string>
 #include "GPS.h"
 
-/**
- * @brief      Class for servicos.
- */
-class Servico
-{
-	bool Restaurantes;
-	unsigned int Nrestaurantes;
-	bool AluguerDeBarcos;
-};
 
 
-
-class Turismo
-{
-	bool CamposDeJogos;
-	bool Alojamentos;
-
-};
 
 /**
  * @brief      Class for praias fluviais.

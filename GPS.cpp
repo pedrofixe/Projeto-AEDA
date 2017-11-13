@@ -27,7 +27,7 @@ GPS::GPS(double latitude, double longitude): latitude(latitude), longitude(longi
 /**
  * @brief      Converts degrees to radians
  *
- * @param  input  Input in degrees
+ * @param      input  Input in degrees
  *
  * @return     input in radians
  */
@@ -38,7 +38,7 @@ double GPS::degreesToRadians(const double & input) const {
 /**
  * @brief      Calculates de distance between two GPS coordiantes
  *
- * @param  gps2  The second set of GPS coordinates
+ * @param      gps2  The second set of GPS coordinates
  *
  * @return     Distance between *this and gps2
  */

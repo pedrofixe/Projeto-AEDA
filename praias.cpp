@@ -31,10 +31,11 @@ string praiaFluvial::getNome()
 {
 	return this->nome;
 }
+
 /**
- * @brief      Gets the praia's gps.
+ * @brief      Gets the gps.
  *
- * @return     The praia's gps.
+ * @return     The gps.
  */
 GPS praiaFluvial::getGPS()
 {

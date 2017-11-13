@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['praiafluvial',['praiaFluvial',['../classpraiaFluvial.html',1,'']]]
+  ['gestorpraias',['GestorPraias',['../classGestorPraias.html',1,'']]],
+  ['gps',['GPS',['../classGPS.html',1,'']]]
 ];
