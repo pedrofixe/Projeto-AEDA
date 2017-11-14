@@ -3,6 +3,7 @@
 #include <vector>
 #include "GPS.h"
 #include "praias.h"
+#include "servicos.h"
 
 using namespace std;
 
@@ -66,16 +67,17 @@ void menu()
 
 
 
+<<<<<<< HEAD
 int main()
 {
 	
 	menu();
-
-	GPS Porto(41.157352, -8.628255);
-	GPS Lisboa(38.722330, -9.139089);
-
-	cout << "\n" << Porto.distance(Lisboa) << "\n\n";
+=======
+	GPS gps1(2.3213, 4.312312);
+>>>>>>> e85b195b1ba29f39d7aa2e018c2c248a7f71cae7
 
 
+
+	cout << "\n" << gps1 << "\n\n";
 	return 0;
 }
