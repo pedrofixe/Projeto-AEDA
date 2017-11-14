@@ -79,24 +79,51 @@ unsigned int praiaFluvial::getCapacidade()
 GestorPraias::GestorPraias()
 {}
 
+string praiaFluvial::getInfo() const
+{
+	string info;
+
+	info += "Nome da Praia: " + nome + " \n ";
+	info += "Concelho onde a praia se situa: " + concelho + " \n ";
+	info += "Capacidade da praia: " + to_string(capacidade) + "\n ";
+	if (bandeiraazul == true)
+	{
+		info += "Bandeira azul: A praia possui bandeira azul \n";
+	}
+	else
+	{
+		info += "Bandeira azul: A praia nao possui bandeira azul \n";
+	}
+}
+
+string rio::getInfo() const
+{
+	string info_rio;
+	info_rio = praiaFluvial::getInfo();
+	info_rio += " A praia é uma praia fluvial de rio \n ";
+	info_rio += "Largura Máxima da praia: " + to_string(larguraMax);
+	info_rio += "Caudal Máximo da praia: " + to_string(caudalMax);
+    info_rio += "Profundidade Máximo da praia: " + to_string(profundidadeMax);
+}
+
+string albufeira::getInfo() const
+{
+	string info_albufeira;
+
+	info_albufeira = praiaFluvial::getInfo();
+	info_albufeira += "A praia é uma praia fluvial de albufeira \n";
+	info_albufeira += "Área da albufeira: " + to_string(area) << endl;
+}
+
+
 void GestorPraias::praiaInfo(string praia)
 {
+
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
-		if (praia == praias[i].getNome())
+		if (praia == praias[i]->getNome())
 		{
-			cout << "Nome da Praia: " << praias[i].getNome() << " \n ";
-			cout << "Concelho onde a praia se situa: " << praias[i].getConcelho() << " \n ";
-			cout << "Capacidade da praia: " << praias[i].getCapacidade() << " \n ";
-			if (praias[i].getBandeiraAzul() == true)
-			{
-				cout << "A praia possui bandeira azul \n";
-			}
-			else
-			{
-				cout << "A praia nao possui bandeira azul \n";
-			}
-
+			praia[i]->getInfo();
 		}
 	}
 

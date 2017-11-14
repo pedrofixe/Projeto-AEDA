@@ -5,13 +5,13 @@
 #include <string>
 #include "GPS.h"
 #include "servicos.h"
+#include <typeinfo>
 
 /**
  * @brief      Class for praias fluviais.
  */
 class praiaFluvial
 {
-
 	std::string nome;
 	std::string concelho;
 	GPS gps;
@@ -26,6 +26,7 @@ public:
 	std::string getConcelho();
 	bool getBandeiraAzul();
 	unsigned int getCapacidade();
+	virtual string getInfo() const;
 };
 
 /**
@@ -40,6 +41,7 @@ public:
 	unsigned int getLargura() { return this->larguraMax; }
 	unsigned int getCaudal() { return this->caudalMax; }
 	unsigned int getProfundida() { return this->profundidadeMax; }
+	string getInfo() const;
 };
 
 
@@ -51,6 +53,7 @@ class albufeira : public praiaFluvial
 	unsigned int area;
 public:
 	unsigned int getArea() { return this->area; }
+	string getInfo() const;
 };
 
 /**
@@ -58,10 +61,10 @@ public:
 */
 class GestorPraias : public praiaFluvial
 {
-	std::vector<praiaFluvial> praias;
+	std::vector<praiaFluvial*> praias;
 public:
 	GestorPraias();
-	void praiaInfo(std::string praia);
+	int praiaInfo(std::string praia);
 };
 
 #endif
