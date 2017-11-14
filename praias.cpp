@@ -141,10 +141,20 @@ int GestorPraias::praiaInfo(string praia)
 
 }
 
+/*
 int GestorPraias::praiaInfoGPS(GPS(double x, double y) )
 {
-	for (unsigned int i = 0; i <)
+	for (unsigned int i = 0; i < praias.size(); i++)
+	{
+		if ( GPS(x,y) == praias[i]->getGPS())
+		{
+
+		}
+
+
+	}
 
 
 
 }
+*/
