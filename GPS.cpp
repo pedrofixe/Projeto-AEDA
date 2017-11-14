@@ -74,6 +74,19 @@ double GPS::getLongitude() const {
 	return longitude;
 }
 
+
+/**
+ * @brief      Returns if two GPS coordinates are equal to one another
+ *
+ * @param[in]  gps2  gps 2
+ *
+ * @return     *this == gps2
+ */
+bool operator==(const GPS & gps2) const {
+
+	return ((this->latitude == gps2.getLatitude()) && (this->longitude == gps2.getLongitude()));
+}
+
 /**
  * @brief      Streams a GPS type variable
  *

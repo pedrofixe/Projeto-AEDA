@@ -102,10 +102,10 @@ string rio::getInfo() const
 {
 	string info_rio;
 	info_rio = praiaFluvial::getInfo();
-	info_rio += " A praia é uma praia fluvial de rio \n ";
-	info_rio += "Largura Máxima da praia: " + to_string(larguraMax);
-	info_rio += "Caudal Máximo da praia: " + to_string(caudalMax);
-    info_rio += "Profundidade Máximo da praia: " + to_string(profundidadeMax);
+	info_rio += " A praia ?uma praia fluvial de rio \n ";
+	info_rio += "Largura M?ima da praia: " + to_string(larguraMax);
+	info_rio += "Caudal M?imo da praia: " + to_string(caudalMax);
+    info_rio += "Profundidade M?imo da praia: " + to_string(profundidadeMax);
 
 	return info_rio;
 }
@@ -115,8 +115,8 @@ string albufeira::getInfo() const
 	string info_albufeira;
 
 	info_albufeira = praiaFluvial::getInfo();
-	info_albufeira += "A praia é uma praia fluvial de albufeira \n";
-	info_albufeira += "Área da albufeira: " + to_string(area)  + "\n";
+	info_albufeira += "A praia ?uma praia fluvial de albufeira \n";
+	info_albufeira += "?rea da albufeira: " + to_string(area)  + "\n";
 	
 	return info_albufeira;
 }
@@ -158,3 +158,23 @@ int GestorPraias::praiaInfoGPS(GPS(double x, double y) )
 
 }
 */
+
+praiaFluvial & GestorPraias::getClosestPraia(const GPS & gps) const {
+
+	praiaFluvial * returnPraia = NULL;
+	if (praias.size() == 0)
+		return returnPraia;
+
+	double leastDistance = gps.distance(praias[0].getGPS);
+
+	for (int i = 1; i < praias.size(); ++i)
+	{
+		if (gps.distance(praias[i].getGPS()) < leastDistance)
+		{
+			returnPraia = praias[i];
+			leastDistance = gps.distance(praias[i].getGPS());
+		}
+	}
+
+	return returnPraia;
+}

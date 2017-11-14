@@ -59,13 +59,14 @@ public:
 /**
 * @brief      Class for GestorPraias.
 */
-class GestorPraias : public praiaFluvial
+class GestorPraias
 {
 	std::vector<praiaFluvial*> praias;
 public:
 	GestorPraias();
 	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS(double x, double y));
+	praiaFluvial * getClosestPraia(const GPS & gps) const;
 };
 
 #endif

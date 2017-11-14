@@ -18,6 +18,7 @@ public:
 	double getLatitude() const;
 	double getLongitude() const;
 	double degreesToRadians(const double & input) const;
+	bool operator==(const GPS & gps2) const;
 	
 
 };
