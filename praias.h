@@ -5,6 +5,7 @@
 #include <string>
 #include "GPS.h"
 #include "servicos.h"
+#include <iostream>
 //#include <typeinfo>
 
 /**
@@ -21,14 +22,18 @@ class praiaFluvial
 public:
 	praiaFluvial();
 	praiaFluvial(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia);
+
 	std::string getNome() const;
 	GPS getGPS() const;
 	std::string getConcelho() const;
 	bool getBandeiraAzul() const;
 	unsigned int getCapacidade() const;
-	// servicos
 	virtual std::string getInfo() const;
+
+	void setGPS(GPS gps);
 };
+std::ostream& operator<<(std::ostream & os, praiaFluvial praia); 
+
 
 /**
  * @brief      Class for rio. Derivates from praiaFluvial.
@@ -65,9 +70,11 @@ class GestorPraias
 	std::vector<praiaFluvial*> praias;
 public:
 	GestorPraias();
-	int praiaInfo(praiaFluvial * praia);
+	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS gps);
-	praiaFluvial * getClosestPraia(GPS & gps) const;
+	praiaFluvial * getClosestPraia(GPS gps);
+	praiaFluvial * findPraia(std::string name) const;
+
 };
 
 #endif

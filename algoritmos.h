@@ -3,21 +3,18 @@
 
 #include <vector>
 
+namespace algoritmos {
 
-class algoritmos
-{
-public:
 	template <class T>
-	int sequentialSearch(const std::vector<T> & v, const T & target) const;
+	static int sequentialSearch(const std::vector<T> & v, T target);
 	template <class T>
-	int sequentialSearch(const std::vector<T> & v, const T & , bool f(T a, T b)) const;
+	static int sequentialSearch(const std::vector<T> & v, T target, bool f(T a, T b));
 	template <class T>
-	void selectionSort(std::vector<T> & v);
+	static void selectionSort(std::vector<T> & v);
 	template<class T>
-	void selectionSort(std::vector<T> & v, bool f(T a, T b));
-	
-};
+	static void selectionSort(std::vector<T> & v, bool f(T a, T b));
 
+}
 
 
 #endif

@@ -1,7 +1,7 @@
 #include "algoritmos.h"
 
 template<class T>
-int algoritmos::sequentialSearch(const std::vector<T> & v, const T & target) const {
+int algoritmos::sequentialSearch(const std::vector<T> & v, T target) {
 
 	for (int i = 0; i < v.size(); ++i)
 	{
@@ -13,7 +13,7 @@ int algoritmos::sequentialSearch(const std::vector<T> & v, const T & target) con
 }
 
 template<class T>
-int algoritmos::sequentialSearch(const std::vector<T> & v, const T & , bool f(T a, T b)) const {
+int algoritmos::sequentialSearch(const std::vector<T> & v, T target, bool f(T, T)) {
 
 	for (int i = 0; i < v.size(); ++i)
 	{

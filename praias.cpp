@@ -1,7 +1,7 @@
 #include "praias.h"
+#include "algoritmos.h"
 
 using namespace std;
-
 
 /**
  * @brief      Constructs the object.
@@ -99,6 +99,23 @@ string praiaFluvial::getInfo() const
 	return info;
 }
 
+void praiaFluvial::setGPS(GPS gps) {
+	this->gps = gps;
+}
+
+/**
+ * @brief      { operator_description }
+ *
+ * @param      os     The operating system
+ * @param[in]  praia  The praia
+ *
+ * @return     { description_of_the_return_value }
+ */
+std::ostream& operator<<(std::ostream & os, praiaFluvial praia) {
+	os << praia.getInfo();
+}
+
+
 string rio::getInfo() const
 {
 	string info_rio = praiaFluvial::getInfo();
@@ -146,7 +163,7 @@ int GestorPraias::praiaInfo(string praia)
  *
  * @return     { description_of_the_return_value }
  */
-int GestorPraias::praiaInfoGPS(GPS gps )
+int GestorPraias::praiaInfoGPS(GPS gps)
 {
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
@@ -171,22 +188,18 @@ int GestorPraias::praiaInfoGPS(GPS gps )
  *
  * @return     The closest praia to gps.
  */
-praiaFluvial * GestorPraias::getClosestPraia(GPS & gps) const {
 
-	praiaFluvial * returnPraia = NULL;
+bool equalGPS(praiaFluvial praia1, praiaFluvial praia2) {
+	return (praia1.getGPS() == praia2.getGPS());
+}
+praiaFluvial * GestorPraias::getClosestPraia(GPS gps) {
+
 	if (praias.size() == 0)
-		return returnPraia;
+		return NULL;
 
-	double leastDistance = gps.distance(praias[0]->getGPS());
+	vector<int> ola = {2,3,1,4};
 
-	for (int i = 1; i < praias.size(); ++i)
-	{
-		if (gps.distance(praias[i]->getGPS()) < leastDistance)
-		{
-			returnPraia = praias[i];
-			leastDistance = gps.distance(praias[i]->getGPS());
-		}
-	}
+	algoritmos::selectionSort(ola);
 
-	return returnPraia;
+	return NULL;
 }
