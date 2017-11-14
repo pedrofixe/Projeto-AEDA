@@ -94,6 +94,8 @@ string praiaFluvial::getInfo() const
 	{
 		info += "Bandeira azul: A praia nao possui bandeira azul \n";
 	}
+
+	return info;
 }
 
 string rio::getInfo() const
@@ -104,6 +106,8 @@ string rio::getInfo() const
 	info_rio += "Largura Máxima da praia: " + to_string(larguraMax);
 	info_rio += "Caudal Máximo da praia: " + to_string(caudalMax);
     info_rio += "Profundidade Máximo da praia: " + to_string(profundidadeMax);
+
+	return info_rio;
 }
 
 string albufeira::getInfo() const
@@ -112,20 +116,35 @@ string albufeira::getInfo() const
 
 	info_albufeira = praiaFluvial::getInfo();
 	info_albufeira += "A praia é uma praia fluvial de albufeira \n";
-	info_albufeira += "Área da albufeira: " + to_string(area) << endl;
+	info_albufeira += "Área da albufeira: " + to_string(area)  + "\n";
+	
+	return info_albufeira;
 }
 
 
-void GestorPraias::praiaInfo(string praia)
+int GestorPraias::praiaInfo(string praia)
 {
 
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
 		if (praia == praias[i]->getNome())
 		{
-			praia[i]->getInfo();
+			cout << praias[i]->getInfo();
+			break;
+			return 0;
 		}
+
 	}
+	
+	return 1;
+
+
+}
+
+int GestorPraias::praiaInfoGPS(GPS(double x, double y) )
+{
+	for (unsigned int i = 0; i <)
+
 
 
 }

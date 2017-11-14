@@ -65,6 +65,7 @@ class GestorPraias : public praiaFluvial
 public:
 	GestorPraias();
 	int praiaInfo(std::string praia);
+	int praiaInfoGPS(GPS(double x, double y));
 };
 
 #endif
