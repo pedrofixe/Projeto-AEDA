@@ -130,7 +130,6 @@ int GestorPraias::praiaInfo(string praia)
 		if (praia == praias[i]->getNome())
 		{
 			cout << praias[i]->getInfo();
-			break;
 			return 0;
 		}
 
