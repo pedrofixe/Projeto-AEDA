@@ -82,9 +82,9 @@ double GPS::getLongitude() const {
  *
  * @return     *this == gps2
  */
-bool operator==(const GPS & gps2) const {
+bool GPS::operator==(const GPS & gps2) const {
 
-	return ((this->latitude == gps2.getLatitude()) && (this->longitude == gps2.getLongitude()));
+	return ((this->latitude == gps2.getLatitude() ) && (this->longitude == gps2.getLongitude()));
 }
 
 /**

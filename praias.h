@@ -26,6 +26,7 @@ public:
 	std::string getConcelho();
 	bool getBandeiraAzul();
 	unsigned int getCapacidade();
+	// serviços
 	virtual string getInfo() const;
 };
 
@@ -65,7 +66,7 @@ class GestorPraias
 public:
 	GestorPraias();
 	int praiaInfo(std::string praia);
-	int praiaInfoGPS(GPS(double x, double y));
+	int praiaInfoGPS(GPS gps);
 	praiaFluvial * getClosestPraia(const GPS & gps) const;
 };
 

@@ -101,28 +101,16 @@ void menu()
 		 cin >> longitude;
 	 }
 
-	 GPS(latitude, longitude);
-
+	 gestor.praiaInfoGPS( GPS(latitude, longitude) );
 
 
 
  }
 
-
-
-
-
-<<<<<<< HEAD
 int main()
 {
-	
 	menu();
-=======
 	GPS gps1(2.3213, 4.312312);
->>>>>>> e85b195b1ba29f39d7aa2e018c2c248a7f71cae7
-
-
-
 	cout << "\n" << gps1 << "\n\n";
 	return 0;
 }

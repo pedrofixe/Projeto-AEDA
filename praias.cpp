@@ -141,23 +141,27 @@ int GestorPraias::praiaInfo(string praia)
 
 }
 
-/*
-int GestorPraias::praiaInfoGPS(GPS(double x, double y) )
+
+int GestorPraias::praiaInfoGPS(GPS gps )
 {
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
-		if ( GPS(x,y) == praias[i]->getGPS())
+		if ( gps == praias[i]->getGPS())
 		{
-
+			cout << praias[i]->getInfo();
+			break;
+			return 0;
 		}
 
 
 	}
 
+	return 1;
+
 
 
 }
-*/
+
 
 praiaFluvial & GestorPraias::getClosestPraia(const GPS & gps) const {
 
