@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['projeto_2daeda',['Projeto-AEDA',['../md__mnt_B09E79689E7927CC_Users_yurby_Desktop_Estudos_2º_ano_1º_Semestre_AEDA_Projeto-AEDA_README.html',1,'']]],
-  ['pi',['pi',['../GPS_8cpp.html#a1daf785e3f68d293c7caa1c756d5cb74',1,'GPS.cpp']]],
-  ['praiafluvial',['praiaFluvial',['../classpraiaFluvial.html',1,'praiaFluvial'],['../classpraiaFluvial.html#ab88371de4e3b999d9150d1ee5d7f7673',1,'praiaFluvial::praiaFluvial()'],['../classpraiaFluvial.html#af3c19d2d92baca3af82dc8bd746ffb6d',1,'praiaFluvial::praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector&lt; servico &gt; servicosdapraia)']]],
-  ['praiainfo',['praiaInfo',['../classGestorPraias.html#a3ca2b8df0d548fce361692853f819ff1',1,'GestorPraias']]],
-  ['praias_2ecpp',['praias.cpp',['../praias_8cpp.html',1,'']]],
-  ['praias_2eh',['praias.h',['../praias_8h.html',1,'']]]
+  ['operator_3c_3c',['operator&lt;&lt;',['../GPS_8cpp.html#a97007c93874fce77f4d9e14c92ca88fa',1,'operator&lt;&lt;(ostream &amp;os, const GPS &amp;input):&#160;GPS.cpp'],['../GPS_8h.html#a2046452c558cee758c000c10ef326d3d',1,'operator&lt;&lt;(std::ostream &amp;os, const GPS &amp;input):&#160;GPS.h']]],
+  ['operator_3d_3d',['operator==',['../classGPS.html#ad7a5cffbd374de2261eabd949a7f99d6',1,'GPS::operator==()'],['../GPS_8cpp.html#aa02acc97f2945eac3900b2cda2702fab',1,'operator==():&#160;GPS.cpp']]]
 ];

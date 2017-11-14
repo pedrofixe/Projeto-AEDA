@@ -9,27 +9,23 @@ Class for \hyperlink{classGestorPraias}{Gestor\+Praias}.
 
 {\ttfamily \#include $<$praias.\+h$>$}
 
-
-
-Inheritance diagram for Gestor\+Praias\+:
-% FIG 0
-
-
-Collaboration diagram for Gestor\+Praias\+:
-% FIG 1
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classGestorPraias_a75246833391190416769acc72c892c48}{Gestor\+Praias} ()
 \begin{DoxyCompactList}\small\item\em \{ function\+\_\+description \} \end{DoxyCompactList}\item 
-void \hyperlink{classGestorPraias_a3ca2b8df0d548fce361692853f819ff1}{praia\+Info} (std\+::string praia)
+int \hyperlink{classGestorPraias_adf3bf03545a568eadb5966b445b1dadb}{praia\+Info} (std\+::string praia)
+\item 
+int \hyperlink{classGestorPraias_a4b4ab76a5873745bb7d60326d9c13362}{praia\+Info\+G\+PS} (\hyperlink{classGPS}{G\+PS}(double x, double y))
+\item 
+\hyperlink{classpraiaFluvial}{praia\+Fluvial} $\ast$ \hyperlink{classGestorPraias_a0b62f5b570fc949acd0bc0a589a51f39}{get\+Closest\+Praia} (const \hyperlink{classGPS}{G\+PS} \&gps) const 
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Class for \hyperlink{classGestorPraias}{Gestor\+Praias}. 
 
-Definition at line 59 of file praias.\+h.
+Definition at line 62 of file praias.\+h.
 
 
 
@@ -57,17 +53,35 @@ Definition at line 79 of file praias.\+cpp.
 
 
 \subsection{Member Function Documentation}
+\index{Gestor\+Praias@{Gestor\+Praias}!get\+Closest\+Praia@{get\+Closest\+Praia}}
+\index{get\+Closest\+Praia@{get\+Closest\+Praia}!Gestor\+Praias@{Gestor\+Praias}}
+\subsubsection[{\texorpdfstring{get\+Closest\+Praia(const G\+P\+S \&gps) const }{getClosestPraia(const GPS &gps) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf praia\+Fluvial} \& Gestor\+Praias\+::get\+Closest\+Praia (
+\begin{DoxyParamCaption}
+\item[{const {\bf G\+PS} \&}]{gps}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGestorPraias_a0b62f5b570fc949acd0bc0a589a51f39}{}\label{classGestorPraias_a0b62f5b570fc949acd0bc0a589a51f39}
+
+
+Definition at line 162 of file praias.\+cpp.
+
 \index{Gestor\+Praias@{Gestor\+Praias}!praia\+Info@{praia\+Info}}
 \index{praia\+Info@{praia\+Info}!Gestor\+Praias@{Gestor\+Praias}}
-\subsubsection[{\texorpdfstring{praia\+Info(std\+::string praia)}{praiaInfo(std::string praia)}}]{\setlength{\rightskip}{0pt plus 5cm}void Gestor\+Praias\+::praia\+Info (
+\subsubsection[{\texorpdfstring{praia\+Info(std\+::string praia)}{praiaInfo(std::string praia)}}]{\setlength{\rightskip}{0pt plus 5cm}int Gestor\+Praias\+::praia\+Info (
 \begin{DoxyParamCaption}
 \item[{std\+::string}]{praia}
 \end{DoxyParamCaption}
-)}\hypertarget{classGestorPraias_a3ca2b8df0d548fce361692853f819ff1}{}\label{classGestorPraias_a3ca2b8df0d548fce361692853f819ff1}
+)}\hypertarget{classGestorPraias_adf3bf03545a568eadb5966b445b1dadb}{}\label{classGestorPraias_adf3bf03545a568eadb5966b445b1dadb}
 
 
-Definition at line 82 of file praias.\+cpp.
+Definition at line 125 of file praias.\+cpp.
 
+\index{Gestor\+Praias@{Gestor\+Praias}!praia\+Info\+G\+PS@{praia\+Info\+G\+PS}}
+\index{praia\+Info\+G\+PS@{praia\+Info\+G\+PS}!Gestor\+Praias@{Gestor\+Praias}}
+\subsubsection[{\texorpdfstring{praia\+Info\+G\+P\+S(\+G\+P\+S(double x, double y))}{praiaInfoGPS(GPS(double x, double y))}}]{\setlength{\rightskip}{0pt plus 5cm}int Gestor\+Praias\+::praia\+Info\+G\+PS (
+\begin{DoxyParamCaption}
+\item[{{\bf G\+PS}(double x, double y)}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGestorPraias_a4b4ab76a5873745bb7d60326d9c13362}{}\label{classGestorPraias_a4b4ab76a5873745bb7d60326d9c13362}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

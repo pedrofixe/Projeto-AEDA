@@ -36,15 +36,15 @@ void menu()
 	switch (option)
 	{
 
-	case 1:
-	{
-		fluvial_name();
-	}
+		case 1:
+		{
+			fluvial_name();
+		}
 
-	case 2:
-	{
-		fluvial_gps();
-	}
+		case 2:
+		{
+			fluvial_gps();
+		}
 
 
 	}

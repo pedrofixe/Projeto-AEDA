@@ -3,13 +3,9 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="servico",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classservico.html",tooltip="Class for servico. "];
+  Node1 [label="praiaFluvial",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpraiaFluvial.html",tooltip="Class for praias fluviais. "];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="cafe",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcafe.html",tooltip="Class for cafe. Derivates from servico. "];
+  Node2 [label="albufeira",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classalbufeira.html",tooltip="Class for albufeira. "];
   Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="campo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classcampo.html",tooltip="Class for campo. Derivates from servico. "];
-  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="nadadorSalvador",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnadadorSalvador.html",tooltip="Class for nadador salvador. Derivates from servico. "];
-  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="restaurante",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classrestaurante.html",tooltip="Class for restaurante. Derivates from servico. "];
+  Node3 [label="rio",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classrio.html",tooltip="Class for rio. "];
 }

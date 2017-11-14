@@ -42,7 +42,7 @@ double GPS::degreesToRadians(const double & input) const {
  *
  * @return     Distance between *this and gps2
  */
-double GPS::distance(const GPS & gps2) {
+double GPS::distance(GPS gps2) {
 
 	double lat1 = degreesToRadians(latitude);
 	double lon1 = degreesToRadians(longitude);

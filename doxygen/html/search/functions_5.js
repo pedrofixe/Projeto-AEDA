@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3c_3c',['operator&lt;&lt;',['../GPS_8cpp.html#a97007c93874fce77f4d9e14c92ca88fa',1,'operator&lt;&lt;(ostream &amp;os, const GPS &amp;input):&#160;GPS.cpp'],['../GPS_8h.html#a2046452c558cee758c000c10ef326d3d',1,'operator&lt;&lt;(std::ostream &amp;os, const GPS &amp;input):&#160;GPS.h']]]
+  ['nadadorsalvador',['nadadorSalvador',['../classnadadorSalvador.html#a81cc8699fe9ae9457ee81e81b8e8f7fd',1,'nadadorSalvador::nadadorSalvador()'],['../classnadadorSalvador.html#a12066255a547b7d0d11f7b648ba7730a',1,'nadadorSalvador::nadadorSalvador(std::string nome, GPS gps)']]]
 ];

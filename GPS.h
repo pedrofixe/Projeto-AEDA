@@ -14,7 +14,7 @@ public:
 
 	GPS();
 	GPS(double latitude, double longitude);
-	double distance(const GPS & gps2);
+	double distance(GPS gps2);
 	double getLatitude() const;
 	double getLongitude() const;
 	double degreesToRadians(const double & input) const;

@@ -18,7 +18,7 @@ praiaFluvial::praiaFluvial()
  * @param[in]  capacidade       The capacidade
  * @param[in]  servicosdapraia  The servicosdapraia
  */
-praiaFluvial::praiaFluvial(string concelho, GPS gps, bool bandeirazul, unsigned int capacidade, vector<servico> servicosdapraia) : concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
+praiaFluvial::praiaFluvial(string nome, string concelho, GPS gps, bool bandeirazul, unsigned int capacidade, vector<servico> servicosdapraia) : concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
 {}
 
 
@@ -27,7 +27,7 @@ praiaFluvial::praiaFluvial(string concelho, GPS gps, bool bandeirazul, unsigned 
  *
  * @return     The praia's name.
  */
-string praiaFluvial::getNome()
+string praiaFluvial::getNome() const
 {
 	return this->nome;
 }
@@ -37,7 +37,7 @@ string praiaFluvial::getNome()
  *
  * @return     The gps.
  */
-GPS praiaFluvial::getGPS()
+GPS praiaFluvial::getGPS() const
 {
 	return this->gps;
 }
@@ -46,7 +46,7 @@ GPS praiaFluvial::getGPS()
  *
  * @return     The praia's concelho.
  */
-string praiaFluvial::getConcelho()
+string praiaFluvial::getConcelho() const
 {
 	return this->concelho;
 }
@@ -55,7 +55,7 @@ string praiaFluvial::getConcelho()
  *
  * @return     The praia's bandeira azul.
  */
-bool praiaFluvial::getBandeiraAzul()
+bool praiaFluvial::getBandeiraAzul() const
 {
 	return bandeiraazul;
 }
@@ -64,21 +64,22 @@ bool praiaFluvial::getBandeiraAzul()
  *
  * @return     The praia's capacidade.
  */
-unsigned int praiaFluvial::getCapacidade()
+unsigned int praiaFluvial::getCapacidade() const
 {
 	return capacidade;
 }
 
-
 /**
- * @brief      { function_description }
- *
- * @param[in]  praia  The praia
+ * @brief      Constructs the Gestor .
  */
-
 GestorPraias::GestorPraias()
 {}
 
+/**
+ * @brief      Gets the information from a praiaFluvial.
+ *
+ * @return     The information.
+ */
 string praiaFluvial::getInfo() const
 {
 	string info;
@@ -88,11 +89,11 @@ string praiaFluvial::getInfo() const
 	info += "Capacidade da praia: " + to_string(capacidade) + "\n ";
 	if (bandeiraazul == true)
 	{
-		info += "Bandeira azul: A praia possui bandeira azul \n";
+		info += "Bandeira azul: A praia possui bandeira azul\n";
 	}
 	else
 	{
-		info += "Bandeira azul: A praia nao possui bandeira azul \n";
+		info += "Bandeira azul: A praia nao possui bandeira azul\n";
 	}
 
 	return info;
@@ -100,21 +101,20 @@ string praiaFluvial::getInfo() const
 
 string rio::getInfo() const
 {
-	string info_rio;
-	info_rio = praiaFluvial::getInfo();
-	info_rio += " A praia ?uma praia fluvial de rio \n ";
-	info_rio += "Largura M?ima da praia: " + to_string(larguraMax);
-	info_rio += "Caudal M?imo da praia: " + to_string(caudalMax);
-    info_rio += "Profundidade M?imo da praia: " + to_string(profundidadeMax);
+	string info_rio = praiaFluvial::getInfo();
+
+	info_rio += " A praia numa praia fluvial de rio\n";
+	info_rio += "Largura Minima da praia: " + to_string(larguraMax);
+	info_rio += "Caudal Maximo da praia: " + to_string(caudalMax);
+    info_rio += "Profundidade Maximo da praia: " + to_string(profundidadeMax);
 
 	return info_rio;
 }
 
 string albufeira::getInfo() const
 {
-	string info_albufeira;
+	string info_albufeira = praiaFluvial::getInfo();
 
-	info_albufeira = praiaFluvial::getInfo();
 	info_albufeira += "A praia ?uma praia fluvial de albufeira \n";
 	info_albufeira += "?rea da albufeira: " + to_string(area)  + "\n";
 	
@@ -137,11 +137,16 @@ int GestorPraias::praiaInfo(string praia)
 	}
 	
 	return 1;
-
-
 }
 
 
+/**
+ * @brief      { function_description }
+ *
+ * @param[in]  gps   The gps
+ *
+ * @return     { description_of_the_return_value }
+ */
 int GestorPraias::praiaInfoGPS(GPS gps )
 {
 	for (unsigned int i = 0; i < praias.size(); i++)
@@ -157,26 +162,30 @@ int GestorPraias::praiaInfoGPS(GPS gps )
 	}
 
 	return 1;
-
-
-
 }
 
 
-praiaFluvial & GestorPraias::getClosestPraia(const GPS & gps) const {
+/**
+ * @brief      Gets the closest praia.
+ *
+ * @param[in]  gps   The GPS coordinates
+ *
+ * @return     The closest praia to gps.
+ */
+praiaFluvial * GestorPraias::getClosestPraia(GPS & gps) const {
 
 	praiaFluvial * returnPraia = NULL;
 	if (praias.size() == 0)
 		return returnPraia;
 
-	double leastDistance = gps.distance(praias[0].getGPS);
+	double leastDistance = gps.distance(praias[0]->getGPS());
 
 	for (int i = 1; i < praias.size(); ++i)
 	{
-		if (gps.distance(praias[i].getGPS()) < leastDistance)
+		if (gps.distance(praias[i]->getGPS()) < leastDistance)
 		{
 			returnPraia = praias[i];
-			leastDistance = gps.distance(praias[i].getGPS());
+			leastDistance = gps.distance(praias[i]->getGPS());
 		}
 	}
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['servico',['servico',['../classservico.html#a837726f124d36d4423d055a273e086f9',1,'servico::servico()'],['../classservico.html#a01a4ad0dcdd94469284e5434bd10987f',1,'servico::servico(std::string nome, GPS gps)']]]
+  ['restaurante',['restaurante',['../classrestaurante.html#aece1bdc24a65aa1d66b4c9c16a902026',1,'restaurante::restaurante()'],['../classrestaurante.html#adaae798d4c0624e219bfc8922954ed3f',1,'restaurante::restaurante(std::string nome, GPS gps)']]]
 ];

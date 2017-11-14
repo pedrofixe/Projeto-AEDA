@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrongcoordinates',['WrongCoordinates',['../classWrongCoordinates.html#ad4183a38f408fdf1653c3886a36e2e11',1,'WrongCoordinates']]]
+  ['servico',['servico',['../classservico.html#a837726f124d36d4423d055a273e086f9',1,'servico::servico()'],['../classservico.html#a01a4ad0dcdd94469284e5434bd10987f',1,'servico::servico(std::string nome, GPS gps)']]]
 ];

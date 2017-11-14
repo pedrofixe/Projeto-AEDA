@@ -5,7 +5,7 @@
 #include <string>
 #include "GPS.h"
 #include "servicos.h"
-#include <typeinfo>
+//#include <typeinfo>
 
 /**
  * @brief      Class for praias fluviais.
@@ -20,18 +20,18 @@ class praiaFluvial
 	std::vector<servico> servicosdapraia;
 public:
 	praiaFluvial();
-	praiaFluvial(std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia);
-	std::string getNome();
-	GPS getGPS();
-	std::string getConcelho();
-	bool getBandeiraAzul();
-	unsigned int getCapacidade();
-	// serviços
-	virtual string getInfo() const;
+	praiaFluvial(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia);
+	std::string getNome() const;
+	GPS getGPS() const;
+	std::string getConcelho() const;
+	bool getBandeiraAzul() const;
+	unsigned int getCapacidade() const;
+	// servicos
+	virtual std::string getInfo() const;
 };
 
 /**
- * @brief      Class for rio.
+ * @brief      Class for rio. Derivates from praiaFluvial.
  */
 class rio : public praiaFluvial
 {
@@ -42,19 +42,19 @@ public:
 	unsigned int getLargura() { return this->larguraMax; }
 	unsigned int getCaudal() { return this->caudalMax; }
 	unsigned int getProfundida() { return this->profundidadeMax; }
-	string getInfo() const;
+	std::string getInfo() const;
 };
 
 
 /**
-* @brief      Class for albufeira.
+* @brief      Class for albufeira. Derivates from praiaFluvial.
 */
 class albufeira : public praiaFluvial
 {
 	unsigned int area;
 public:
 	unsigned int getArea() { return this->area; }
-	string getInfo() const;
+	std::string getInfo() const;
 };
 
 /**
@@ -65,9 +65,9 @@ class GestorPraias
 	std::vector<praiaFluvial*> praias;
 public:
 	GestorPraias();
-	int praiaInfo(std::string praia);
+	int praiaInfo(praiaFluvial * praia);
 	int praiaInfoGPS(GPS gps);
-	praiaFluvial * getClosestPraia(const GPS & gps) const;
+	praiaFluvial * getClosestPraia(GPS & gps) const;
 };
 
 #endif
