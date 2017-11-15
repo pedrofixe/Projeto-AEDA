@@ -103,13 +103,4 @@ void selectionSort(std::vector<T*> & v, bool (*f)(T a, T b)) {
 }
 
 
-template<class T>
-T pila(T a, T b) {
-	if (a>b)
-		return a;
-	else
-		return b;
-}
-
-
 #endif

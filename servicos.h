@@ -26,10 +26,10 @@ public:
  */
 class nadadorSalvador : public servico
 {
-
+	string nome;
 public:
 	nadadorSalvador();
-	nadadorSalvador(std::string nome, GPS gps);
+	nadadorSalvador(std::string nome);
 	~nadadorSalvador();
 
 };
