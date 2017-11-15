@@ -23,7 +23,9 @@ public:
 
 	void setWidth(unsigned int width);
 	void setHeight(unsigned int height);
-	void setBanner(std::string filename);
+	
+	void LoadBanner(std::string filename);
+	void LoadPraias(std::string filename);
 
 };
 

@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "ui_utilities.h"
+#include <fstream>
 
 using namespace std;
 
@@ -37,5 +38,15 @@ void menu::setHeight(unsigned int height)
 }
 
 void menu::setBanner(string filename) {
+
+}
+
+
+void LoadPraias(std::string filename) {
+
+	ifstream file(filename); //nome concelho latitude longitude bandeiraazul capacidade (tipo1 nome1 latutude1 longitude1 tipo2 nome2 latitude2 longitude2 ...)
+
+
+
 
 }

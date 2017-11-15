@@ -3,6 +3,7 @@
 
 #include <vector>
 
+
 template<class T>
 int sequentialSearch(std::vector<T> & v, T target) {
 
@@ -44,18 +45,23 @@ template<class T>
 void selectionSort(std::vector<T> & v) {
 
 	T smallest;
+	int index;
 
 	for (int i = 0; i < v.size(); ++i)
 	{
 		smallest = v[i];
+		index = i;
 
 		for (int j = i + 1; j < v.size(); ++j)
 		{
 			if (v[j] < smallest)
+			{
 				smallest = v[j];
+				index = j;
+			}
 		}
 
-		std::swap(smallest, v[i]);
+		std::swap(v[index], v[i]);
 	}
 
 }
@@ -64,18 +70,23 @@ template<class T>
 void selectionSort(std::vector<T> & v, bool (*f)(T a, T b)) {
 
 	T smallest;
+	int index;
 
 	for (int i = 0; i < v.size(); ++i)
 	{
 		smallest = v[i];
+		index = i;
 
 		for (int j = i + 1; j < v.size(); ++j)
 		{
 			if (f(v[j], smallest))
+			{
 				smallest = v[j];
+				index = j;
+			}
 		}
 
-		std::swap(smallest, v[i]);
+		std::swap(v[index], v[i]);
 	}
 
 
@@ -85,31 +96,29 @@ template<class T>
 void selectionSort(std::vector<T*> & v, bool (*f)(T a, T b)) {
 
 	T smallest;
+	int index;
 
 	for (int i = 0; i < v.size(); ++i)
 	{
 		smallest = *v[i];
+		index = i;
 
 		for (int j = i + 1; j < v.size(); ++j)
 		{
 			if (f(*v[j], smallest))
+			{
 				smallest = *v[j];
+				index = j;
+			}
 		}
 
-		std::swap(smallest, *v[i]);
+		std::swap(*v[index], *v[i]);
 	}
 
 
 }
 
 
-template<class T>
-T pila(T a, T b) {
-	if (a>b)
-		return a;
-	else
-		return b;
-}
 
 
 #endif

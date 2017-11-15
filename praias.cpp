@@ -167,7 +167,7 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
 }
 
 void GestorPraias::addPraia(praiaFluvial praia) {
-	praias.push_back(praia);
+	praias.push_back(&praia);
 }
 
 
