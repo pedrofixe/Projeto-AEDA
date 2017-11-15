@@ -302,3 +302,75 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 	cout << "A praia possui " << c << " cafes, " << r << "restaurantes, " << cd << " campos desportivos e " << ns << " nadadores salvadores\n" ;
 
 }
+
+
+
+
+void GestorPraias::LoadPraias(std::string filename) {
+
+	ifstream file(filename); //tipo nome concelho latitude longitude bandeiraazul capacidade (tipo1 nome1 latitude1 longitude1 tipo2 nome2 latitude2 longitude2 ...)
+	string temp;
+
+	while (getline(file, temp, '\n'))
+	{
+		temp += ',';
+		stringstream ss(temp);
+		string type;
+		getline(ss, type, ',');
+		string nome;
+		getline(ss, nome, ',');
+		string concelho;
+		getline(ss, concelho, ',');
+		string GPS1;
+		getline(ss, GPS1, ',');
+		string GPS2;
+		getline(ss, GPS2, ',');
+		string bandeiraazul;
+		getline(ss, bandeiraazul, ',');
+		string capacidade;
+		getline(ss, capacidade, ',');
+
+		string largura;
+		string caudal;
+		string profundidade;
+		string area;
+
+		if (type == "rio")
+		{
+			getline(ss, largura, ',');
+			getline(ss, caudal, ',');
+			getline(ss, profundidade, ',');
+		}
+		else if (type == "albufeira")
+		{
+			getline(ss, area, ',');
+		}
+		else
+			throw BadFileInput(filename);
+
+
+		vector<servico> foo;
+		string tiposervico;
+		string nomeservico;
+		string GPSservico1;
+		string GPSservico2;
+
+		while (getline(ss, tiposervico, ',') && getline(ss, nomeservico, ',' ) && getline(ss , GPSservico1, ',') && getline(ss, GPSservico2, ','))
+		{
+			if (tiposervico == "nadadorSalvador")
+				foo.push_back(nadadorSalvador(nomeservico));
+			else if (tiposervico == "cafe")
+				foo.push_back(cafe(nomeservico, GPS(stod(GPSservico1), stod(GPSservico2))));
+			else if (tiposervico == "restaurante")
+				foo.push_back(restaurante(nomeservico, GPS(stod(GPSservico1), stod(GPSservico2))));
+			else if (tiposervico == "campoDesportivo")
+				foo.push_back(campoDesportivo(nomeservico, GPS(stod(GPSservico1), stod(GPSservico2))));
+			else
+				throw BadFileInput(filename);
+		}
+
+		if (type == "rio")
+			praias.push_back(rio(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), stob(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
+		else
+			praias.push_back(albufeira(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), stob(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
+	}
