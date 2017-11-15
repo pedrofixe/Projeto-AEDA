@@ -62,6 +62,7 @@ class albufeira : public praiaFluvial
 {
 	unsigned int area;
 public:
+	albufeira(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int area);
 	unsigned int getArea() { return this->area; }
 	std::string getInfo() const;
 };
