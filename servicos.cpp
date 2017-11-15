@@ -55,6 +55,64 @@ void servico::setTipo(string tipo)
 	this->tipo = tipo;
 }
 
+servicoForaDaPraia::servicoForaDaPraia()
+{}
+
+servicoForaDaPraia::servicoForaDaPraia(string nome, GPS gps)
+{
+	this->nome = nome;
+	this->gps = gps;
+}
+
+string servicoForaDaPraia::getNome() const
+{
+	return nome;
+}
+
+GPS servicoForaDaPraia::getGPS() const
+{
+	return gps;
+}
+
+pontosTuristicos::pontosTuristicos()
+{}
+
+pontosTuristicos::pontosTuristicos(string nome, GPS gps)
+{
+	this->nome = nome;
+	this->gps = gps;
+}
+
+string pontosTuristicos::getNome() const
+{
+	return nome;
+}
+
+GPS pontosTuristicos::getGPS() const
+{
+	return gps;
+}
+
+
+alojamento::alojamento()
+{}
+
+alojamento::alojamento(string nome, GPS gps)
+{
+	this->nome = nome;
+	this->gps = gps;
+}
+
+string alojamento::getNome() const
+{
+	return nome;
+}
+
+GPS alojamento::getGPS() const
+{
+	return gps;
+}
+
 //------------------------------NADADOR------------------------------
 
 /**

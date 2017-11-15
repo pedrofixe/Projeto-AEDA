@@ -20,7 +20,6 @@ public:
 	std::string getTipo() const;
 	std::string getNome() const;
 	void setTipo(std::string tipo);
-
 };
 
 
@@ -71,6 +70,43 @@ public:
 	~campoDesportivo();
 
 };
+
+class servicoForaDaPraia
+{
+	std::string nome;
+	GPS gps;
+public:
+	servicoForaDaPraia();
+	servicoForaDaPraia(std::string nome, GPS gps);
+	~servicoForaDaPraia();
+	GPS getGPS() const;
+	std::string getNome() const;
+
+};
+
+
+class pontosTuristicos: public servicoForaDaPraia
+{
+	std::string nome;
+	GPS gps;
+public:
+	pontosTuristicos();
+	pontosTuristicos(std::string nome, GPS gps);
+	GPS getGPS() const;
+	std::string getNome() const;
+};
+
+class alojamento : public servicoForaDaPraia
+{
+	std::string nome;
+	GPS gps;
+public:
+	alojamento();
+	alojamento(std::string nome, GPS gps);
+	GPS getGPS() const;
+	std::string getNome() const;
+};
+
 
 
 #endif
