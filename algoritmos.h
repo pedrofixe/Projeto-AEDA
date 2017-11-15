@@ -119,9 +119,4 @@ void selectionSort(std::vector<T*> & v, bool (*f)(T a, T b)) {
 }
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 229f7aac023730b9e7d2c4edbe770f95fbb936db
 #endif
