@@ -73,10 +73,13 @@ public:
 	GestorPraias();
 	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS gps);
+	void addPraia(praiaFluvial praia);
+	void setPraias(std::vector<praiaFluvial*> input);
+	std::vector<praiaFluvial*> getPraias();
 	praiaFluvial * getClosestPraia(GPS gps);
 	praiaFluvial * findPraia(std::string nome);
 	praiaFluvial * findPraia(GPS gps);
-
+	void sortByConcelho();
 
 };
 

@@ -100,7 +100,9 @@ string praiaFluvial::getInfo() const
 
 	return info;
 }
- 
+
+
+
 void praiaFluvial::setGPS(GPS gps) {
 	this->gps = gps;
 }
@@ -109,14 +111,7 @@ void praiaFluvial::setNome(string nome) {
 	this->nome = nome;
 }
 
-/**
- * @brief      { operator_description }
- *
- * @param      os     The operating system
- * @param[in]  praia  The praia
- *
- * @return     { description_of_the_return_value }
- */
+
 std::ostream& operator<<(std::ostream & os, praiaFluvial praia) {
 	os << praia.getInfo();
 }
@@ -171,15 +166,9 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
 	return 1;
 }
 
-
-/**
- * @brief      { function_description }
- *
- * @param[in]  gps   The gps
- *
- * @return     { description_of_the_return_value }
- */
-
+void GestorPraias::addPraia(praiaFluvial praia) {
+	praias.push_back(praia);
+}
 
 
 /**
@@ -189,6 +178,14 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
  *
  * @return     The closest praia to gps.
  */
+
+void GestorPraias::setPraias(std::vector<praiaFluvial*> input) {
+	praias = input;
+}
+
+std::vector<praiaFluvial*> GestorPraias::getPraias() {
+	return praias;
+}
 
 praiaFluvial * GestorPraias::getClosestPraia(GPS gps) {
 
@@ -249,4 +246,14 @@ praiaFluvial * GestorPraias::findPraia(GPS gps) {
 		return NULL;
 
 	return praias[index];
+}
+
+
+bool lesserConcelho(praiaFluvial praia1, praiaFluvial praia2) {
+	return (praia1.getConcelho() < praia2.getConcelho());
+}
+
+void GestorPraias::sortByConcelho() {
+
+	selectionSort(praias, lesserConcelho);
 }
