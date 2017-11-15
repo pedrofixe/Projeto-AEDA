@@ -84,6 +84,7 @@ public:
 	praiaFluvial * findPraia(GPS gps);
 
 	void LoadPraias(std::string filename);
+	void SavePraias(std::string filename);
 	
 	void sortByConcelho();
 	void servicosInfo(praiaFluvial praia);

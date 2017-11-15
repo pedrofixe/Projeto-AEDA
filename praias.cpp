@@ -376,3 +376,10 @@ void GestorPraias::LoadPraias(std::string filename) {
 		else
 			praias.push_back(new albufeira(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), (bool)stoi(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
 	}
+}
+
+
+void GestorPraias::SavePraias(std::string filename) {
+
+	
+}
