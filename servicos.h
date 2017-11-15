@@ -11,11 +11,13 @@ class servico
 {	
 	std::string nome;
 	GPS gps;
+	std::string tipo;
 public:
 	servico();
 	servico(std::string nome, GPS gps);
 	~servico();
 	GPS getGPS() const;
+	string getTipo() const;
 	std::string getNome() const;
 
 };

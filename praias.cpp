@@ -263,23 +263,26 @@ void GestorPraias::sortByConcelho() {
 	selectionSort(praias, lesserConcelho);
 }
 
+
 void GestorPraias::servicosInfo(praiaFluvial praia)
 {
-	string servico;
-	
+	string nome;
+	GPS gps;
+	string cafes, restaurantes, nadador, campos;
+
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
 		if (praia.getNome() == praias[i]->getNome)
 		{
 			for (unsigned int u = 0; u < praias[i]->getServicos().size(); u++)
 			{
-				servico = to_string(praias[i]->getServicos().at(u));
+				nome = praias[i]->getServicos().at(u).getNome();
+				gps = praias[i]->getServicos().at(u).getGPS();
 			}
 
 
 		}
 
 	}
-
 
 }

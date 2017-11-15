@@ -45,7 +45,10 @@ string servico::getNome() const
 {
 	return nome;
 }
-
+string servico::getTipo() const
+{
+	return tipo;
+}
 
 //------------------------------NADADOR------------------------------
 
@@ -111,3 +114,4 @@ campoDesportivo::campoDesportivo(string nome, GPS gps) : servico(nome, gps)
 
 campoDesportivo::~campoDesportivo()
 {}
+
