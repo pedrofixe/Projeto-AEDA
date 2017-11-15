@@ -273,7 +273,7 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
-		if (praia.getNome() == praias[i]->getNome)
+		if (praia.getNome() == praias[i]->getNome() )
 		{
 			for (unsigned int u = 0; u < praias[i]->getServicos().size(); u++)
 			{
