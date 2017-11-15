@@ -1,5 +1,7 @@
 #include "praias.h"
 #include "algoritmos.h"
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -370,7 +372,7 @@ void GestorPraias::LoadPraias(std::string filename) {
 		}
 
 		if (type == "rio")
-			praias.push_back(rio(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), stob(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
+			praias.push_back(new rio(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), (bool)stoi(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
 		else
-			praias.push_back(albufeira(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), stob(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
+			praias.push_back(new albufeira(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), (bool)stoi(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
 	}
