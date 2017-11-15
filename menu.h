@@ -1,12 +1,14 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "praias.h"
 #include <string>
 #include <vector>
 
 class menu {
 
-	unsigned int widht;
+	GestorPraias gestor;
+	unsigned int width;
 	unsigned int height;
 	std::vector<std::string> banner;
 
@@ -17,6 +19,9 @@ public:
 	void MainMenu();
 	void Menu1();
 	void Menu2();
+	void Menu3();
+	void Menu4();
+	void Menu5();
 
 	unsigned int getWidth();
 	unsigned int getHeight();
