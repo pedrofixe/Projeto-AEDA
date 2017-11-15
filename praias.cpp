@@ -71,6 +71,11 @@ unsigned int praiaFluvial::getCapacidade() const
 	return capacidade;
 }
 
+std::vector<servico> praiaFluvial::getServicos() const
+{
+	return servicosdapraia;
+}
+
 /**
  * @brief      Constructs the Gestor .
  */
@@ -121,7 +126,7 @@ string rio::getInfo() const
 {
 	string info_rio = praiaFluvial::getInfo();
 
-	info_rio += " A praia numa praia fluvial de rio\n";
+	info_rio += " A praia trata-se de uma praia fluvial de rio\n";
 	info_rio += "Largura Minima da praia: " + to_string(larguraMax);
 	info_rio += "Caudal Maximo da praia: " + to_string(caudalMax);
     info_rio += "Profundidade Maximo da praia: " + to_string(profundidadeMax);
@@ -133,8 +138,8 @@ string albufeira::getInfo() const
 {
 	string info_albufeira = praiaFluvial::getInfo();
 
-	info_albufeira += "A praia ?uma praia fluvial de albufeira \n";
-	info_albufeira += "?rea da albufeira: " + to_string(area)  + "\n";
+	info_albufeira += "A praia trata-se de uma praia fluvial de albufeira \n";
+	info_albufeira += "Area da albufeira: " + to_string(area)  + "\n";
 	
 	return info_albufeira;
 }
@@ -256,4 +261,25 @@ bool lesserConcelho(praiaFluvial praia1, praiaFluvial praia2) {
 void GestorPraias::sortByConcelho() {
 
 	selectionSort(praias, lesserConcelho);
+}
+
+void GestorPraias::servicosInfo(praiaFluvial praia)
+{
+	string servico;
+	
+	for (unsigned int i = 0; i < praias.size(); i++)
+	{
+		if (praia.getNome() == praias[i]->getNome)
+		{
+			for (unsigned int u = 0; u < praias[i]->getServicos().size(); u++)
+			{
+				servico = to_string(praias[i]->getServicos().at(u));
+			}
+
+
+		}
+
+	}
+
+
 }

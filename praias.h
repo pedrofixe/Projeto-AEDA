@@ -28,6 +28,7 @@ public:
 	std::string getConcelho() const;
 	bool getBandeiraAzul() const;
 	unsigned int getCapacidade() const;
+	std::vector<servico> getServicos() const;
 	virtual std::string getInfo() const;
 
 	void setGPS(GPS gps);
@@ -80,6 +81,7 @@ public:
 	praiaFluvial * findPraia(std::string nome);
 	praiaFluvial * findPraia(GPS gps);
 	void sortByConcelho();
+	void servicosInfo(praiaFluvial praia);
 
 };
 
