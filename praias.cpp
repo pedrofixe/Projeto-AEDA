@@ -3,6 +3,8 @@
 
 using namespace std;
 
+
+
 /**
  * @brief      Constructs the object.
  */
@@ -98,9 +100,13 @@ string praiaFluvial::getInfo() const
 
 	return info;
 }
-
+ 
 void praiaFluvial::setGPS(GPS gps) {
 	this->gps = gps;
+}
+
+void praiaFluvial::setNome(string nome) {
+	this->nome = nome;
 }
 
 /**
@@ -139,19 +145,29 @@ string albufeira::getInfo() const
 }
 
 
-int GestorPraias::praiaInfo(string praia)
-{
+int GestorPraias::praiaInfo(std::string praia) {
 
-	for (unsigned int i = 0; i < praias.size(); i++)
+	praiaFluvial * temp = this->findPraia(praia);
+
+	if (temp != NULL)
 	{
-		if (praia == praias[i]->getNome())
-		{
-			cout << praias[i]->getInfo();
-			return 0;
-		}
-
+		cout << temp->getInfo();
+		return 0;
 	}
-	
+
+	return 1;
+}
+
+int GestorPraias::praiaInfoGPS(GPS gps) {
+
+	praiaFluvial * temp = this->findPraia(gps);
+
+	if (temp != NULL)
+	{
+		cout << temp->getInfo();
+		return 0;
+	}
+
 	return 1;
 }
 
@@ -163,22 +179,7 @@ int GestorPraias::praiaInfo(string praia)
  *
  * @return     { description_of_the_return_value }
  */
-int GestorPraias::praiaInfoGPS(GPS gps)
-{
-	for (unsigned int i = 0; i < praias.size(); i++)
-	{
-		if ( gps == praias[i]->getGPS())
-		{
-			cout << praias[i]->getInfo();
-			break;
-			return 0;
-		}
 
-
-	}
-
-	return 1;
-}
 
 
 /**
@@ -189,17 +190,63 @@ int GestorPraias::praiaInfoGPS(GPS gps)
  * @return     The closest praia to gps.
  */
 
-bool equalGPS(praiaFluvial praia1, praiaFluvial praia2) {
-	return (praia1.getGPS() == praia2.getGPS());
-}
 praiaFluvial * GestorPraias::getClosestPraia(GPS gps) {
 
 	if (praias.size() == 0)
 		return NULL;
 
-	vector<int> ola = {2,3,1,4};
+	int index = 0;
+	int min = praias[0]->getGPS().distance(gps);
 
-	algoritmos::selectionSort(ola);
+	for (int i = 0; i < praias.size(); ++i)
+	{
+		if (praias[i]->getGPS().distance(gps) < min)
+		{
+			index = i;
+			min = praias[i]->getGPS().distance(gps);
+		}
+	}
 
-	return NULL;
+	return praias[index];
+}
+
+bool equalNome(praiaFluvial praia1, praiaFluvial praia2) {
+	return (praia1.getNome() == praia2.getNome());
+}
+
+praiaFluvial * GestorPraias::findPraia(string nome) {
+
+	if (praias.size() == 0)
+		return NULL;
+
+	praiaFluvial foo;
+	foo.setNome(nome);
+
+	int index = sequentialSearch(praias, foo, equalNome);
+
+	if (index == -1)
+		return NULL;
+
+	return praias[index];
+}
+
+
+bool equalGPS(praiaFluvial praia1, praiaFluvial praia2) {
+	return (praia1.getGPS() == praia2.getGPS());
+}
+
+praiaFluvial * GestorPraias::findPraia(GPS gps) {
+
+	if (praias.size() == 0)
+		return NULL;
+
+	praiaFluvial foo;
+	foo.setGPS(gps);
+
+	int index = sequentialSearch(praias, foo, equalNome);
+
+	if (index == -1)
+		return NULL;
+
+	return praias[index];
 }

@@ -31,6 +31,7 @@ public:
 	virtual std::string getInfo() const;
 
 	void setGPS(GPS gps);
+	void setNome(std::string nome);
 };
 std::ostream& operator<<(std::ostream & os, praiaFluvial praia); 
 
@@ -73,7 +74,9 @@ public:
 	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS gps);
 	praiaFluvial * getClosestPraia(GPS gps);
-	praiaFluvial * findPraia(std::string name) const;
+	praiaFluvial * findPraia(std::string nome);
+	praiaFluvial * findPraia(GPS gps);
+
 
 };
 
