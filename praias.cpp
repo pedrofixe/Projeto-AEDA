@@ -146,6 +146,18 @@ string albufeira::getInfo() const
 	return info_albufeira;
 }
 
+rio::rio(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int larguraMax, unsigned int caudalMax, unsigned int profundidadeMax): praiaFluvial(nome,concelho,gps,capacidade,servicosdapraia)
+{
+	this->larguraMax = larguraMax;
+	this->caudalMax = caudalMax;
+	this->profundidadeMax = profundidadeMax;
+}
+
+
+albufeira::albufeira(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int area) : praiaFluvial(nome, concelho, gps, bandeiraazul, capacidade, servicosdapraia)
+{
+	this->area = area;
+}
 
 int GestorPraias::praiaInfo(std::string praia) {
 
@@ -308,7 +320,8 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 
 
 
-void GestorPraias::LoadPraias(std::string filename) {
+void GestorPraias::LoadPraias(std::string filename) 
+{
 
 	ifstream file(filename); //tipo nome concelho latitude longitude bandeiraazul capacidade (tipo1 nome1 latitude1 longitude1 tipo2 nome2 latitude2 longitude2 ...)
 	string temp;
