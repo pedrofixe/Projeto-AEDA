@@ -6,7 +6,6 @@
 #include "GPS.h"
 #include "servicos.h"
 #include <iostream>
-//#include <typeinfo>
 
 /**
  * @brief      Class for praias fluviais.
@@ -46,6 +45,9 @@ class rio : public praiaFluvial
 	unsigned int caudalMax;
 	unsigned int profundidadeMax;
 public:
+	rio();
+	rio(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int larguraMax, unsigned int caudalMax, unsigned int profundidadeMax);
+	
 	unsigned int getLargura() { return this->larguraMax; }
 	unsigned int getCaudal() { return this->caudalMax; }
 	unsigned int getProfundida() { return this->profundidadeMax; }
@@ -80,8 +82,23 @@ public:
 	praiaFluvial * getClosestPraia(GPS gps);
 	praiaFluvial * findPraia(std::string nome);
 	praiaFluvial * findPraia(GPS gps);
+
+	void LoadPraias(std::string filename);
+	
 	void sortByConcelho();
 	void servicosInfo(praiaFluvial praia);
+
+};
+
+
+class BadFileInput {
+
+	std::string filename;
+public:
+	BadFileInput() {}
+	BadFileInput(std::string filename) : filename(filename) {}
+
+	std::string getFilename() { return filename; }
 
 };
 

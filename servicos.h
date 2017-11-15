@@ -17,9 +17,9 @@ public:
 	servico(std::string nome, GPS gps);
 	~servico();
 	GPS getGPS() const;
-	string getTipo() const;
+	std::string getTipo() const;
 	std::string getNome() const;
-	void setTipo(string tipo);
+	void setTipo(std::string tipo);
 
 };
 

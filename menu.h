@@ -30,7 +30,6 @@ public:
 	void setHeight(unsigned int height);
 	
 	void LoadBanner(std::string filename);
-	void LoadPraias(std::string filename);
 
 };
 
