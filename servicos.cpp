@@ -61,10 +61,8 @@ nadadorSalvador::nadadorSalvador()
  * @param[in]  nome  The name
  * @param[in]  gps   The GPS coordinates
  */
-nadadorSalvador::nadadorSalvador(string nome) servico(nome,GPS(0,0))
-{
-	this->nome = nome;
-}
+nadadorSalvador::nadadorSalvador(string nome): servico(nome,GPS(0,0))
+{}
 
 /**
  * @brief      Destroys lifeguard.
