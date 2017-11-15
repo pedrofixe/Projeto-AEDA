@@ -50,6 +50,11 @@ string servico::getTipo() const
 	return tipo;
 }
 
+void servico::setTipo(string tipo)
+{
+	this->tipo = tipo;
+}
+
 //------------------------------NADADOR------------------------------
 
 /**
@@ -65,7 +70,9 @@ nadadorSalvador::nadadorSalvador()
  * @param[in]  gps   The GPS coordinates
  */
 nadadorSalvador::nadadorSalvador(string nome): servico(nome,GPS(0,0))
-{}
+{
+	setTipo("nadador");
+}
 
 /**
  * @brief      Destroys lifeguard.
@@ -88,7 +95,9 @@ cafe::cafe()
  * @param[in]  gps   The GPS coordinates
  */
 cafe::cafe(string nome, GPS gps) : servico(nome, gps)
-{}
+{
+	setTipo("cafe");
+}
 
 cafe::~cafe()
 {}
@@ -99,7 +108,9 @@ restaurante::restaurante()
 {}
 
 restaurante::restaurante(string nome, GPS gps) : servico(nome, gps)
-{}
+{
+   setTipo("restaurante");
+}
 
 restaurante::~restaurante()
 {}
@@ -110,7 +121,9 @@ campoDesportivo::campoDesportivo()
 {}
 
 campoDesportivo::campoDesportivo(string nome, GPS gps) : servico(nome, gps)
-{}
+{
+	setTipo("campoDesportivo");
+}
 
 campoDesportivo::~campoDesportivo()
 {}

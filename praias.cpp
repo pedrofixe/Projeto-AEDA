@@ -269,6 +269,7 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 	string nome;
 	GPS gps;
 	string cafes, restaurantes, nadador, campos;
+	int c = 0, r = 0, ns = 0, cd = 0;
 
 	for (unsigned int i = 0; i < praias.size(); i++)
 	{
@@ -276,13 +277,28 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 		{
 			for (unsigned int u = 0; u < praias[i]->getServicos().size(); u++)
 			{
-				nome = praias[i]->getServicos().at(u).getNome();
 				gps = praias[i]->getServicos().at(u).getGPS();
+
+				if (praias[i]->getServicos().at(u).getTipo() == "restaurante")
+				{
+					r++;
+				}
+				else if (praias[i]->getServicos().at(u).getTipo() == "cafe")
+				{
+					c++;
+				}
+				else if (praias[i]->getServicos().at(u).getTipo() == "campoDesportivo")
+				{
+					cd++;
+				}
+				else if (praias[i]->getServicos().at(u).getTipo() == "nadador")
+				{
+					ns++;
+				}
 			}
-
-
 		}
-
 	}
+	
+	cout << "A praia possui " << c << " cafes, " << r << "restaurantes, " << cd << " campos desportivos e " << ns << " nadadores salvadores\n" ;
 
 }

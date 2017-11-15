@@ -19,6 +19,7 @@ public:
 	GPS getGPS() const;
 	string getTipo() const;
 	std::string getNome() const;
+	void setTipo(string tipo);
 
 };
 
