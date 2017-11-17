@@ -85,26 +85,18 @@ public:
 };
 
 
-class pontosTuristicos: public servicoForaDaPraia
+class pontoTuristico: public servicoForaDaPraia
 {
-	std::string nome;
-	GPS gps;
 public:
-	pontosTuristicos();
-	pontosTuristicos(std::string nome, GPS gps);
-	GPS getGPS() const;
-	std::string getNome() const;
+	pontoTuristico();
+	pontoTuristico(std::string nome, GPS gps);
 };
 
 class alojamento : public servicoForaDaPraia
 {
-	std::string nome;
-	GPS gps;
 public:
 	alojamento();
 	alojamento(std::string nome, GPS gps);
-	GPS getGPS() const;
-	std::string getNome() const;
 };
 
 
