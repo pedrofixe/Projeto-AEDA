@@ -323,72 +323,114 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 void GestorPraias::LoadPraias(std::string filename) 
 {
 
-	ifstream file(filename); //tipo nome concelho latitude longitude bandeiraazul capacidade (tipo1 nome1 latitude1 longitude1 tipo2 nome2 latitude2 longitude2 ...)
-	string temp;
+	ifstream file(filename);
 
-	while (getline(file, temp, '\n'))
+	if (!file.is_open())
+		throw BadFileInput(filename);
+
+	string tempPraia;
+
+	vector<string> parser(10,"");
+	stringstream ss;
+
+	vector<servicos> tempServicos;
+
+	while (getline(file, tempPraia, '\n'))
 	{
-		temp += ',';
-		stringstream ss(temp);
-		string type;
-		getline(ss, type, ',');
-		string nome;
-		getline(ss, nome, ',');
-		string concelho;
-		getline(ss, concelho, ',');
-		string GPS1;
-		getline(ss, GPS1, ',');
-		string GPS2;
-		getline(ss, GPS2, ',');
-		string bandeiraazul;
-		getline(ss, bandeiraazul, ',');
-		string capacidade;
-		getline(ss, capacidade, ',');
+		ss.str(tempPraia);
 
-		string largura;
-		string caudal;
-		string profundidade;
-		string area;
+		getline(ss, parser[0], ',');
 
-		if (type == "rio")
+		if (parser[0] == "rio") //"rio",nome,concelho,latitude,longitude,bandeiraazul,capacidade,largura,caudal,profundidade,tipo1,nome1,latitude1,longitude1,...
 		{
-			getline(ss, largura, ',');
-			getline(ss, caudal, ',');
-			getline(ss, profundidade, ',');
+			getline(ss, parser[1], ',');
+			getline(ss, parser[2], ',');
+			getline(ss, parser[3], ',');
+			getline(ss, parser[4], ',');
+			getline(ss, parser[5], ',');
+			getline(ss, parser[6], ',');
+			getline(ss, parser[7], ',');
+			getline(ss, parser[8], ',');
+			getline(ss, parser[9], ',');
+
+			tempServicos.resize(0);
+			while (getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
+			{
+				if (parser[1] == "nadadorSalvador")
+					tempServicos.push_back(new nadadorSalvador(parser[2]));
+
+				else if (parser[1] == "cafe")
+					tempServicos.push_back(new cafe(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+
+				else if (parser[1] == "restaurante")
+					tempServicos.push_back(new restaurante(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+
+				else if (parser[1] == "campoDesportivo")
+					tempServicos.push_back(new campoDesportivo(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+
+				else
+					throw BadFileInput(filename);
+			}
+
+			praias.push_back(new rio(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7]), stoi(parser[8]), stoi(parser[9])));
 		}
-		else if (type == "albufeira")
+
+		else if (parser[0] == "albufeira") //"albufeira",nome,concelho,latitude,longitude,bandeiraazul,capacidade,area
 		{
-			getline(ss, area, ',');
+			getline(ss, parser[1], ',');
+			getline(ss, parser[2], ',');
+			getline(ss, parser[3], ',');
+			getline(ss, parser[4], ',');
+			getline(ss, parser[5], ',');
+			getline(ss, parser[6], ',');
+			getline(ss, parser[7], ',');
+
+			tempServicos.resize(0);
+			while (getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
+			{
+				if (parser[1] == "nadadorSalvador")
+					tempServicos.push_back(nadadorSalvador(parser[2]));
+
+				else if (parser[1] == "cafe")
+					tempServicos.push_back(cafe(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+
+				else if (parser[1] == "restaurante")
+					tempServicos.push_back(restaurante(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+
+				else if (parser[1] == "campoDesportivo")
+					tempServicos.push_back(campoDesportivo(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+
+				else
+					throw BadFileInput(filename);
+			}
+
+			praias.push_back(new albufeira(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7])));
+		}
+
+		else if (parser[0] == "servicoforadapraia") //"servicoforadapraia",tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
+		{
+			while(getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ','))
+			{
+				if (parser[1] == "pontoTuristico")
+				{
+					servicosdefora.push_back(pontoTuristico(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+				}
+
+				else if (parser[1] == "alojamento")
+				{
+					servicosdefora.push_back(alojamento(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+				}
+
+				else
+					throw BadFileInput(filename);
+			}
 		}
 		else
 			throw BadFileInput(filename);
 
-
-		vector<servico> foo;
-		string tiposervico;
-		string nomeservico;
-		string GPSservico1;
-		string GPSservico2;
-
-		while (getline(ss, tiposervico, ',') && getline(ss, nomeservico, ',' ) && getline(ss , GPSservico1, ',') && getline(ss, GPSservico2, ','))
-		{
-			if (tiposervico == "nadadorSalvador")
-				foo.push_back(nadadorSalvador(nomeservico));
-			else if (tiposervico == "cafe")
-				foo.push_back(cafe(nomeservico, GPS(stod(GPSservico1), stod(GPSservico2))));
-			else if (tiposervico == "restaurante")
-				foo.push_back(restaurante(nomeservico, GPS(stod(GPSservico1), stod(GPSservico2))));
-			else if (tiposervico == "campoDesportivo")
-				foo.push_back(campoDesportivo(nomeservico, GPS(stod(GPSservico1), stod(GPSservico2))));
-			else
-				throw BadFileInput(filename);
-		}
-
-		if (type == "rio")
-			praias.push_back(new rio(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), (bool)stoi(bandeiraazul), stoi(capacidade),  foo, stoi(largura), stoi(caudal), stoi(profundidade)));
-		else
-			praias.push_back(new albufeira(nome, concelho, GPS(stod(GPSservico1), stod(GPSservico2)), (bool)stoi(bandeiraazul), stoi(capacidade),  foo, stoi(area)));
 	}
+
+	file.close();
 }
 
 
