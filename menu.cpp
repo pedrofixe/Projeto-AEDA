@@ -12,55 +12,59 @@ menu::menu(unsigned int width, unsigned int height) : width(width), height(heigh
 
 void menu::MainMenu()
 {
-	 	unsigned int option;
-	 	cout << "-------------------------------------------------------------------------" << endl;
-	 	cout << "|        Welcome to our guide of Praias Fluviais in Portugal !  :D        |" << endl;
-	 	cout << "-------------------------------------------------------------------------" << endl;
-	 	cout << "Enter a number to choose the sub-menu that you want to go !\n";
-	 	cout << "1- See a fluvial beach by inserting name \n";
-	 	cout << "2- See a fluvial beach by inserting GPS \n";
-	 	cout << "3- Discover the nearest beach around your GPS coordenates	\n";
-	 	cout << "4- See the beaches of a county \n";
-		cout << "5- See the services of a beach \n";
 
-	 	cout << "Choose an option : "; cin >> option; cout << endl;
-	 	while (cin.fail() || option < 1 || option > 6)
-	 	{
-	 		cin.clear();
-	 		cin.ignore(1000, '\n');
-	 		cout << "Please write a valid number ! \n";
-	 		cin >> option;
-	 	}
+	gestor.LoadPraias("input");
+	gestor.SavePraias("input");
 
-	 	switch (option)
-	 	{
+	unsigned int option;
+	cout << "-------------------------------------------------------------------------" << endl;
+	cout << "|        Welcome to our guide of Praias Fluviais in Portugal !  :D        |" << endl;
+	cout << "-------------------------------------------------------------------------" << endl;
+	cout << "Enter a number to choose the sub-menu that you want to go !\n";
+	cout << "1- See a fluvial beach by inserting name \n";
+	cout << "2- See a fluvial beach by inserting GPS \n";
+	cout << "3- Discover the nearest beach around your GPS coordenates	\n";
+	cout << "4- See the beaches of a county \n";
+	cout << "5- See the services of a beach \n";
 
-	 		case 1:
-	 		{
-	 			Menu1();
-	 		}
+	cout << "Choose an option : "; cin >> option; cout << endl;
+	while (cin.fail() || option < 1 || option > 6)
+	{
+		cin.clear();
+		cin.ignore(1000, '\n');
+		cout << "Please write a valid number ! \n";
+		cin >> option;
+	}
 
-	 		case 2:
-	 		{
-	 			Menu2();
-	 		}
-			
-			case 3:
-			{
-				Menu3();
-			}
-			
-			case 4:
-			{
-				Menu4();
-			}
+	switch (option)
+	{
 
-			case 5:
-			{
-				Menu5();
-			}
+		case 1:
+		{
+			Menu1();
+		}
 
-	 	}	
+		case 2:
+		{
+			Menu2();
+		}
+
+		case 3:
+		{
+			Menu3();
+		}
+
+		case 4:
+		{
+			Menu4();
+		}
+
+		case 5:
+		{
+			Menu5();
+		}
+
+	}	
 }
 
 void menu::Menu1()
@@ -191,7 +195,7 @@ void menu::setHeight(unsigned int height)
 	this->height = height;
 }
 
-void menu::setBanner(string filename) {
+void menu::LoadBanner(string filename) {
 
 }
 

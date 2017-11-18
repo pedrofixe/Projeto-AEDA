@@ -39,10 +39,10 @@ public:
 	void setTipo(std::string tipo);
 
 	unsigned int getLargura() const;
-	unsigned int getCaudal() const;
-	unsigned int getProfundidade() const;
+	virtual unsigned int getCaudal() const;
+	virtual unsigned int getProfundidade() const;
 
-	unsigned int getArea() const;
+	virtual unsigned int getArea() const;
 
 };
 std::ostream& operator<<(std::ostream & os, praiaFluvial praia); 

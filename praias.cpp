@@ -75,6 +75,10 @@ std::vector<servico> praiaFluvial::getServicos() const {
 	return servicosdapraia;
 }
 
+
+std::string praiaFluvial::getTipo() const {
+	return tipo;
+}
 /**
  * @brief      Gets the information from a praiaFluvial.
  *
@@ -110,6 +114,23 @@ void praiaFluvial::setNome(string nome) {
 
 void praiaFluvial::setTipo(string tipo) {
 	this->tipo = tipo;
+}
+
+
+unsigned int praiaFluvial::getLargura() const {
+	return 0;
+}
+
+unsigned int praiaFluvial::getCaudal() const {
+	return 0;
+}
+
+unsigned int praiaFluvial::getProfundidade() const {
+	return 0;
+}
+
+unsigned int praiaFluvial::getArea() const {
+	return 0;
 }
 
 
@@ -374,7 +395,7 @@ void GestorPraias::LoadPraias(std::string filename)
 
 	string tempPraia;
 
-	vector<string> parser(10,"");
+	vector<string> parser(13,"");
 	stringstream ss;
 
 	vector<servico> tempServicos;
@@ -398,19 +419,19 @@ void GestorPraias::LoadPraias(std::string filename)
 			getline(ss, parser[9], ',');
 
 			tempServicos.resize(0);
-			while (getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
+			while (getline(ss, parser[10], ',') && getline(ss, parser[11], ',') && getline(ss, parser[12], ',') && getline(ss, parser[13], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
 			{
-				if (parser[1] == "nadadorSalvador")
-					tempServicos.push_back(nadadorSalvador(parser[2]));
+				if (parser[10] == "nadadorSalvador")
+					tempServicos.push_back(nadadorSalvador(parser[11]));
 
-				else if (parser[1] == "cafe")
-					tempServicos.push_back(cafe(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+				else if (parser[10] == "cafe")
+					tempServicos.push_back(cafe(parser[11], GPS(stod(parser[12]), stod(parser[13]))));
 
-				else if (parser[1] == "restaurante")
-					tempServicos.push_back(restaurante(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+				else if (parser[10] == "restaurante")
+					tempServicos.push_back(restaurante(parser[11], GPS(stod(parser[12]), stod(parser[13]))));
 
-				else if (parser[1] == "campoDesportivo")
-					tempServicos.push_back(campoDesportivo(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+				else if (parser[10] == "campoDesportivo")
+					tempServicos.push_back(campoDesportivo(parser[11], GPS(stod(parser[12]), stod(parser[13]))));
 
 				else
 					throw BadFileInput(filename);
@@ -430,19 +451,19 @@ void GestorPraias::LoadPraias(std::string filename)
 			getline(ss, parser[7], ',');
 
 			tempServicos.resize(0);
-			while (getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
+			while (getline(ss, parser[10], ',') && getline(ss, parser[11], ',') && getline(ss, parser[12], ',') && getline(ss, parser[13], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
 			{
-				if (parser[1] == "nadadorSalvador")
-					tempServicos.push_back(nadadorSalvador(parser[2]));
+				if (parser[10] == "nadadorSalvador")
+					tempServicos.push_back(nadadorSalvador(parser[11]));
 
-				else if (parser[1] == "cafe")
-					tempServicos.push_back(cafe(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+				else if (parser[10] == "cafe")
+					tempServicos.push_back(cafe(parser[11], GPS(stod(parser[12]), stod(parser[13]))));
 
-				else if (parser[1] == "restaurante")
-					tempServicos.push_back(restaurante(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+				else if (parser[10] == "restaurante")
+					tempServicos.push_back(restaurante(parser[11], GPS(stod(parser[12]), stod(parser[13]))));
 
-				else if (parser[1] == "campoDesportivo")
-					tempServicos.push_back(campoDesportivo(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+				else if (parser[10] == "campoDesportivo")
+					tempServicos.push_back(campoDesportivo(parser[11], GPS(stod(parser[12]), stod(parser[13]))));
 
 				else
 					throw BadFileInput(filename);

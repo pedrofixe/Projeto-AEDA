@@ -8,8 +8,8 @@
 class menu {
 
 	GestorPraias gestor;
-	unsigned int width;
-	unsigned int height;
+	unsigned int width = 100;
+	unsigned int height = 35;
 	std::vector<std::string> banner;
 
 public:
