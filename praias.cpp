@@ -22,7 +22,7 @@ praiaFluvial::praiaFluvial()
  * @param[in]  capacidade       The capacidade
  * @param[in]  servicosdapraia  The servicosdapraia
  */
-praiaFluvial::praiaFluvial(string nome, string concelho, GPS gps, bool bandeirazul, unsigned int capacidade, vector<servico> servicosdapraia) : concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
+praiaFluvial::praiaFluvial(string nome, string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, vector<servico> servicosdapraia) : nome(nome), concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
 {}
 
 praiaFluvial::~praiaFluvial()
@@ -145,7 +145,7 @@ rio::rio()
 	setTipo("rio");
 }
 
-rio::rio(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int larguraMax, unsigned int caudalMax, unsigned int profundidadeMax): praiaFluvial(nome,concelho,gps,capacidade,bandeiraazul, servicosdapraia), larguraMax(larguraMax), caudalMax(caudalMax), profundidadeMax(profundidadeMax)
+rio::rio(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int larguraMax, unsigned int caudalMax, unsigned int profundidadeMax): praiaFluvial(nome,concelho,gps,bandeiraazul,capacidade, servicosdapraia), larguraMax(larguraMax), caudalMax(caudalMax), profundidadeMax(profundidadeMax)
 {
 	setTipo("rio");
 }
@@ -387,7 +387,6 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 
 void GestorPraias::LoadPraias(std::string filename) 
 {
-
 	ifstream file(filename);
 
 	if (!file.is_open())
@@ -395,14 +394,13 @@ void GestorPraias::LoadPraias(std::string filename)
 
 	string tempPraia;
 
-	vector<string> parser(13,"");
-	stringstream ss;
+	vector<string> parser(14,"");
 
 	vector<servico> tempServicos;
 
 	while (getline(file, tempPraia, '\n'))
 	{
-		ss.str(tempPraia);
+		stringstream ss(tempPraia);
 
 		getline(ss, parser[0], ',');
 
@@ -437,7 +435,16 @@ void GestorPraias::LoadPraias(std::string filename)
 					throw BadFileInput(filename);
 			}
 
-			praias.push_back(new rio(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7]), stoi(parser[8]), stoi(parser[9])));
+			try
+			{
+				praias.push_back(new rio(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7]), stoi(parser[8]), stoi(parser[9])));
+			}
+			catch (exception& e)
+			{
+				throw BadFileInput(filename);
+			}
+
+
 		}
 
 		else if (parser[0] == "albufeira") //"albufeira",nome,concelho,latitude,longitude,bandeiraazul,capacidade,area
@@ -469,21 +476,42 @@ void GestorPraias::LoadPraias(std::string filename)
 					throw BadFileInput(filename);
 			}
 
-			praias.push_back(new albufeira(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7])));
+			try
+			{
+				praias.push_back(new albufeira(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7])));
+			}
+			catch (exception& e)
+			{
+				throw BadFileInput(filename);
+			}
 		}
 
-		else if (parser[0] == "servicoforadapraia") //"servicoforadapraia",tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
+		else if (parser[0] == "servicosdefora") //"servicosdefora",tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
 		{
 			while(getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ','))
 			{
 				if (parser[1] == "pontoTuristico")
 				{
-					servicosdefora.push_back(new pontoTuristico(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+					try
+					{
+						servicosdefora.push_back(new pontoTuristico(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+					}
+					catch (exception& e)
+					{
+						throw BadFileInput(filename);
+					}
 				}
 
 				else if (parser[1] == "alojamento")
 				{
-					servicosdefora.push_back(new alojamento(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+					try
+					{
+						servicosdefora.push_back(new alojamento(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+					}
+					catch (exception& e)
+					{
+						throw BadFileInput(filename);
+					}
 				}
 
 				else

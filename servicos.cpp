@@ -69,7 +69,7 @@ nadadorSalvador::nadadorSalvador()
  */
 nadadorSalvador::nadadorSalvador(string nome): servico(nome,GPS(0,0))
 {
-	setTipo("nadador");
+	setTipo("nadadorSalvador");
 }
 
 /**

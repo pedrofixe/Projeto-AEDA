@@ -38,7 +38,7 @@ public:
 	void setNome(std::string nome);
 	void setTipo(std::string tipo);
 
-	unsigned int getLargura() const;
+	virtual unsigned int getLargura() const;
 	virtual unsigned int getCaudal() const;
 	virtual unsigned int getProfundidade() const;
 
