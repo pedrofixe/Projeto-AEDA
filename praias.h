@@ -18,9 +18,11 @@ class praiaFluvial
 	bool bandeiraazul;
 	unsigned int capacidade;
 	std::vector<servico> servicosdapraia;
+	std::string tipo;
 public:
 	praiaFluvial();
 	praiaFluvial(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia);
+	~praiaFluvial();
 
 	std::string getNome() const;
 	GPS getGPS() const;
@@ -28,10 +30,20 @@ public:
 	bool getBandeiraAzul() const;
 	unsigned int getCapacidade() const;
 	std::vector<servico> getServicos() const;
+	std::string getTipo() const;
+
 	virtual std::string getInfo() const;
 
 	void setGPS(GPS gps);
 	void setNome(std::string nome);
+	void setTipo(std::string tipo);
+
+	unsigned int getLargura() const;
+	unsigned int getCaudal() const;
+	unsigned int getProfundidade() const;
+
+	unsigned int getArea() const;
+
 };
 std::ostream& operator<<(std::ostream & os, praiaFluvial praia); 
 
@@ -47,10 +59,11 @@ class rio : public praiaFluvial
 public:
 	rio();
 	rio(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int larguraMax, unsigned int caudalMax, unsigned int profundidadeMax);
-	
-	unsigned int getLargura() { return this->larguraMax; }
-	unsigned int getCaudal() { return this->caudalMax; }
-	unsigned int getProfundida() { return this->profundidadeMax; }
+	~rio();
+
+	unsigned int getLargura() const;
+	unsigned int getCaudal() const;
+	unsigned int getProfundidade() const;
 	std::string getInfo() const;
 };
 
@@ -62,8 +75,11 @@ class albufeira : public praiaFluvial
 {
 	unsigned int area;
 public:
+	albufeira();
 	albufeira(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int area);
-	unsigned int getArea() { return this->area; }
+	~albufeira();
+
+	unsigned int getArea() const;
 	std::string getInfo() const;
 };
 
@@ -76,6 +92,9 @@ class GestorPraias
 	std::vector<servicoForaDaPraia*> servicosdefora;
 public:
 	GestorPraias();
+	GestorPraias(std::vector<praiaFluvial*> praias, std::vector<servicoForaDaPraia*> servicosdefora);
+	~GestorPraias();
+
 	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS gps);
 
@@ -88,11 +107,11 @@ public:
 	praiaFluvial * findPraia(std::string nome);
 	praiaFluvial * findPraia(GPS gps);
 
-	void LoadPraias(std::string filename);
-	void SavePraias(std::string filename);
-	
 	void sortByConcelho();
 	void servicosInfo(praiaFluvial praia);
+
+	void LoadPraias(std::string filename);
+	void SavePraias(std::string filename);
 
 };
 

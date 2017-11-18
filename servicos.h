@@ -71,17 +71,14 @@ public:
 
 };
 
-class servicoForaDaPraia
+
+
+class servicoForaDaPraia : public servico
 {
-	std::string nome;
-	GPS gps;
 public:
 	servicoForaDaPraia();
 	servicoForaDaPraia(std::string nome, GPS gps);
 	~servicoForaDaPraia();
-	GPS getGPS() const;
-	std::string getNome() const;
-
 };
 
 
@@ -90,6 +87,7 @@ class pontoTuristico: public servicoForaDaPraia
 public:
 	pontoTuristico();
 	pontoTuristico(std::string nome, GPS gps);
+	~pontoTuristico();
 };
 
 class alojamento : public servicoForaDaPraia
@@ -97,6 +95,7 @@ class alojamento : public servicoForaDaPraia
 public:
 	alojamento();
 	alojamento(std::string nome, GPS gps);
+	~alojamento();
 };
 
 

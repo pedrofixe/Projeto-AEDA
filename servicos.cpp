@@ -31,8 +31,7 @@ servico::~servico()
  *
  * @return     The gps.
  */
-GPS servico::getGPS() const
-{
+GPS servico::getGPS() const {
 	return gps;
 }
 
@@ -41,12 +40,10 @@ GPS servico::getGPS() const
  *
  * @return     The name.
  */
-string servico::getNome() const
-{
+string servico::getNome() const {
 	return nome;
 }
-string servico::getTipo() const
-{
+string servico::getTipo() const {
 	return tipo;
 }
 
@@ -136,31 +133,37 @@ campoDesportivo::~campoDesportivo()
 servicoForaDaPraia::servicoForaDaPraia()
 {}
 
-servicoForaDaPraia::servicoForaDaPraia(string nome, GPS gps)
-{
-	this->nome = nome;
-	this->gps = gps;
-}
+servicoForaDaPraia::servicoForaDaPraia(string nome, GPS gps) : servico(nome, gps)
+{}
 
-string servicoForaDaPraia::getNome() const
-{
-	return nome;
-}
+servicoForaDaPraia::~servicoForaDaPraia()
+{}
 
-GPS servicoForaDaPraia::getGPS() const
-{
-	return gps;
-}
+//------------------------------PONTOTURISTICO------------------------------
+
+
 
 pontoTuristico::pontoTuristico()
 {}
 
 pontoTuristico::pontoTuristico(string nome, GPS gps) : servicoForaDaPraia(nome, gps)
+{
+	setTipo("pontoTuristico");
+}
+
+pontoTuristico::~pontoTuristico()
 {}
+
+//------------------------------ALOJAMENTO------------------------------
 
 
 alojamento::alojamento()
 {}
 
 alojamento::alojamento(string nome, GPS gps) : servicoForaDaPraia(nome, gps)
+{
+	setTipo("alojamento");
+}
+
+alojamento::~alojamento()
 {}

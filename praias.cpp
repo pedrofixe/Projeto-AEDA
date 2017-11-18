@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+//------------------------------PRAIAFLUVIAL------------------------------
 
 /**
  * @brief      Constructs the object.
@@ -25,14 +25,15 @@ praiaFluvial::praiaFluvial()
 praiaFluvial::praiaFluvial(string nome, string concelho, GPS gps, bool bandeirazul, unsigned int capacidade, vector<servico> servicosdapraia) : concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
 {}
 
+praiaFluvial::~praiaFluvial()
+{}
 
 /**
  * @brief      Gets the praia's name.
  *
  * @return     The praia's name.
  */
-string praiaFluvial::getNome() const
-{
+string praiaFluvial::getNome() const {
 	return this->nome;
 }
 
@@ -41,8 +42,7 @@ string praiaFluvial::getNome() const
  *
  * @return     The gps.
  */
-GPS praiaFluvial::getGPS() const
-{
+GPS praiaFluvial::getGPS() const {
 	return this->gps;
 }
 /**
@@ -50,8 +50,7 @@ GPS praiaFluvial::getGPS() const
  *
  * @return     The praia's concelho.
  */
-string praiaFluvial::getConcelho() const
-{
+string praiaFluvial::getConcelho() const {
 	return this->concelho;
 }
 /**
@@ -59,30 +58,22 @@ string praiaFluvial::getConcelho() const
  *
  * @return     The praia's bandeira azul.
  */
-bool praiaFluvial::getBandeiraAzul() const
-{
+bool praiaFluvial::getBandeiraAzul() const {
 	return bandeiraazul;
 }
+
 /**
  * @brief      Gets the praia's capacidade.
  *
  * @return     The praia's capacidade.
  */
-unsigned int praiaFluvial::getCapacidade() const
-{
+unsigned int praiaFluvial::getCapacidade() const {
 	return capacidade;
 }
 
-std::vector<servico> praiaFluvial::getServicos() const
-{
+std::vector<servico> praiaFluvial::getServicos() const {
 	return servicosdapraia;
 }
-
-/**
- * @brief      Constructs the Gestor .
- */
-GestorPraias::GestorPraias()
-{}
 
 /**
  * @brief      Gets the information from a praiaFluvial.
@@ -109,7 +100,6 @@ string praiaFluvial::getInfo() const
 }
 
 
-
 void praiaFluvial::setGPS(GPS gps) {
 	this->gps = gps;
 }
@@ -118,11 +108,42 @@ void praiaFluvial::setNome(string nome) {
 	this->nome = nome;
 }
 
+void praiaFluvial::setTipo(string tipo) {
+	this->tipo = tipo;
+}
+
 
 std::ostream& operator<<(std::ostream & os, praiaFluvial praia) {
 	os << praia.getInfo();
 }
 
+//------------------------------RIO------------------------------
+
+rio::rio()
+{
+	setTipo("rio");
+}
+
+rio::rio(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int larguraMax, unsigned int caudalMax, unsigned int profundidadeMax): praiaFluvial(nome,concelho,gps,capacidade,bandeiraazul, servicosdapraia), larguraMax(larguraMax), caudalMax(caudalMax), profundidadeMax(profundidadeMax)
+{
+	setTipo("rio");
+}
+
+rio::~rio()
+{}
+
+
+unsigned int rio::getLargura() const {
+	return larguraMax; 
+}
+
+unsigned int rio::getCaudal() const { 
+	return caudalMax;
+}
+
+unsigned int rio::getProfundidade() const {
+	return profundidadeMax;
+}
 
 string rio::getInfo() const
 {
@@ -136,6 +157,26 @@ string rio::getInfo() const
 	return info_rio;
 }
 
+//------------------------------ALBUFEIRA------------------------------
+
+albufeira::albufeira()
+{
+	setTipo("albufeira");
+}
+
+albufeira::albufeira(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int area) : praiaFluvial(nome, concelho, gps, bandeiraazul, capacidade, servicosdapraia), area(area)
+{
+	setTipo("albufeira");
+}
+
+albufeira::~albufeira()
+{}
+
+
+unsigned int albufeira::getArea() const {
+	return area;
+}
+
 string albufeira::getInfo() const
 {
 	string info_albufeira = praiaFluvial::getInfo();
@@ -146,18 +187,21 @@ string albufeira::getInfo() const
 	return info_albufeira;
 }
 
-rio::rio(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int larguraMax, unsigned int caudalMax, unsigned int profundidadeMax): praiaFluvial(nome,concelho,gps,capacidade,bandeiraazul, servicosdapraia)
-{
-	this->larguraMax = larguraMax;
-	this->caudalMax = caudalMax;
-	this->profundidadeMax = profundidadeMax;
-}
 
+//------------------------------GESTORPRAIAS------------------------------
 
-albufeira::albufeira(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia, unsigned int area) : praiaFluvial(nome, concelho, gps, bandeiraazul, capacidade, servicosdapraia)
-{
-	this->area = area;
-}
+/**
+ * @brief      Constructs the Gestor .
+ */
+GestorPraias::GestorPraias()
+{}
+
+GestorPraias::GestorPraias(std::vector<praiaFluvial*> praias, std::vector<servicoForaDaPraia*> servicosdefora) : praias(praias), servicosdefora(servicosdefora)
+{}
+
+GestorPraias::~GestorPraias()
+{}
+
 
 int GestorPraias::praiaInfo(std::string praia) {
 
@@ -333,7 +377,7 @@ void GestorPraias::LoadPraias(std::string filename)
 	vector<string> parser(10,"");
 	stringstream ss;
 
-	vector<servicos> tempServicos;
+	vector<servico> tempServicos;
 
 	while (getline(file, tempPraia, '\n'))
 	{
@@ -357,16 +401,16 @@ void GestorPraias::LoadPraias(std::string filename)
 			while (getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
 			{
 				if (parser[1] == "nadadorSalvador")
-					tempServicos.push_back(new nadadorSalvador(parser[2]));
+					tempServicos.push_back(nadadorSalvador(parser[2]));
 
 				else if (parser[1] == "cafe")
-					tempServicos.push_back(new cafe(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+					tempServicos.push_back(cafe(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
 
 				else if (parser[1] == "restaurante")
-					tempServicos.push_back(new restaurante(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+					tempServicos.push_back(restaurante(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
 
 				else if (parser[1] == "campoDesportivo")
-					tempServicos.push_back(new campoDesportivo(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
+					tempServicos.push_back(campoDesportivo(parser[2], GPS(stod(parser[3]), stod(parser[4]))));
 
 				else
 					throw BadFileInput(filename);
@@ -413,12 +457,12 @@ void GestorPraias::LoadPraias(std::string filename)
 			{
 				if (parser[1] == "pontoTuristico")
 				{
-					servicosdefora.push_back(pontoTuristico(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+					servicosdefora.push_back(new pontoTuristico(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
 				}
 
 				else if (parser[1] == "alojamento")
 				{
-					servicosdefora.push_back(alojamento(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
+					servicosdefora.push_back(new alojamento(parser[2], GPS(stod(parser[3]),stod(parser[4]))));
 				}
 
 				else
@@ -436,5 +480,34 @@ void GestorPraias::LoadPraias(std::string filename)
 
 void GestorPraias::SavePraias(std::string filename) {
 
-	
+	ofstream file(filename);
+
+	if (!file.is_open())
+		throw BadFileInput(filename);
+
+	for (int i = 0; i < praias.size(); ++i)
+	{
+		if (i != 0)
+			file << '\n';
+
+		if (praias[i]->getTipo() == "rio")
+			file << praias[i]->getTipo() << ',' << praias[i]->getNome() << ',' << praias[i]->getConcelho() << ',' << praias[i]->getGPS().getLatitude() << ',' << praias[i]->getGPS().getLongitude() << ',' << praias[i]->getBandeiraAzul() << ',' << praias[i]->getCapacidade() << ',' << praias[i]->getLargura() << ',' << praias[i]->getCaudal() << ',' << praias[i]->getProfundidade();
+		else
+			file << praias[i]->getTipo() << ',' << praias[i]->getNome() << ',' << praias[i]->getConcelho() << ',' << praias[i]->getGPS().getLatitude() << ',' << praias[i]->getGPS().getLongitude() << ',' << praias[i]->getBandeiraAzul() << ',' << praias[i]->getCapacidade() << ',' << praias[i]->getArea();
+
+		for (int j = 0; j < praias[i]->getServicos().size(); ++j)
+		{
+			file << ',' << praias[i]->getServicos()[j].getTipo() << ',' << praias[i]->getServicos()[j].getNome() << ',' << praias[i]->getServicos()[j].getGPS().getLatitude() << ',' << praias[i]->getServicos()[j].getGPS().getLongitude();
+		}
+	}
+
+	for (int i = 0; i < servicosdefora.size(); ++i)
+	{
+		if (i == 0)
+			file << '\n' << "servicosdefora";
+
+		file << ',' << servicosdefora[i]->getTipo() << ',' << servicosdefora[i]->getNome() << ',' << servicosdefora[i]->getGPS().getLatitude() << ',' << servicosdefora[i]->getGPS().getLongitude();
+	}
+
+	file.close();
 }
