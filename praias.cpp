@@ -385,12 +385,12 @@ void GestorPraias::servicosInfo(praiaFluvial praia)
 
 
 
-void GestorPraias::LoadPraias(std::string filename) 
+bool GestorPraias::LoadPraias(std::string filename) 
 {
 	ifstream file(filename);
 
 	if (!file.is_open())
-		throw BadFileInput(filename);
+		return false;
 
 	string tempPraia;
 
@@ -524,15 +524,17 @@ void GestorPraias::LoadPraias(std::string filename)
 	}
 
 	file.close();
+
+	return true;
 }
 
 
-void GestorPraias::SavePraias(std::string filename) {
+bool GestorPraias::SavePraias(std::string filename) {
 
 	ofstream file(filename);
 
 	if (!file.is_open())
-		throw BadFileInput(filename);
+		return false;
 
 	for (int i = 0; i < praias.size(); ++i)
 	{
@@ -559,4 +561,6 @@ void GestorPraias::SavePraias(std::string filename) {
 	}
 
 	file.close();
+
+	return true;
 }

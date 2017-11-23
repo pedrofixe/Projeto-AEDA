@@ -16,6 +16,7 @@ public:
 	menu();
 	menu(unsigned int widht, unsigned int height);
 
+	void PreMenu();
 	void MainMenu();
 	void Menu1();
 	void Menu2();
@@ -29,7 +30,8 @@ public:
 	void setWidth(unsigned int width);
 	void setHeight(unsigned int height);
 	
-	void LoadBanner(std::string filename);
+	bool LoadBanner(std::string filename);
+	void PrintBanner();
 
 };
 

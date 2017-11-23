@@ -110,8 +110,8 @@ public:
 	void sortByConcelho();
 	void servicosInfo(praiaFluvial praia);
 
-	void LoadPraias(std::string filename);
-	void SavePraias(std::string filename);
+	bool LoadPraias(std::string filename);
+	bool SavePraias(std::string filename);
 
 };
 

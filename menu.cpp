@@ -9,12 +9,50 @@ menu::menu()
 menu::menu(unsigned int width, unsigned int height) : width(width), height(height)
 {}
 
+void menu::PreMenu()
+{
+
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	string tempstr;
+
+	while(1)
+	{
+		cout <<"\n Insert input filename (leave empty for default: \"inputfile\"): ";
+
+		getline(cin, tempstr);
+		if (tempstr == "")	tempstr = "inputfile";
+
+		if (gestor.LoadPraias(tempstr))
+			break;
+		else
+			cout << "File doesn't exist!";
+
+	}
+	cout << "\n";
+
+	while (1)
+	{
+		cout <<"\n Insert banner filename (leave empty for default: \"bannerfile\"): ";
+
+		getline(cin, tempstr);
+		if (tempstr == "")	tempstr = "bannerfile";
+
+		if (LoadBanner(tempstr))
+			break;
+		else
+			cout << "File doesn't exist!";
+	}
+
+	cout << "\n\n   All files have been loaded with success. Press enter to continue...";
+	getchar();
+}
+
 
 void menu::MainMenu()
 {
-
-	gestor.LoadPraias("input");
-	gestor.SavePraias("input");
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
 
 	unsigned int option;
 	cout << "-------------------------------------------------------------------------" << endl;
@@ -69,6 +107,10 @@ void menu::MainMenu()
 
 void menu::Menu1()
 {
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+
 	char c;
 	string praia;
 	cout << "Enter the name of the fluvial beach that you want to get info !\n";
@@ -94,34 +136,42 @@ void menu::Menu1()
 
 void menu::Menu2()
 {
-	  double latitude, longitude;
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
 
-	  cout << "Please enter the latitude of the beach ! \n";
-	  cout << "Latitude: ";
-	  while (cin.fail() )
-	  {
-	 	 cin.clear();
-	 	 cin.ignore(1000, '\n');
-	 	 cout << "Please write a valid number ! \n";
-	 	 cin >> latitude;
-	  }
+	double latitude, longitude;
 
-	  cout << "Now please enter the longitude ! \n";
-	  cout << "Longitude: ";
-	  while (cin.fail() )
-	  {
-	 	 cin.clear();
-	 	 cin.ignore(1000, '\n');
-	 	 cout << "Please write a valid number ! \n";
-	 	 cin >> longitude;
-	  }
+	cout << "Please enter the latitude of the beach ! \n";
+	cout << "Latitude: ";
+	while (cin.fail() )
+	{
+		cin.clear();
+		cin.ignore(1000, '\n');
+		cout << "Please write a valid number ! \n";
+		cin >> latitude;
+	}
 
-	  gestor.praiaInfoGPS( GPS(latitude, longitude) );
+	cout << "Now please enter the longitude ! \n";
+	cout << "Longitude: ";
+	while (cin.fail() )
+	{
+		cin.clear();
+		cin.ignore(1000, '\n');
+		cout << "Please write a valid number ! \n";
+		cin >> longitude;
+	}
+
+	gestor.praiaInfoGPS( GPS(latitude, longitude) );
 
 }
 
 void menu::Menu3()
 {
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+
 	double latitude, longitude;
 
 	cout << "Please enter the latitude of the position you want to calculate the nearest beach ! \n";
@@ -154,6 +204,10 @@ void menu::Menu3()
 
 void menu::Menu4()
 {
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+
 	string county;
 
 	cout << "Please input the county ! \n";
@@ -165,6 +219,10 @@ void menu::Menu4()
 
 void menu::Menu5()
 {
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+	
 	string praia;
 	cout << "Enter the name of the fluvial beach that you want to get info !\n";
 	cout << "Name of the beach: ";
@@ -195,8 +253,29 @@ void menu::setHeight(unsigned int height)
 	this->height = height;
 }
 
-void menu::LoadBanner(string filename) {
+bool menu::LoadBanner(string filename) {
 
+	ifstream file(filename);
+
+	if (!file.is_open())
+		return false;
+
+	string tempstr;
+
+	while(getline(file, tempstr, '\n'))
+	{
+		banner.push_back(tempstr);
+	}
+
+	return true;
 }
 
+void menu::PrintBanner() {
 
+	for (int i = 0; i < banner.size(); ++i)
+	{
+		cout << banner[i];
+	}
+
+	cout << '\n';
+}

@@ -9,8 +9,9 @@ using namespace std;
 /**
  * @brief      Constructs the object.
  */
-GPS::GPS()
-{}
+GPS::GPS(){
+	
+}
 
 /**
  * @brief      Constructs the object.
