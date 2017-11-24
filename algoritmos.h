@@ -40,6 +40,33 @@ int sequentialSearch(std::vector<T*> & v, T target, bool (*f)(T, T)) {
 	return -1;
 }
 
+template<class T>
+typename std::vector<T>::iterator sequentialSearch(std::vector<T> & v, T target)
+{
+	typename std::vector<T>::iterator it;
+
+	for (it = v.begin(); it != v.end(); ++it)
+	{
+		if (*it == target)
+			return it;
+	}
+
+	return it; //v.end()
+}
+
+template<class T>
+typename std::vector<T>::iterator sequentialSearch(std::vector<T> & v, T target, bool (*f)(T, T))
+{
+	typename std::vector<T>::iterator it;
+
+	for (it = v.begin(); it != v.end(); ++it)
+	{
+		if (f(*it, target))
+			return it;
+	}
+
+	return it; //v.end()
+}
 
 template<class T>
 void selectionSort(std::vector<T> & v) {

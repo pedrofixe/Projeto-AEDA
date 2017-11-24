@@ -229,11 +229,11 @@ GestorPraias::~GestorPraias()
 
 int GestorPraias::praiaInfo(std::string praia) {
 
-	praiaFluvial * temp = this->findPraia(praia);
+	vector<praiaFluvial*>::iterator it = this->findPraia(praia);
 
-	if (temp != nullptr)
+	if (it != praias.end())
 	{
-		cout << temp->getInfo();
+		cout << (*it)->getInfo();
 		return 0;
 	}
 
@@ -242,11 +242,11 @@ int GestorPraias::praiaInfo(std::string praia) {
 
 int GestorPraias::praiaInfoGPS(GPS gps) {
 
-	praiaFluvial * temp = this->findPraia(gps);
+	vector<praiaFluvial*>::iterator it = this->findPraia(gps);
 
-	if (temp != nullptr)
+	if (it != praias.end())
 	{
-		cout << temp->getInfo();
+		cout << (*it)->getInfo();
 		return 0;
 	}
 
@@ -256,6 +256,11 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
 void GestorPraias::addPraia(praiaFluvial *praia) {
 	praias.push_back(praia);
 }
+
+void GestorPraias::removePraia(std::vector<praiaFluvial*>::iterator it) {
+	praias.erase(it);
+}
+
 
 /**
  * @brief      Gets the closest praia.
@@ -273,65 +278,53 @@ std::vector<praiaFluvial*> GestorPraias::getPraias() {
 	return praias;
 }
 
-praiaFluvial * GestorPraias::getClosestPraia(GPS gps) {
+std::vector<praiaFluvial*>::iterator GestorPraias::getClosestPraia(GPS gps) {
 
 	if (praias.size() == 0)
-		return nullptr;
+		return praias.end();
 
-	int index = 0;
-	int min = praias[0]->getGPS().distance(gps);
+	std::vector<praiaFluvial*>::iterator it;
 
-	for (int i = 0; i < praias.size(); ++i)
+	std::vector<praiaFluvial*>::iterator min = praias.begin();
+
+	for (it = praias.begin(); it != praias.end(); ++it)
 	{
-		if (praias[i]->getGPS().distance(gps) < min)
-		{
-			index = i;
-			min = praias[i]->getGPS().distance(gps);
-		}
+		if ((*it)->getGPS().distance(gps) < (*min)->getGPS().distance(gps))
+			min = it;
 	}
 
-	return praias[index];
-}
-
-bool equalNome(praiaFluvial praia1, praiaFluvial praia2) {
-	return (praia1.getNome() == praia2.getNome());
-}
-
-praiaFluvial * GestorPraias::findPraia(string nome) {
-
-	if (praias.size() == 0)
-		return nullptr;
-
-	praiaFluvial foo;
-	foo.setNome(nome);
-
-	int index = sequentialSearch(praias, foo, equalNome);
-
-	if (index == -1)
-		return nullptr;
-
-	return praias[index];
+	return min;
 }
 
 
-bool equalGPS(praiaFluvial praia1, praiaFluvial praia2) {
-	return (praia1.getGPS() == praia2.getGPS());
+vector<praiaFluvial*>::iterator GestorPraias::findPraia(string nome) {
+
+	vector<praiaFluvial*>::iterator it ;
+
+	for (it = praias.begin(); it != praias.end(); ++it)
+	{
+		if ((*it)->getNome() == nome)
+			return it;
+	}
+
+	return it; //praias.end()
 }
 
-praiaFluvial * GestorPraias::findPraia(GPS gps) {
+vector<praiaFluvial*>::iterator GestorPraias::findPraia(GPS gps) {
 
-	if (praias.size() == 0)
-		return nullptr;
+	vector<praiaFluvial*>::iterator it ;
 
-	praiaFluvial foo;
-	foo.setGPS(gps);
+	for (it = praias.begin(); it != praias.end(); ++it)
+	{
+		if ((*it)->getGPS() == gps)
+			return it;
+	}
 
-	int index = sequentialSearch(praias, foo, equalNome);
+	return it; //praias.end()
+}
 
-	if (index == -1)
-		return nullptr;
-
-	return praias[index];
+bool GestorPraias::isEnd(std::vector<praiaFluvial*>::iterator &it) {
+	return (it == praias.end());
 }
 
 

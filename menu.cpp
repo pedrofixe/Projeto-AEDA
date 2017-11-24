@@ -507,6 +507,7 @@ void menu::RemovePraia()
 
 	string tempstr;
 	GPS gps;
+	vector<praiaFluvial*>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
@@ -524,8 +525,6 @@ void menu::RemovePraia()
 
 			if (tempstr2 == ".")
 				return;
-
-			string tempstr3;
 
 			cout << "Please enter the longitude coordinate of the beach\n";
 
@@ -546,14 +545,14 @@ void menu::RemovePraia()
 			}
 			break;
 		}
-		praiaFluvial * temp = gestor.findPraia(gps);
+		it = gestor.findPraia(gps);
 	}
 	else
 	{
-		praiaFluvial * temp = gestor.findPraia(tempstr);
+		it = gestor.findPraia(tempstr);
 	}
 
-	if (temp == nullptr)
+	if (gestor.isEnd(it))
 	{
 		cout << "Beach not found!\n";
 		cout << "Would you like to try again ? (Y/N) \n";
@@ -564,7 +563,7 @@ void menu::RemovePraia()
 	}
 	else
 	{
-		cout << '\n' << *temp;
+		cout << '\n' << **it;
 		getline(cin, tempstr);
 	}
 }
@@ -591,9 +590,9 @@ void menu::SearchPraiaByName()
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
 
-	praiaFluvial * temp = gestor.findPraia(tempstr);
+	vector<praiaFluvial*>::iterator it = gestor.findPraia(tempstr);
 
-	if (temp == nullptr)
+	if (gestor.isEnd(it))
 	{
 		cout << "Beach not found!\n";
 		cout << "Would you like to try again ? (Y/N) \n";
@@ -604,7 +603,7 @@ void menu::SearchPraiaByName()
 	}
 	else
 	{
-		cout << '\n' << *temp;
+		cout << '\n' << **it;
 		getline(cin, tempstr);
 	}
 
@@ -634,9 +633,9 @@ void menu::SearchPraiaByGPS()
 		utilities::trimString(tempstr);
 		longitude = stod(tempstr);
 
-		praiaFluvial * temp = gestor.findPraia(GPS(latitude, longitude));
+		vector<praiaFluvial*>::iterator it = gestor.findPraia(GPS(latitude, longitude));
 
-		if (temp == nullptr)
+		if (gestor.isEnd(it))
 		{
 			cout << "Beach not found!\n";
 			cout << "Would you like to try again ? (Y/N) \n";
@@ -647,7 +646,7 @@ void menu::SearchPraiaByGPS()
 		}
 		else
 		{
-			cout << '\n' << *temp;
+			cout << '\n' << **it;
 			getline(cin, tempstr);
 		}
 	}
@@ -692,10 +691,9 @@ void menu::SearchNearestBeach()
 
 	GPS gps(latitude, longitude);
 
-	praiaFluvial *pf;
-	pf = gestor.getClosestPraia(gps);
+	vector<praiaFluvial*>::iterator it= gestor.getClosestPraia(gps);
 
-	cout << "The nearest beach is " << pf->getNome();
+	cout << "The nearest beach is " << (*it)->getNome();
 }
 
 void menu::SearchPraiaByCounty()
