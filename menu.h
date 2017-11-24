@@ -16,13 +16,17 @@ public:
 	menu();
 	menu(unsigned int widht, unsigned int height);
 
+	void Begin();
 	void PreMenu();
 	void MainMenu();
-	void Menu1();
-	void Menu2();
-	void Menu3();
-	void Menu4();
-	void Menu5();
+	void AddPraia();
+	void RemovePraia();
+	void ListPraias();
+	void SearchPraiaByName();
+	void SearchPraiaByGPS();
+	void SearchNearestBeach();
+	void SearchPraiaByCounty();
+	//void DisplayPraiaServices();
 
 	unsigned int getWidth();
 	unsigned int getHeight();

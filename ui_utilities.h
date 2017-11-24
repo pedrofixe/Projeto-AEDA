@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
 
 using namespace std;
 
 class ui_utilities{
+
+	unsigned int width = 100;
+	unsigned int height = 35;
 
 public:
 	

@@ -1,6 +1,6 @@
 #include "GPS.h"
-
 #include <cmath>
+
 
 #define pi atan(1)*4
 
@@ -100,14 +100,3 @@ ostream & operator<< (ostream & os,const GPS & input) {
 
 	return (os << input.getLatitude() << " , " << input.getLongitude());
 }
-
-
-//------------------------------WRONGCOORDINATES------------------------------
-
-/**
- * @brief      Constructs the object.
- *
- * @param[in]  gps   The gps
- */
-WrongCoordinates::WrongCoordinates(GPS gps) : gps(gps)
-{}

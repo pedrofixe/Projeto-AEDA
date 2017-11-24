@@ -8,9 +8,9 @@ namespace utilities{
 	template <class T>
 
 	void swap(T&, T&);
-	void trimString(string&);
+	void trimString(std::string &input);
 	int intSize(int);
-	bool isNumeric(string);
+	bool isNumeric(std::string input);
 	
 };
 

@@ -2,6 +2,7 @@
 #define GPS_H
 
 #include <iostream>
+#include <exception>
 
 /**
  * @brief      Class for GPS coordinates.
@@ -28,14 +29,12 @@ std::ostream& operator <<(std::ostream & os,const GPS & input);
  * @brief      Class for handling wrong coordinates in GPS.
  */
 class WrongCoordinates {
-	
 	GPS gps;
-
 public:
 
-	WrongCoordinates(GPS gps);
+	WrongCoordinates(GPS gps): gps(gps) {}
 
-	GPS getGPS();
+	GPS getGPS() const {return gps;}
 	
 };
 

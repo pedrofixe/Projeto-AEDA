@@ -88,9 +88,10 @@ string praiaFluvial::getInfo() const
 {
 	string info;
 
-	info += "Nome da Praia: " + nome + " \n ";
-	info += "Concelho onde a praia se situa: " + concelho + " \n ";
-	info += "Capacidade da praia: " + to_string(capacidade) + "\n ";
+	info += "Tipo da praia: " + tipo + '\n';
+	info += "Nome da praia: " + nome + " \n";
+	info += "Concelho onde a praia se situa: " + concelho + " \n";
+	info += "Capacidade da praia: " + to_string(capacidade) + "\n";
 	if (bandeiraazul == true)
 	{
 		info += "Bandeira azul: A praia possui bandeira azul\n";
@@ -99,6 +100,8 @@ string praiaFluvial::getInfo() const
 	{
 		info += "Bandeira azul: A praia nao possui bandeira azul\n";
 	}
+
+
 
 	return info;
 }
@@ -228,7 +231,7 @@ int GestorPraias::praiaInfo(std::string praia) {
 
 	praiaFluvial * temp = this->findPraia(praia);
 
-	if (temp != NULL)
+	if (temp != nullptr)
 	{
 		cout << temp->getInfo();
 		return 0;
@@ -241,7 +244,7 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
 
 	praiaFluvial * temp = this->findPraia(gps);
 
-	if (temp != NULL)
+	if (temp != nullptr)
 	{
 		cout << temp->getInfo();
 		return 0;
@@ -274,7 +277,7 @@ std::vector<praiaFluvial*> GestorPraias::getPraias() {
 praiaFluvial * GestorPraias::getClosestPraia(GPS gps) {
 
 	if (praias.size() == 0)
-		return NULL;
+		return nullptr;
 
 	int index = 0;
 	int min = praias[0]->getGPS().distance(gps);
@@ -298,7 +301,7 @@ bool equalNome(praiaFluvial praia1, praiaFluvial praia2) {
 praiaFluvial * GestorPraias::findPraia(string nome) {
 
 	if (praias.size() == 0)
-		return NULL;
+		return nullptr;
 
 	praiaFluvial foo;
 	foo.setNome(nome);
@@ -306,7 +309,7 @@ praiaFluvial * GestorPraias::findPraia(string nome) {
 	int index = sequentialSearch(praias, foo, equalNome);
 
 	if (index == -1)
-		return NULL;
+		return nullptr;
 
 	return praias[index];
 }
@@ -319,7 +322,7 @@ bool equalGPS(praiaFluvial praia1, praiaFluvial praia2) {
 praiaFluvial * GestorPraias::findPraia(GPS gps) {
 
 	if (praias.size() == 0)
-		return NULL;
+		return nullptr;
 
 	praiaFluvial foo;
 	foo.setGPS(gps);
@@ -327,7 +330,7 @@ praiaFluvial * GestorPraias::findPraia(GPS gps) {
 	int index = sequentialSearch(praias, foo, equalNome);
 
 	if (index == -1)
-		return NULL;
+		return nullptr;
 
 	return praias[index];
 }

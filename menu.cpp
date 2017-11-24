@@ -1,5 +1,7 @@
 #include "menu.h"
 #include "ui_utilities.h"
+#include "utilities.h"
+#include <fstream>
 
 using namespace std;
 
@@ -8,6 +10,11 @@ menu::menu()
 
 menu::menu(unsigned int width, unsigned int height) : width(width), height(height)
 {}
+
+void menu::Begin()
+{
+	PreMenu();
+}
 
 void menu::PreMenu()
 {
@@ -21,7 +28,9 @@ void menu::PreMenu()
 		cout <<"\n Insert input filename (leave empty for default: \"inputfile\"): ";
 
 		getline(cin, tempstr);
-		if (tempstr == "")	tempstr = "inputfile";
+		utilities::trimString(tempstr);
+		if (tempstr == "")
+			tempstr = "inputfile";
 
 		if (gestor.LoadPraias(tempstr))
 			break;
@@ -36,7 +45,9 @@ void menu::PreMenu()
 		cout <<"\n Insert banner filename (leave empty for default: \"bannerfile\"): ";
 
 		getline(cin, tempstr);
-		if (tempstr == "")	tempstr = "bannerfile";
+		utilities::trimString(tempstr);
+		if (tempstr == "")
+			tempstr = "bannerfile";
 
 		if (LoadBanner(tempstr))
 			break;
@@ -45,7 +56,9 @@ void menu::PreMenu()
 	}
 
 	cout << "\n\n   All files have been loaded with success. Press enter to continue...";
-	getchar();
+	getline(cin, tempstr);
+
+	MainMenu();
 }
 
 
@@ -53,120 +66,525 @@ void menu::MainMenu()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
+	PrintBanner();
 
-	unsigned int option;
-	cout << "-------------------------------------------------------------------------" << endl;
-	cout << "|        Welcome to our guide of Praias Fluviais in Portugal !  :D        |" << endl;
-	cout << "-------------------------------------------------------------------------" << endl;
-	cout << "Enter a number to choose the sub-menu that you want to go !\n";
-	cout << "1- See a fluvial beach by inserting name \n";
-	cout << "2- See a fluvial beach by inserting GPS \n";
+	cout << "Enter a number to choose the sub-menu that you want to go !\n\n";
+	cout << "1- See a river beach by inserting name \n";
+	cout << "2- See a river beach by inserting GPS \n";
 	cout << "3- Discover the nearest beach around your GPS coordenates	\n";
 	cout << "4- See the beaches of a county \n";
 	cout << "5- See the services of a beach \n";
+	cout << "0- Quit \n\n";
 
-	cout << "Choose an option : "; cin >> option; cout << endl;
-	while (cin.fail() || option < 1 || option > 6)
+
+	string input;
+
+	while (true)
 	{
-		cin.clear();
-		cin.ignore(1000, '\n');
-		cout << "Please write a valid number ! \n";
-		cin >> option;
+		cout << "Select an option: ";
+
+		getline(cin, input);
+		utilities::trimString(input);
+		cout << "\n";
+
+		if (input == "1")
+		{
+			AddPraia();
+			break;
+		}
+
+		else if (input == "2")
+		{
+			RemovePraia();
+			break;
+		}
+
+		else if (input == "3")
+		{
+			ListPraias();
+			break;
+		}
+
+		else if (input == "4")
+		{
+			SearchPraiaByName();
+			break;
+		}
+
+		else if (input == "5")
+		{
+			SearchPraiaByGPS();
+			break;
+		}
+
+		else if (input == "6")
+		{
+			SearchNearestBeach();
+			break;
+		}
+
+		else if (input == "7")
+		{
+			SearchPraiaByCounty();
+			break;
+		}
+
+		else if (input == "0")
+			return;
+
+		else
+			cout << "Invalid input\n";
+
+	}
+}
+
+void menu::AddPraia()
+{
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+
+	string tempstr, tipo, nome, concelho;
+	GPS gps;
+	bool bandeiraazul;
+	int capacidade, larguraMax, caudalMax, profundidadeMax, area;
+	vector<servico> tempServicos;
+
+	cout << "\n\nEnter the information of the river beach that you want to add! (write \".\" at any time to go back)\n";
+
+	while(1)
+	{
+		cout << "Please enter the type of the beach (\"rio\" or \"albufeira\")\n";
+
+		getline(cin, tipo);
+		utilities::trimString(tipo);
+
+		if (name == ".")
+			return;
+
+		if (tipo == "rio" || tipo == "albufeira")
+			break;
+
+		cout << "Wrong type! Must be either \"rio\" or \"albufeira\"\n\n";
 	}
 
-	switch (option)
+	while(1)
+	{
+		cout << "Please enter the name of the beach\n";
+
+		getline(cin, nome);
+		utilities::trimString(nome);
+
+		if (name == ".")
+			return;
+
+		if (name != "")
+			break;
+
+		cout << "You need to write something!\n\n";
+	}
+
+	while(1)
+	{
+		cout << "Please enter the county of the beach\n";
+
+		getline(cin, concelho);
+		utilities::trimString(concelho);
+
+		if (concelho == ".")
+			return;
+
+		if (concelho != "")
+			break;
+
+		cout << "You need to write something!\n\n";
+	}
+
+	while(1)
+	{
+		cout << "Please enter the latitude coordinate of the beach\n";
+
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == ".")
+			return;
+
+		string tempstr2;
+
+		cout << "Please enter the longitude coordinate of the beach\n";
+
+		getline(cin, tempstr2);
+		utilities::trimString(tempstr2);
+
+		if (tempstr2 == ".")
+			return;
+
+		try
+		{
+			gps = GPS(stod(tempstr), stod(tempstr2));
+		}
+		catch (exception &e)
+		{
+			cout << "Wrong Coordinates!\n";
+			continue;
+		}
+		break;
+	}
+
+	while(1)
+	{
+		cout << "Does the beach have blue flag? (Y/N)\n";
+
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == ".")
+			return;
+
+		if (tempstr == "Y" || tempstr == "y")
+			bandeiraazul = true;
+		else
+			bandeiraazul = false;
+
+		break;
+	}
+
+	while(1)
+	{
+		cout << "Please enter the capacity of the beach\n";
+
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == ".")
+			return;
+
+		try
+		{
+			capacidade = stoi(tempstr);
+
+			if (capacidade < 0)
+			{
+				cout << "Capacity must be an unsigned integer!\n";
+				continue;
+			}
+
+			break;
+		}
+		catch (exception &e)
+		{
+			cout << "Capacity must be an unsigned integer!\n";
+		}
+
+	}
+
+	if (tipo == "rio")
 	{
 
-		case 1:
+		while(1)
 		{
-			Menu1();
+			cout << "Please enter the maximum width of the beach\n";
+
+			getline(cin, tempstr);
+			utilities::trimString(tempstr);
+
+			if (tempstr == ".")
+				return;
+
+			try
+			{
+				larguraMax = stoi(tempstr);
+
+				if (larguraMax < 0)
+				{
+					cout << "The maximum width must be an unsigned integer!\n";
+					continue;
+				}
+
+				break;
+			}
+			catch (exception &e)
+			{
+				cout << "The maximum width must be an unsigned integer!\n";
+			}
+
 		}
 
-		case 2:
+		while(1)
 		{
-			Menu2();
+			cout << "Please enter the maximum volume of water of the beach\n";
+
+			getline(cin, tempstr);
+			utilities::trimString(tempstr);
+
+			if (tempstr == ".")
+				return;
+
+			try
+			{
+				caudalMax = stoi(tempstr);
+
+				if (caudalMax < 0)
+				{
+					cout << "The maximum volume must be an unsigned integer!\n";
+					continue;
+				}
+
+				break;
+			}
+			catch (exception &e)
+			{
+				cout << "The maximum volume must be an unsigned integer!\n";
+			}
+
 		}
 
-		case 3:
+		while(1)
 		{
-			Menu3();
+			cout << "Please enter the maximum depth of the beach\n";
+
+			getline(cin, tempstr);
+			utilities::trimString(tempstr);
+
+			if (tempstr == ".")
+				return;
+
+			try
+			{
+				profundidadeMax = stoi(tempstr);
+
+				if (profundidadeMax < 0)
+				{
+					cout << "The maximum depth must be an unsigned integer!\n";
+					continue;
+				}
+
+				break;
+			}
+			catch (exception &e)
+			{
+				cout << "The maximum depth must be an unsigned integer!\n";
+			}
+
 		}
 
-		case 4:
+	}
+	else
+	{
+		while(1)
 		{
-			Menu4();
+			cout << "Please enter the area of the beach\n";
+
+			getline(cin, tempstr);
+			utilities::trimString(tempstr);
+
+			if (tempstr == ".")
+				return;
+
+			try
+			{
+				area = stoi(tempstr);
+
+				if (area < 0)
+				{
+					cout << "The area must be an unsigned integer!\n";
+					continue;
+				}
+
+				break;
+			}
+			catch (exception &e)
+			{
+				cout << "The area must be an unsigned integer!\n";
+			}
+
 		}
 
-		case 5:
+	}
+
+	while(1)
+	{
+		cout << "Enter a service of the beach (write \"..\" to end input of services)";
+		string tipo, nome;
+		GPS gps2;
+
+		while(1)
 		{
-			Menu5();
+			cout << "Please enter the type of the service\n";
+
+			getline(cin, tipo);
+			utilities::trimString(tipo);
+
+			if (tipo == ".")
+				goto endinput;
+
+			if (tipo == "nadadorSalvador" || tipo == "cafe" || tipo == "restaurante" || tipo == "campoDesportivo")
+				break;
+
+			cout << "Wrong type\n";
 		}
 
-	}	
+		while(1)
+		{
+			cout << "Please enter the name of the service\n";
+
+			getline(cin, nome);
+			utilities::trimString(nome);
+
+			if (nome == ".")
+				goto endinput;
+
+			if (nome == "")
+			{
+				cout << "You need to enter something\n";
+				continue;
+			}
+
+			break;
+		}
+
+		while(1)
+		{
+			cout << "Please enter the latitude coordinate of the beach\n";
+
+			getline(cin, tempstr2);
+			utilities::trimString(tempstr2);
+
+			if (tempstr2 == ".")
+				return;
+
+			string tempstr3;
+
+			cout << "Please enter the longitude coordinate of the beach\n";
+
+			getline(cin, tempstr3);
+			utilities::trimString(tempstr3);
+
+			if (tempstr2 == ".")
+				return;
+
+			try
+			{
+				gps2 = GPS(stod(tempstr2), stod(tempstr3));
+			}
+			catch (exception &e)
+			{
+				cout << "Wrong Coordinates!\n";
+				continue;
+			}
+			break;
+		}
+
+
+	}
+
+	endinput: 
+
 }
 
-void menu::Menu1()
+
+void menu::RemovePraia()
+{
+
+
+
+}
+
+void menu::ListPraias()
+{
+
+
+
+
+}
+
+void menu::SearchPraiaByName()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
 	PrintBanner();
 
-	char c;
-	string praia;
-	cout << "Enter the name of the fluvial beach that you want to get info !\n";
-    cout << "Name of the beach: ";
-	getline(cin, praia);
+	string tempstr;
 
-	praiaFluvial * temp = gestor.findPraia(praia);
+	cout << "Enter the name of the river beach that you want to get info !\n";
 
-	 if (temp == NULL)
-	 {
-	 	cout << " We couldn't find the beach you were searching for :( \n";
-	 }
+	cout << "Please enter the name of the beach\n";
+	getline(cin, tempstr);
+	utilities::trimString(tempstr);
 
-	 cout << "Do you wanna try again ? (Y/N) \n";
-	 if (c == 'Y')
-	 {
-	 	Menu1();
-	 }
-	 else 
-	 	MainMenu();
+	praiaFluvial * temp = gestor.findPraia(tempstr);
+
+	if (temp == nullptr)
+	{
+		cout << "Beach not found!\n";
+		cout << "Would you like to try again ? (Y/N) \n";
+		getline(cin, tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			SearchPraiaByName();
+	}
+	else
+	{
+		cout << '\n' << *temp;
+		getline(cin, tempstr);
+	}
+
 
 }
 
-void menu::Menu2()
+void menu::SearchPraiaByGPS()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
 	PrintBanner();
 
+	string tempstr;
 	double latitude, longitude;
 
-	cout << "Please enter the latitude of the beach ! \n";
-	cout << "Latitude: ";
-	while (cin.fail() )
+	cout << "Enter the GPS coordinates of the river beach that you want to get info !\n";
+
+	try
 	{
-		cin.clear();
-		cin.ignore(1000, '\n');
-		cout << "Please write a valid number ! \n";
-		cin >> latitude;
-	}
+		cout << "Please enter the latitude of the beach\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+		latitude = stod(tempstr);
 
-	cout << "Now please enter the longitude ! \n";
-	cout << "Longitude: ";
-	while (cin.fail() )
+		cout << "Please enter the longitude of the beach\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+		longitude = stod(tempstr);
+
+		praiaFluvial * temp = gestor.findPraia(GPS(latitude, longitude));
+
+		if (temp == nullptr)
+		{
+			cout << "Beach not found!\n";
+			cout << "Would you like to try again ? (Y/N) \n";
+			getline(cin, tempstr);
+
+			if (tempstr == "Y" || tempstr == "y")
+				SearchPraiaByGPS();
+		}
+		else
+		{
+			cout << '\n' << *temp;
+			getline(cin, tempstr);
+		}
+	}
+	catch (exception& e)
 	{
-		cin.clear();
-		cin.ignore(1000, '\n');
-		cout << "Please write a valid number ! \n";
-		cin >> longitude;
+			cout << "Invalid coordinates!\n";
+			cout << "Would you like to try again ? (Y/N) \n";
+			getline(cin, tempstr);
+
+			if (tempstr == "Y" || tempstr == "y")
+				SearchPraiaByGPS();
 	}
-
-	gestor.praiaInfoGPS( GPS(latitude, longitude) );
-
 }
 
-void menu::Menu3()
+void menu::SearchNearestBeach()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
@@ -202,7 +620,7 @@ void menu::Menu3()
 	cout << "The nearest beach is " << pf->getNome();
 }
 
-void menu::Menu4()
+void menu::SearchPraiaByCounty()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
@@ -217,20 +635,20 @@ void menu::Menu4()
 
 }
 
-void menu::Menu5()
+/*void menu::DisplayPraiaServices()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
 	PrintBanner();
 	
 	string praia;
-	cout << "Enter the name of the fluvial beach that you want to get info !\n";
+	cout << "Enter the name of the river beach that you want to get info !\n";
 	cout << "Name of the beach: ";
 	getline(cin, praia);
 
 	praiaFluvial * temp = gestor.findPraia(praia);
 
-}
+}*/
 
 unsigned int menu::getWidth()
 {
@@ -274,7 +692,7 @@ void menu::PrintBanner() {
 
 	for (int i = 0; i < banner.size(); ++i)
 	{
-		cout << banner[i];
+		cout << string((width - banner[i].size())/2, ' ') << banner[i] << '\n';
 	}
 
 	cout << '\n';
