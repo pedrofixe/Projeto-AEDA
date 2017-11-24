@@ -253,10 +253,9 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
 	return 1;
 }
 
-void GestorPraias::addPraia(praiaFluvial praia) {
-	praias.push_back(&praia);
+void GestorPraias::addPraia(praiaFluvial *praia) {
+	praias.push_back(praia);
 }
-
 
 /**
  * @brief      Gets the closest praia.

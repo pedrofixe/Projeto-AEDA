@@ -98,7 +98,8 @@ public:
 	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS gps);
 
-	void addPraia(praiaFluvial praia);
+	void addPraia(praiaFluvial *praia);
+	void removePraia(praiaFluvial *praia);
 	void setPraias(std::vector<praiaFluvial*> input);
 
 	std::vector<praiaFluvial*> getPraias();

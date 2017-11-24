@@ -2,6 +2,7 @@
 #include "ui_utilities.h"
 #include "utilities.h"
 #include <fstream>
+#include "GPS.h"
 
 using namespace std;
 
@@ -159,7 +160,7 @@ void menu::AddPraia()
 		getline(cin, tipo);
 		utilities::trimString(tipo);
 
-		if (name == ".")
+		if (tipo == ".")
 			return;
 
 		if (tipo == "rio" || tipo == "albufeira")
@@ -175,10 +176,10 @@ void menu::AddPraia()
 		getline(cin, nome);
 		utilities::trimString(nome);
 
-		if (name == ".")
+		if (nome == ".")
 			return;
 
-		if (name != "")
+		if (nome != "")
 			break;
 
 		cout << "You need to write something!\n\n";
@@ -406,20 +407,20 @@ void menu::AddPraia()
 	while(1)
 	{
 		cout << "Enter a service of the beach (write \"..\" to end input of services)";
-		string tipo, nome;
+		string tempstr2, tipo2, nome2;
 		GPS gps2;
 
 		while(1)
 		{
 			cout << "Please enter the type of the service\n";
 
-			getline(cin, tipo);
-			utilities::trimString(tipo);
+			getline(cin, tipo2);
+			utilities::trimString(tipo2);
 
-			if (tipo == ".")
+			if (tipo2 == ".")
 				goto endinput;
 
-			if (tipo == "nadadorSalvador" || tipo == "cafe" || tipo == "restaurante" || tipo == "campoDesportivo")
+			if (tipo2 == "nadadorSalvador" || tipo2 == "cafe" || tipo2 == "restaurante" || tipo2 == "campoDesportivo")
 				break;
 
 			cout << "Wrong type\n";
@@ -429,13 +430,13 @@ void menu::AddPraia()
 		{
 			cout << "Please enter the name of the service\n";
 
-			getline(cin, nome);
-			utilities::trimString(nome);
+			getline(cin, nome2);
+			utilities::trimString(nome2);
 
-			if (nome == ".")
+			if (nome2 == ".")
 				goto endinput;
 
-			if (nome == "")
+			if (nome2 == "")
 			{
 				cout << "You need to enter something\n";
 				continue;
@@ -461,7 +462,7 @@ void menu::AddPraia()
 			getline(cin, tempstr3);
 			utilities::trimString(tempstr3);
 
-			if (tempstr2 == ".")
+			if (tempstr3 == ".")
 				return;
 
 			try
@@ -476,19 +477,96 @@ void menu::AddPraia()
 			break;
 		}
 
-
+		if (tipo == "nadadorSalvador")
+			tempServicos.push_back(nadadorSalvador(nome2));
+		else if (tipo == "cafe")
+			tempServicos.push_back(cafe(nome2, gps2));
+		else if (tipo == "restaurante")
+			tempServicos.push_back(restaurante(nome2, gps2));
+		else if (tipo == "campoDesportivo")
+			tempServicos.push_back(campoDesportivo(nome2, gps2));
 	}
 
-	endinput: 
+endinput: 
+	if (tipo == "rio")
+		gestor.addPraia(new rio(nome, concelho, gps, bandeiraazul, capacidade, tempServicos, larguraMax, caudalMax, profundidadeMax));
+	else
+		gestor.addPraia(new albufeira(nome, concelho, gps, bandeiraazul, capacidade, tempServicos, area));
 
+	cout << "River beach added!\n";
 }
 
 
 void menu::RemovePraia()
-{
+{ //TO DO
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
 
+	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead)";
 
+	string tempstr;
+	GPS gps;
 
+	getline(cin, tempstr);
+	utilities::trimString(tempstr);
+
+	if (tempstr == ".")
+	{
+		while(1)
+		{
+			string tempstr2, tempstr3;
+
+			cout << "Please enter the latitude coordinate of the beach\n";
+
+			getline(cin, tempstr2);
+			utilities::trimString(tempstr2);
+
+			if (tempstr2 == ".")
+				return;
+
+			string tempstr3;
+
+			cout << "Please enter the longitude coordinate of the beach\n";
+
+			getline(cin, tempstr3);
+			utilities::trimString(tempstr3);
+
+			if (tempstr3 == ".")
+				return;
+
+			try
+			{
+				gps = GPS(stod(tempstr2), stod(tempstr3));
+			}
+			catch (exception &e)
+			{
+				cout << "Wrong Coordinates!\n";
+				continue;
+			}
+			break;
+		}
+		praiaFluvial * temp = gestor.findPraia(gps);
+	}
+	else
+	{
+		praiaFluvial * temp = gestor.findPraia(tempstr);
+	}
+
+	if (temp == nullptr)
+	{
+		cout << "Beach not found!\n";
+		cout << "Would you like to try again ? (Y/N) \n";
+		getline(cin, tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			SearchPraiaByName();
+	}
+	else
+	{
+		cout << '\n' << *temp;
+		getline(cin, tempstr);
+	}
 }
 
 void menu::ListPraias()
