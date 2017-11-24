@@ -277,6 +277,10 @@ std::vector<praiaFluvial*> GestorPraias::getPraias() {
 	return praias;
 }
 
+std::vector<servicoForaDaPraia*> GestorPraias::getServicos() {
+	return servicosdefora;
+}
+
 praiaFluvial GestorPraias::getPraia(std::vector<praiaFluvial*>::iterator it) {
 
 	return (**it);
@@ -329,15 +333,6 @@ vector<praiaFluvial*>::iterator GestorPraias::findPraia(GPS gps) {
 
 bool GestorPraias::isEnd(std::vector<praiaFluvial*>::iterator &it) {
 	return (it == praias.end());
-}
-
-void GestorPraias::listPraias() const {
-
-	for (std::vector<praiaFluvial*>::const_iterator it = praias.begin(); it != praias.end(); ++it)
-	{
-		cout << (**it) << '\n';
-	}
-
 }
 
 

@@ -7,6 +7,7 @@
 
 class menu {
 
+	std::string inputfilename;
 	GestorPraias gestor;
 	unsigned int width = 100;
 	unsigned int height = 30;
@@ -23,8 +24,8 @@ public:
 	void RemovePraia();
 	void ListPraias();
 	void SearchPraia();
-	void SearchNearestBeach();
-	void SearchPraiaByCounty();
+	void SearchNearestPraia();
+	void SearchServices();
 	//void DisplayPraiaServices();
 
 	unsigned int getWidth();
