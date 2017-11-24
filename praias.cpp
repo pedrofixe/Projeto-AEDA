@@ -88,20 +88,18 @@ string praiaFluvial::getInfo() const
 {
 	string info;
 
-	info += "Tipo da praia: " + tipo + '\n';
-	info += "Nome da praia: " + nome + " \n";
-	info += "Concelho onde a praia se situa: " + concelho + " \n";
-	info += "Capacidade da praia: " + to_string(capacidade) + "\n";
+	info += "Tipo da praia: " + tipo + ", ";
+	info += "Nome da praia: " + nome + ", ";
+	info += "Concelho onde a praia se situa: " + concelho + ", ";
+	info += "Capacidade da praia: " + to_string(capacidade) + ", ";
 	if (bandeiraazul == true)
 	{
-		info += "Bandeira azul: A praia possui bandeira azul\n";
+		info += "Bandeira azul: A praia possui bandeira azul, ";
 	}
 	else
 	{
-		info += "Bandeira azul: A praia nao possui bandeira azul\n";
+		info += "Bandeira azul: A praia nao possui bandeira azul, ";
 	}
-
-
 
 	return info;
 }
@@ -173,9 +171,9 @@ string rio::getInfo() const
 {
 	string info_rio = praiaFluvial::getInfo();
 
-	info_rio += " A praia trata-se de uma praia fluvial de rio\n";
-	info_rio += "Largura Minima da praia: " + to_string(larguraMax);
-	info_rio += "Caudal Maximo da praia: " + to_string(caudalMax);
+	info_rio += "A praia trata-se de uma praia fluvial de rio, ";
+	info_rio += "Largura Minima da praia: " + to_string(larguraMax) + ", ";
+	info_rio += "Caudal Maximo da praia: " + to_string(caudalMax) + ", ";
     info_rio += "Profundidade Maximo da praia: " + to_string(profundidadeMax);
 
 	return info_rio;
@@ -205,8 +203,8 @@ string albufeira::getInfo() const
 {
 	string info_albufeira = praiaFluvial::getInfo();
 
-	info_albufeira += "A praia trata-se de uma praia fluvial de albufeira \n";
-	info_albufeira += "Area da albufeira: " + to_string(area)  + "\n";
+	info_albufeira += "A praia trata-se de uma praia fluvial de albufeira, ";
+	info_albufeira += "Area da albufeira: " + to_string(area);
 	
 	return info_albufeira;
 }
@@ -274,8 +272,14 @@ void GestorPraias::setPraias(std::vector<praiaFluvial*> input) {
 	praias = input;
 }
 
+
 std::vector<praiaFluvial*> GestorPraias::getPraias() {
 	return praias;
+}
+
+praiaFluvial GestorPraias::getPraia(std::vector<praiaFluvial*>::iterator it) {
+
+	return (**it);
 }
 
 std::vector<praiaFluvial*>::iterator GestorPraias::getClosestPraia(GPS gps) {
@@ -325,6 +329,15 @@ vector<praiaFluvial*>::iterator GestorPraias::findPraia(GPS gps) {
 
 bool GestorPraias::isEnd(std::vector<praiaFluvial*>::iterator &it) {
 	return (it == praias.end());
+}
+
+void GestorPraias::listPraias() const {
+
+	for (std::vector<praiaFluvial*>::const_iterator it = praias.begin(); it != praias.end(); ++it)
+	{
+		cout << (**it) << '\n';
+	}
+
 }
 
 

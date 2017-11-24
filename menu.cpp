@@ -19,7 +19,6 @@ void menu::Begin()
 
 void menu::PreMenu()
 {
-
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
 	string tempstr;
@@ -65,77 +64,74 @@ void menu::PreMenu()
 
 void menu::MainMenu()
 {
-	ui_utilities::SetWindow(width, height);
-	ui_utilities::ClearScreen();
-	PrintBanner();
-
-	cout << "Enter a number to choose the sub-menu that you want to go !\n\n";
-	cout << "1- See a river beach by inserting name \n";
-	cout << "2- See a river beach by inserting GPS \n";
-	cout << "3- Discover the nearest beach around your GPS coordenates	\n";
-	cout << "4- See the beaches of a county \n";
-	cout << "5- See the services of a beach \n";
-	cout << "0- Quit \n\n";
-
-
-	string input;
-
-	while (true)
+	while(true)
 	{
-		cout << "Select an option: ";
+		ui_utilities::SetWindow(width, height);
+		ui_utilities::ClearScreen();
+		PrintBanner();
 
-		getline(cin, input);
-		utilities::trimString(input);
-		cout << "\n";
+		cout << "Enter a number to choose the sub-menu that you want to go !\n\n";
+		cout << "1- Add a river beach \n";
+		cout << "2- Remove a river beach \n";
+		cout << "3- List all river beaches \n";
+		cout << "4- Search river beach \n";
+		cout << "5- See the services of a beach \n";
+		cout << "0- Quit \n\n";
 
-		if (input == "1")
+
+		string input;
+
+		while (true)
 		{
-			AddPraia();
-			break;
+			cout << "Select an option: ";
+
+			getline(cin, input);
+			utilities::trimString(input);
+			cout << "\n";
+
+			if (input == "1")
+			{
+				AddPraia();
+				break;
+			}
+
+			else if (input == "2")
+			{
+				RemovePraia();
+				break;
+			}
+
+			else if (input == "3")
+			{
+				ListPraias();
+				break;
+			}
+
+			else if (input == "4")
+			{
+				SearchPraia();
+				break;
+			}
+
+			else if (input == "6")
+			{
+				SearchNearestBeach();
+				break;
+			}
+
+			else if (input == "7")
+			{
+				SearchPraiaByCounty();
+				break;
+			}
+
+			else if (input == "0")
+				return;
+
+			else
+				cout << "Invalid input!\n";
+
 		}
-
-		else if (input == "2")
-		{
-			RemovePraia();
-			break;
-		}
-
-		else if (input == "3")
-		{
-			ListPraias();
-			break;
-		}
-
-		else if (input == "4")
-		{
-			SearchPraiaByName();
-			break;
-		}
-
-		else if (input == "5")
-		{
-			SearchPraiaByGPS();
-			break;
-		}
-
-		else if (input == "6")
-		{
-			SearchNearestBeach();
-			break;
-		}
-
-		else if (input == "7")
-		{
-			SearchPraiaByCounty();
-			break;
-		}
-
-		else if (input == "0")
-			return;
-
-		else
-			cout << "Invalid input\n";
-
 	}
 }
 
@@ -453,7 +449,7 @@ void menu::AddPraia()
 			utilities::trimString(tempstr2);
 
 			if (tempstr2 == ".")
-				return;
+				goto endinput;
 
 			string tempstr3;
 
@@ -463,7 +459,7 @@ void menu::AddPraia()
 			utilities::trimString(tempstr3);
 
 			if (tempstr3 == ".")
-				return;
+				goto endinput;
 
 			try
 			{
@@ -498,7 +494,7 @@ endinput:
 
 
 void menu::RemovePraia()
-{ //TO DO
+{
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
 	PrintBanner();
@@ -559,38 +555,82 @@ void menu::RemovePraia()
 		getline(cin, tempstr);
 
 		if (tempstr == "Y" || tempstr == "y")
-			SearchPraiaByName();
+			RemovePraia();
+		else
+			return;
 	}
 	else
 	{
-		cout << '\n' << **it;
-		getline(cin, tempstr);
+		gestor.removePraia(it);
+		cout << "Beach removed!\n";
 	}
 }
 
 void menu::ListPraias()
 {
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
 
-
+	cout << "As praias sao:\n";
 
 
 }
 
-void menu::SearchPraiaByName()
+void menu::SearchPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
 	PrintBanner();
 
+	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead)";
+
 	string tempstr;
+	GPS gps;
+	vector<praiaFluvial*>::iterator it;
 
-	cout << "Enter the name of the river beach that you want to get info !\n";
-
-	cout << "Please enter the name of the beach\n";
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
 
-	vector<praiaFluvial*>::iterator it = gestor.findPraia(tempstr);
+	if (tempstr == ".")
+	{
+		while(1)
+		{
+			string tempstr2, tempstr3;
+
+			cout << "Please enter the latitude coordinate of the beach\n";
+
+			getline(cin, tempstr2);
+			utilities::trimString(tempstr2);
+
+			if (tempstr2 == ".")
+				return;
+
+			cout << "Please enter the longitude coordinate of the beach\n";
+
+			getline(cin, tempstr3);
+			utilities::trimString(tempstr3);
+
+			if (tempstr3 == ".")
+				return;
+
+			try
+			{
+				gps = GPS(stod(tempstr2), stod(tempstr3));
+			}
+			catch (exception &e)
+			{
+				cout << "Wrong Coordinates!\n";
+				continue;
+			}
+			break;
+		}
+		it = gestor.findPraia(gps);
+	}
+	else
+	{
+		it = gestor.findPraia(tempstr);
+	}
 
 	if (gestor.isEnd(it))
 	{
@@ -599,67 +639,18 @@ void menu::SearchPraiaByName()
 		getline(cin, tempstr);
 
 		if (tempstr == "Y" || tempstr == "y")
-			SearchPraiaByName();
+			SearchPraia();
+		else
+			return;
 	}
 	else
 	{
-		cout << '\n' << **it;
+		cout << '\n' << gestor.getPraia(it) << '\n';
 		getline(cin, tempstr);
 	}
-
 
 }
 
-void menu::SearchPraiaByGPS()
-{
-	ui_utilities::SetWindow(width, height);
-	ui_utilities::ClearScreen();
-	PrintBanner();
-
-	string tempstr;
-	double latitude, longitude;
-
-	cout << "Enter the GPS coordinates of the river beach that you want to get info !\n";
-
-	try
-	{
-		cout << "Please enter the latitude of the beach\n";
-		getline(cin, tempstr);
-		utilities::trimString(tempstr);
-		latitude = stod(tempstr);
-
-		cout << "Please enter the longitude of the beach\n";
-		getline(cin, tempstr);
-		utilities::trimString(tempstr);
-		longitude = stod(tempstr);
-
-		vector<praiaFluvial*>::iterator it = gestor.findPraia(GPS(latitude, longitude));
-
-		if (gestor.isEnd(it))
-		{
-			cout << "Beach not found!\n";
-			cout << "Would you like to try again ? (Y/N) \n";
-			getline(cin, tempstr);
-
-			if (tempstr == "Y" || tempstr == "y")
-				SearchPraiaByGPS();
-		}
-		else
-		{
-			cout << '\n' << **it;
-			getline(cin, tempstr);
-		}
-	}
-	catch (exception& e)
-	{
-			cout << "Invalid coordinates!\n";
-			cout << "Would you like to try again ? (Y/N) \n";
-			getline(cin, tempstr);
-
-			if (tempstr == "Y" || tempstr == "y")
-				SearchPraiaByGPS();
-	}
-}
 
 void menu::SearchNearestBeach()
 {

@@ -103,11 +103,14 @@ public:
 	void setPraias(std::vector<praiaFluvial*> input);
 
 	std::vector<praiaFluvial*> getPraias();
+	praiaFluvial getPraia(std::vector<praiaFluvial*>::iterator it);
 
 	std::vector<praiaFluvial*>::iterator getClosestPraia(GPS gps);
 	std::vector<praiaFluvial*>::iterator findPraia(std::string nome);
 	std::vector<praiaFluvial*>::iterator findPraia(GPS gps);
 	bool isEnd(std::vector<praiaFluvial*>::iterator &it);
+
+	void listPraias();
 
 	void sortByConcelho();
 	void servicosInfo(praiaFluvial praia);

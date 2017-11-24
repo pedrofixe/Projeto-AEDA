@@ -9,7 +9,7 @@ class menu {
 
 	GestorPraias gestor;
 	unsigned int width = 100;
-	unsigned int height = 35;
+	unsigned int height = 30;
 	std::vector<std::string> banner;
 
 public:
@@ -22,8 +22,7 @@ public:
 	void AddPraia();
 	void RemovePraia();
 	void ListPraias();
-	void SearchPraiaByName();
-	void SearchPraiaByGPS();
+	void SearchPraia();
 	void SearchNearestBeach();
 	void SearchPraiaByCounty();
 	//void DisplayPraiaServices();
