@@ -134,11 +134,6 @@ unsigned int praiaFluvial::getArea() const {
 	return 0;
 }
 
-
-std::ostream& operator<<(std::ostream & os, praiaFluvial praia) {
-	os << praia.getInfo();
-}
-
 //------------------------------RIO------------------------------
 
 rio::rio()
