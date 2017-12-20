@@ -6,6 +6,7 @@
 #include "GPS.h"
 #include "servicos.h"
 #include <iostream>
+#include <set>
 
 /**
  * @brief      Class for praias fluviais.
@@ -38,6 +39,9 @@ public:
 	void setNome(std::string nome);
 	void setTipo(std::string tipo);
 
+	bool operator<(const praiaFluvial& praia1) const;
+	bool operator==(const praiaFluvial& praia1) const;
+
 	virtual unsigned int getLargura() const;
 	virtual unsigned int getCaudal() const;
 	virtual unsigned int getProfundidade() const;
@@ -47,6 +51,9 @@ public:
 };
 std::ostream& operator<<(std::ostream & os, praiaFluvial praia); 
 
+bool operator==(const praiaFluvial* praia1, const praiaFluvial* praia2);
+
+bool operator<(const praiaFluvial* praia1, const praiaFluvial* praia2);
 
 /**
  * @brief      Class for rio. Derivates from praiaFluvial.
@@ -83,36 +90,42 @@ public:
 	std::string getInfo() const;
 };
 
+
+
+struct classcomp {
+  bool operator() (const praiaFluvial* lhs, const praiaFluvial* rhs) const
+  {return *lhs<*rhs;}
+};
+
 /**
 * @brief      Class for GestorPraias.
 */
 class GestorPraias
 {
-	std::vector<praiaFluvial*> praias;
+	std::set<praiaFluvial*, classcomp> praias;
 	std::vector<servicoForaDaPraia*> servicosdefora;
 public:
 	GestorPraias();
-	GestorPraias(std::vector<praiaFluvial*> praias, std::vector<servicoForaDaPraia*> servicosdefora);
+	GestorPraias(std::set<praiaFluvial*, classcomp> praias, std::vector<servicoForaDaPraia*> servicosdefora);
 	~GestorPraias();
 
 	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS gps);
 
 	void addPraia(praiaFluvial *praia);
-	void removePraia(std::vector<praiaFluvial*>::iterator it);
-	void setPraias(std::vector<praiaFluvial*> input);
+	void removePraia(std::set<praiaFluvial*>::iterator it);
+	void setPraias(std::set<praiaFluvial*> input);
 
-	std::vector<praiaFluvial*> getPraias();
+	std::set<praiaFluvial*> getPraias();
 	std::vector<servicoForaDaPraia*> getServicos();
-	praiaFluvial getPraia(std::vector<praiaFluvial*>::iterator it);
+	praiaFluvial getPraia(std::set<praiaFluvial*>::iterator it);
 
-	std::vector<praiaFluvial*>::iterator getClosestPraia(GPS gps);
-	std::vector<praiaFluvial*>::iterator findPraia(std::string nome);
-	std::vector<praiaFluvial*>::iterator findPraia(GPS gps);
-	bool isEnd(std::vector<praiaFluvial*>::iterator &it);
+	std::set<praiaFluvial*>::iterator getClosestPraia(GPS gps);
+	std::set<praiaFluvial*>::iterator findPraia(std::string nome);
+	std::set<praiaFluvial*>::iterator findPraia(GPS gps);
+	bool isEnd(std::set<praiaFluvial*>::iterator &it);
 
-	void sortByConcelho();
-	void servicosInfo(praiaFluvial praia);
+	void servicosInfo(praiaFluvial praia);\
 
 	bool LoadPraias(std::string filename);
 	bool SavePraias(std::string filename);
