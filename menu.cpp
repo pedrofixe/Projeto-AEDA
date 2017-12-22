@@ -510,7 +510,7 @@ void menu::RemovePraia()
 
 	string tempstr;
 	GPS gps;
-	vector<praiaFluvial*>::iterator it;
+	set<praiaFluvial*, classcomp>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
@@ -584,11 +584,11 @@ void menu::ListPraias()
 
 	cout << "As praias sao:\n";
 
-	std::vector<praiaFluvial*> p = gestor.getPraias();
+	set<praiaFluvial*, classcomp> p = gestor.getPraias();
 
-	for (int i = 0; i < p.size(); ++i)
+	for (set<praiaFluvial*, classcomp>::iterator it = p.begin(); it != p.end(); it++)
 	{
-		cout << p[i]->getInfo() << '\n';
+		cout << (*it)->getInfo() << '\n';
 	}
 
 	getline(cin, tempstr);
@@ -605,7 +605,7 @@ void menu::SearchPraia()
 
 	string tempstr;
 	GPS gps;
-	vector<praiaFluvial*>::iterator it;
+	set<praiaFluvial*, classcomp>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
@@ -726,7 +726,7 @@ void menu::SearchNearestPraia()
 		break;
 	}
 
-	vector<praiaFluvial*>::iterator it= gestor.getClosestPraia(gps);
+	set<praiaFluvial*, classcomp>::iterator it= gestor.getClosestPraia(gps);
 
 	cout << "The nearest beach is " << (*it)->getNome();
 
@@ -744,7 +744,7 @@ void menu::SearchServices()
 
 	string tempstr;
 	GPS gps;
-	vector<praiaFluvial*>::iterator it;
+	set<praiaFluvial*, classcomp>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);

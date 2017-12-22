@@ -35,8 +35,8 @@ public:
 
 	virtual std::string getInfo() const;
 
-	void setGPS(GPS gps);
 	void setNome(std::string nome);
+	void setGPS(GPS gps);
 	void setTipo(std::string tipo);
 
 	bool operator<(const praiaFluvial& praia1) const;
@@ -51,9 +51,6 @@ public:
 };
 std::ostream& operator<<(std::ostream & os, praiaFluvial praia); 
 
-bool operator==(const praiaFluvial* praia1, const praiaFluvial* praia2);
-
-bool operator<(const praiaFluvial* praia1, const praiaFluvial* praia2);
 
 /**
  * @brief      Class for rio. Derivates from praiaFluvial.
@@ -113,17 +110,17 @@ public:
 	int praiaInfoGPS(GPS gps);
 
 	void addPraia(praiaFluvial *praia);
-	void removePraia(std::set<praiaFluvial*>::iterator it);
-	void setPraias(std::set<praiaFluvial*> input);
+	void removePraia(std::set<praiaFluvial*, classcomp>::iterator it);
+	void setPraias(std::set<praiaFluvial*, classcomp> input);
 
-	std::set<praiaFluvial*> getPraias();
+	std::set<praiaFluvial*, classcomp> getPraias();
 	std::vector<servicoForaDaPraia*> getServicos();
-	praiaFluvial getPraia(std::set<praiaFluvial*>::iterator it);
+	praiaFluvial getPraia(std::set<praiaFluvial*, classcomp>::iterator it);
 
-	std::set<praiaFluvial*>::iterator getClosestPraia(GPS gps);
-	std::set<praiaFluvial*>::iterator findPraia(std::string nome);
-	std::set<praiaFluvial*>::iterator findPraia(GPS gps);
-	bool isEnd(std::set<praiaFluvial*>::iterator &it);
+	std::set<praiaFluvial*, classcomp>::iterator getClosestPraia(GPS gps);
+	std::set<praiaFluvial*, classcomp>::iterator findPraia(std::string nome);
+	std::set<praiaFluvial*, classcomp>::iterator findPraia(GPS gps);
+	bool isEnd(std::set<praiaFluvial*, classcomp>::iterator &it);
 
 	void servicosInfo(praiaFluvial praia);\
 

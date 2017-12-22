@@ -94,11 +94,11 @@ string praiaFluvial::getInfo() const
 	info += "Capacidade da praia: " + to_string(capacidade) + ", ";
 	if (bandeiraazul == true)
 	{
-		info += "Bandeira azul: A praia possui bandeira azul, ";
+		info += "A praia possui bandeira azul, ";
 	}
 	else
 	{
-		info += "Bandeira azul: A praia nao possui bandeira azul, ";
+		info += "A praia nao possui bandeira azul, ";
 	}
 
 	return info;
@@ -143,14 +143,6 @@ unsigned int praiaFluvial::getProfundidade() const {
 
 unsigned int praiaFluvial::getArea() const {
 	return 0;
-}
-
-bool operator==(const praiaFluvial* praia1, const praiaFluvial* praia2) {
-	return (*praia1 == *praia2);
-}
-
-bool operator<(const praiaFluvial* praia1, const praiaFluvial* praia2) {
-	return (*praia1 < *praia2);
 }
 
 //------------------------------RIO------------------------------
@@ -241,7 +233,7 @@ GestorPraias::~GestorPraias()
 
 int GestorPraias::praiaInfo(string praia) {
 
-	set<praiaFluvial*, classcomp> praias::iterator it = this->findPraia(praia);
+	set<praiaFluvial*, classcomp>::iterator it = this->findPraia(praia);
 
 	if (it != praias.end())
 	{
@@ -254,7 +246,7 @@ int GestorPraias::praiaInfo(string praia) {
 
 int GestorPraias::praiaInfoGPS(GPS gps) {
 
-	set<praiaFluvial*, classcomp> praias::iterator it = this->findPraia(gps);
+	set<praiaFluvial*, classcomp>::iterator it = this->findPraia(gps);
 
 	if (it != praias.end())
 	{
@@ -269,7 +261,7 @@ void GestorPraias::addPraia(praiaFluvial *praia) {
 	praias.insert(praia);
 }
 
-void GestorPraias::removePraia(set<praiaFluvial*, classcomp> praias::iterator it) {
+void GestorPraias::removePraia(set<praiaFluvial*, classcomp>::iterator it) {
 	praias.erase(it);
 }
 
@@ -282,12 +274,12 @@ void GestorPraias::removePraia(set<praiaFluvial*, classcomp> praias::iterator it
  * @return     The closest praia to gps.
  */
 
-void GestorPraias::setPraias(set<praiaFluvial*, classcomp> praias input) {
+void GestorPraias::setPraias(set<praiaFluvial*, classcomp> input) {
 	praias = input;
 }
 
 
-set<praiaFluvial*, classcomp> praias GestorPraias::getPraias() {
+set<praiaFluvial*, classcomp> GestorPraias::getPraias() {
 	return praias;
 }
 
@@ -295,19 +287,19 @@ vector<servicoForaDaPraia*> GestorPraias::getServicos() {
 	return servicosdefora;
 }
 
-praiaFluvial GestorPraias::getPraia(set<praiaFluvial*, classcomp> praias::iterator it) {
+praiaFluvial GestorPraias::getPraia(set<praiaFluvial*, classcomp>::iterator it) {
 
 	return (**it);
 }
 
-set<praiaFluvial*, classcomp> praias::iterator GestorPraias::getClosestPraia(GPS gps) {
+set<praiaFluvial*, classcomp>::iterator GestorPraias::getClosestPraia(GPS gps) {
 
 	if (praias.size() == 0)
 		return praias.end();
 
-	set<praiaFluvial*, classcomp> praias::iterator it;
+	set<praiaFluvial*, classcomp>::iterator it;
 
-	set<praiaFluvial*, classcomp> praias::iterator min = praias.begin();
+	set<praiaFluvial*, classcomp>::iterator min = praias.begin();
 
 	for (it = praias.begin(); it != praias.end(); ++it)
 	{
@@ -319,24 +311,33 @@ set<praiaFluvial*, classcomp> praias::iterator GestorPraias::getClosestPraia(GPS
 }
 
 
-set<praiaFluvial*, classcomp> praias::iterator GestorPraias::findPraia(string nome) {
-	praiaFluvial
+set<praiaFluvial*, classcomp>::iterator GestorPraias::findPraia(string nome) {
+
+	set<praiaFluvial*, classcomp>::iterator it = praias.begin();
+
+	for (it = praias.begin(); it != praias.end(); it++)
+	{
+		if ((*it)->getNome() == nome)
+			return it;
+	}
+
+	return praias.end();
 }
 
-set<praiaFluvial*, classcomp> praias::iterator GestorPraias::findPraia(GPS gps) {
+set<praiaFluvial*, classcomp>::iterator GestorPraias::findPraia(GPS gps) {
 
-	set<praiaFluvial*, classcomp> praias::iterator it ;
+	set<praiaFluvial*, classcomp>::iterator it = praias.begin();
 
-	for (it = praias.begin(); it != praias.end(); ++it)
+	for (it = praias.begin(); it != praias.end(); it++)
 	{
 		if ((*it)->getGPS() == gps)
 			return it;
 	}
 
-	return it; //praias.end()
+	return praias.end();
 }
 
-bool GestorPraias::isEnd(set<praiaFluvial*, classcomp> praias::iterator &it) {
+bool GestorPraias::isEnd(set<praiaFluvial*, classcomp>::iterator &it) {
 	return (it == praias.end());
 }
 
@@ -440,7 +441,7 @@ bool GestorPraias::LoadPraias(string filename)
 
 			try
 			{
-				praias.push_back(new rio(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7]), stoi(parser[8]), stoi(parser[9])));
+				praias.insert(new rio(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7]), stoi(parser[8]), stoi(parser[9])));
 			}
 			catch (exception& e)
 			{
@@ -481,7 +482,7 @@ bool GestorPraias::LoadPraias(string filename)
 
 			try
 			{
-				praias.push_back(new albufeira(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7])));
+				praias.insert(new albufeira(parser[1], parser[2], GPS(stod(parser[3]), stod(parser[4])), (bool)stoi(parser[5]), stoi(parser[6]),  tempServicos, stoi(parser[7])));
 			}
 			catch (exception& e)
 			{
@@ -539,19 +540,19 @@ bool GestorPraias::SavePraias(string filename) {
 	if (!file.is_open())
 		return false;
 
-	for (int i = 0; i < praias.size(); ++i)
+	for (set<praiaFluvial*, classcomp>::iterator it = praias.begin(); it != praias.end(); it++)
 	{
-		if (i != 0)
+		if (it != praias.begin())
 			file << '\n';
 
-		if (praias[i]->getTipo() == "rio")
-			file << praias[i]->getTipo() << ',' << praias[i]->getNome() << ',' << praias[i]->getConcelho() << ',' << praias[i]->getGPS().getLatitude() << ',' << praias[i]->getGPS().getLongitude() << ',' << praias[i]->getBandeiraAzul() << ',' << praias[i]->getCapacidade() << ',' << praias[i]->getLargura() << ',' << praias[i]->getCaudal() << ',' << praias[i]->getProfundidade();
+		if ((*it)->getTipo() == "rio")
+			file << (*it)->getTipo() << ',' << (*it)->getNome() << ',' << (*it)->getConcelho() << ',' << (*it)->getGPS().getLatitude() << ',' << (*it)->getGPS().getLongitude() << ',' << (*it)->getBandeiraAzul() << ',' << (*it)->getCapacidade() << ',' << (*it)->getLargura() << ',' << (*it)->getCaudal() << ',' << (*it)->getProfundidade();
 		else
-			file << praias[i]->getTipo() << ',' << praias[i]->getNome() << ',' << praias[i]->getConcelho() << ',' << praias[i]->getGPS().getLatitude() << ',' << praias[i]->getGPS().getLongitude() << ',' << praias[i]->getBandeiraAzul() << ',' << praias[i]->getCapacidade() << ',' << praias[i]->getArea();
+			file << (*it)->getTipo() << ',' << (*it)->getNome() << ',' << (*it)->getConcelho() << ',' << (*it)->getGPS().getLatitude() << ',' << (*it)->getGPS().getLongitude() << ',' << (*it)->getBandeiraAzul() << ',' << (*it)->getCapacidade() << ',' << (*it)->getArea();
 
-		for (int j = 0; j < praias[i]->getServicos().size(); ++j)
+		for (int j = 0; j < (*it)->getServicos().size(); ++j)
 		{
-			file << ',' << praias[i]->getServicos()[j].getTipo() << ',' << praias[i]->getServicos()[j].getNome() << ',' << praias[i]->getServicos()[j].getGPS().getLatitude() << ',' << praias[i]->getServicos()[j].getGPS().getLongitude();
+			file << ',' << (*it)->getServicos()[j].getTipo() << ',' << (*it)->getServicos()[j].getNome() << ',' << (*it)->getServicos()[j].getGPS().getLatitude() << ',' << (*it)->getServicos()[j].getGPS().getLongitude();
 		}
 	}
 
