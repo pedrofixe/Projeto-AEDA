@@ -52,6 +52,14 @@ void servico::setTipo(string tipo)
 	this->tipo = tipo;
 }
 
+//2 parte trabalho
+
+bool servico::getAberto()
+{
+	return aberto;
+}
+
+
 
 //------------------------------NADADOR------------------------------
 
@@ -167,3 +175,4 @@ alojamento::alojamento(string nome, GPS gps) : servicoForaDaPraia(nome, gps)
 
 alojamento::~alojamento()
 {}
+

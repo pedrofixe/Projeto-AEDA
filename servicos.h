@@ -12,6 +12,7 @@ class servico
 	std::string nome;
 	GPS gps;
 	std::string tipo;
+	bool aberto;
 public:
 	servico();
 	servico(std::string nome, GPS gps);
@@ -19,6 +20,7 @@ public:
 	GPS getGPS() const;
 	std::string getTipo() const;
 	std::string getNome() const;
+	bool getAberto();
 	void setTipo(std::string tipo);
 };
 

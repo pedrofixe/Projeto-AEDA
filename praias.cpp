@@ -145,6 +145,25 @@ unsigned int praiaFluvial::getArea() const {
 	return 0;
 }
 
+////2 parte
+
+bool praiaFluvial::operator< (const praiaFluvial& praia1) const
+{
+	if (this->concelho == praia1.concelho)
+		return (this->bandeiraazul < praia1.bandeiraazul);
+	else
+		return (this->concelho < praia1.concelho);
+}
+
+bool praiaFluvial::operator== (const praiaFluvial& praia1) const
+{
+	return (this->getConcelho == praia1.concelho);
+}
+
+//Labaredas was here ^-
+
+
+
 //------------------------------RIO------------------------------
 
 rio::rio()
