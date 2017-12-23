@@ -585,3 +585,11 @@ bool GestorPraias::SavePraias(string filename) {
 
 	return true;
 }
+
+
+//2
+
+tabHS GestorPraias::getServicosNaoAtivos() const
+{
+	return servicosNaoAtivos;
+}

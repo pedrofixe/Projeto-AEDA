@@ -7,6 +7,7 @@
 #include "servicos.h"
 #include <iostream>
 #include <set>
+#include <unordered_set>
 
 /**
  * @brief      Class for praias fluviais.
@@ -32,7 +33,6 @@ public:
 	unsigned int getCapacidade() const;
 	std::vector<servico> getServicos() const;
 	std::string getTipo() const;
-
 	virtual std::string getInfo() const;
 
 	void setNome(std::string nome);
@@ -97,10 +97,19 @@ struct classcomp {
 /**
 * @brief      Class for GestorPraias.
 */
+
+
+//2
+typedef unordered_set<servico> tabHS;
+
+
 class GestorPraias
 {
 	std::set<praiaFluvial*, classcomp> praias;
 	std::vector<servicoForaDaPraia*> servicosdefora;
+	//2
+	tabHS servicosNaoAtivos;
+
 public:
 	GestorPraias();
 	GestorPraias(std::set<praiaFluvial*, classcomp> praias, std::vector<servicoForaDaPraia*> servicosdefora);
@@ -126,6 +135,9 @@ public:
 
 	bool LoadPraias(std::string filename);
 	bool SavePraias(std::string filename);
+
+	//2
+	tabHS getServicosNaoAtivos() const;
 
 };
 
