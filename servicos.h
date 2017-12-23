@@ -13,6 +13,7 @@ class servico
 	GPS gps;
 	std::string tipo;
 	bool aberto;
+	//falta data em que fecha
 public:
 	servico();
 	servico(std::string nome, GPS gps);
@@ -98,6 +99,21 @@ public:
 	alojamento();
 	alojamento(std::string nome, GPS gps);
 	~alojamento();
+};
+
+
+// 2
+
+class ServicoPtr {
+	servico* servicoPtr;
+public:
+	ServicoPtr(servico* s) { servicoPtr = s; }
+	string getName() const { return servicoPtr->getNome(); } // gps tipo aberto
+	GPS getGPS() const { return servicoPtr->getGPS(); }
+	string getType() const { return servicoPtr->getTipo(); }
+	bool getAberto() const { return servicoPtr->getAberto(); }
+	//void setName(string n) { servicoPtr->nome = n; }
+	// falta funcao que altera a data
 };
 
 

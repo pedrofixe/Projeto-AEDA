@@ -108,7 +108,7 @@ class GestorPraias
 	std::set<praiaFluvial*, classcomp> praias;
 	std::vector<servicoForaDaPraia*> servicosdefora;
 	//2
-	tabHS servicosNaoAtivos;
+	tabHS servicosNaoAtivos;		
 
 public:
 	GestorPraias();
