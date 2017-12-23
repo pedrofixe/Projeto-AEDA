@@ -1,5 +1,6 @@
 #include "praias.h"
 #include "algoritmos.h"
+#include "utilities.h"
 #include <sstream>
 #include <fstream>
 
@@ -144,25 +145,6 @@ unsigned int praiaFluvial::getProfundidade() const {
 unsigned int praiaFluvial::getArea() const {
 	return 0;
 }
-
-////2 parte
-
-bool praiaFluvial::operator< (const praiaFluvial& praia1) const
-{
-	if (this->concelho == praia1.concelho)
-		return (this->bandeiraazul < praia1.bandeiraazul);
-	else
-		return (this->concelho < praia1.concelho);
-}
-
-bool praiaFluvial::operator== (const praiaFluvial& praia1) const
-{
-	return (this->getConcelho == praia1.concelho);
-}
-
-//Labaredas was here ^-
-
-
 
 //------------------------------RIO------------------------------
 
@@ -426,6 +408,7 @@ bool GestorPraias::LoadPraias(string filename)
 		stringstream ss(tempPraia);
 
 		getline(ss, parser[0], ',');
+		utilities::trimString(parser[0]);
 
 		if (parser[0] == "rio") //"rio",nome,concelho,latitude,longitude,bandeiraazul,capacidade,largura,caudal,profundidade,tipo1,nome1,latitude1,longitude1,...
 		{
@@ -439,9 +422,15 @@ bool GestorPraias::LoadPraias(string filename)
 			getline(ss, parser[8], ',');
 			getline(ss, parser[9], ',');
 
+			for(int i = 1; i <= 9; i++)
+				utilities::trimString(parser[i]);
+
 			tempServicos.resize(0);
 			while (getline(ss, parser[10], ',') && getline(ss, parser[11], ',') && getline(ss, parser[12], ',') && getline(ss, parser[13], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
 			{
+				for(int i = 10; i <= 13; i++)
+					utilities::trimString(parser[i]);
+
 				if (parser[10] == "nadadorSalvador")
 					tempServicos.push_back(nadadorSalvador(parser[11]));
 
@@ -480,9 +469,15 @@ bool GestorPraias::LoadPraias(string filename)
 			getline(ss, parser[6], ',');
 			getline(ss, parser[7], ',');
 
+			for(int i = 1; i <= 7; i++)
+				utilities::trimString(parser[i]);
+
 			tempServicos.resize(0);
 			while (getline(ss, parser[10], ',') && getline(ss, parser[11], ',') && getline(ss, parser[12], ',') && getline(ss, parser[13], ',')) //tipo1,nome1,latitude1,longitude1,tipo2,nome2,latitude2,longitude2,...
 			{
+				for(int i = 10; i <= 13; i++)
+					utilities::trimString(parser[i]);
+
 				if (parser[10] == "nadadorSalvador")
 					tempServicos.push_back(nadadorSalvador(parser[11]));
 
@@ -513,6 +508,9 @@ bool GestorPraias::LoadPraias(string filename)
 		{
 			while(getline(ss, parser[1], ',') && getline(ss, parser[2], ',') && getline(ss, parser[3], ',') && getline(ss, parser[4], ','))
 			{
+				for(int i = 1; i <= 4; i++)
+					utilities::trimString(parser[i]);
+
 				if (parser[1] == "pontoTuristico")
 				{
 					try

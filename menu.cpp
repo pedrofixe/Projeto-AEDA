@@ -71,15 +71,16 @@ void menu::MainMenu()
 	{
 		ui_utilities::SetWindow(width, height);
 		ui_utilities::ClearScreen();
-		PrintBanner();
+		PrintBanner(width);
 
 		cout << "Enter a number to choose the sub-menu that you want to go !\n\n";
 		cout << "1- Add a river beach \n";
 		cout << "2- Remove a river beach \n";
 		cout << "3- List all river beaches \n";
-		cout << "4- Search river beach \n";
-		cout << "5- Search nearest river beach \n";
-		cout << "6- Search services near river beach \n";
+		cout << "4- List river beaches of specific county\n";
+		cout << "5- Search river beach \n";
+		cout << "6- Search nearest river beach \n";
+		cout << "7- Search services near river beach \n";
 		cout << "0- Quit \n\n";
 
 
@@ -113,17 +114,23 @@ void menu::MainMenu()
 
 			else if (input == "4")
 			{
-				SearchPraia();
+				ListByConcelho();
 				break;
 			}
 
 			else if (input == "5")
 			{
-				SearchNearestPraia();
+				SearchPraia();
 				break;
 			}
 
 			else if (input == "6")
+			{
+				SearchNearestPraia();
+				break;
+			}
+
+			else if (input == "7")
 			{
 				SearchServices();
 				break;
@@ -146,7 +153,7 @@ void menu::AddPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner();
+	PrintBanner(width);
 
 	string tempstr, tipo, nome, concelho;
 	GPS gps;
@@ -504,7 +511,7 @@ void menu::RemovePraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner();
+	PrintBanner(width);
 
 	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead)\n";
 
@@ -576,9 +583,9 @@ void menu::RemovePraia()
 
 void menu::ListPraias()
 {
-	ui_utilities::SetWindow(130, height);
+	ui_utilities::SetWindow(160, height);
 	ui_utilities::ClearScreen();
-	PrintBanner();
+	PrintBanner(width);
 
 	string tempstr;
 
@@ -595,11 +602,59 @@ void menu::ListPraias()
 
 }
 
+
+void menu::ListByConcelho()
+{
+	ui_utilities::SetWindow(160, height);
+	ui_utilities::ClearScreen();
+	PrintBanner(160);
+
+	cout << "Enter the county (write \".\" at any time to leave):\n";
+
+	string tempstr;
+	bool found = false;
+
+	getline(cin, tempstr);
+	utilities::trimString(tempstr);
+
+	if (tempstr == ".")
+	{
+		return;
+	}
+
+	set<praiaFluvial*, classcomp> p = gestor.getPraias();
+	vector<praiaFluvial*> foo;
+
+	for (set<praiaFluvial*, classcomp>::iterator it = p.begin(); it != p.end(); it++)
+	{
+		if ((*it)->getConcelho() == tempstr)
+		{
+			found = true;
+			cout << '\n' << (*it)->getInfo(); 
+		}
+	}
+
+	if (!found)
+	{
+		cout << "County not found!\n";
+		cout << "Would you like to try again ? (Y/N) \n";
+		getline(cin, tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			ListByConcelho();
+
+		return;
+	}
+
+	cout << "\n\n";
+	getline(cin, tempstr);
+}
+
 void menu::SearchPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner();
+	PrintBanner(width);
 
 	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead):\n";
 
@@ -676,7 +731,7 @@ void menu::SearchNearestPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner();
+	PrintBanner(width);
 
 	double latitude, longitude;
 	GPS gps;
@@ -738,7 +793,7 @@ void menu::SearchServices()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner();
+	PrintBanner(width);
 
 	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead):\n";
 
@@ -857,7 +912,7 @@ bool menu::LoadBanner(string filename) {
 	return true;
 }
 
-void menu::PrintBanner() {
+void menu::PrintBanner(unsigned int width) {
 
 	for (int i = 0; i < banner.size(); ++i)
 	{
