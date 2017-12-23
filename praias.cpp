@@ -588,7 +588,6 @@ bool GestorPraias::SavePraias(string filename) {
 
 
 //2
-
 tabHS GestorPraias::getServicosNaoAtivos() const
 {
 	return servicosNaoAtivos;
