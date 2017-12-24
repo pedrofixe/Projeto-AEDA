@@ -22,6 +22,7 @@ public:
 	unsigned int getDia() const;
 	unsigned int getMes() const;
 	unsigned int getAno() const;
+	std::string getInfo() const;
 
 	void setDia(unsigned int dia);
 	void setMes(unsigned int mes);

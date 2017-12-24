@@ -23,12 +23,15 @@ public:
 	void AddPraia();
 	void RemovePraia();
 	void EditBandeira();
+	void MakeInspection();
 	void ListPraias();
 	void ListByConcelho();
 	void SearchPraia();
 	void SearchNearestPraia();
 	void SearchServices();
 	//void DisplayPraiaServices();
+
+	std::set<praiaFluvial*, classcomp>::iterator getPraia();
 
 	unsigned int getWidth();
 	unsigned int getHeight();

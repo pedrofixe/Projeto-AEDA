@@ -706,6 +706,120 @@ void menu::EditBandeira()
 
 }
 
+void menu::MakeInspection()
+{
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+
+	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead):\n";
+
+	string tempstr;
+	GPS gps;
+	set<praiaFluvial*, classcomp>::iterator it;
+
+	getline(cin, tempstr);
+	utilities::trimString(tempstr);
+
+	if (tempstr == ".")
+	{
+		while(1)
+		{
+			string tempstr2, tempstr3;
+
+			cout << "Please enter the latitude coordinate of the beach\n";
+
+			getline(cin, tempstr2);
+			utilities::trimString(tempstr2);
+
+			if (tempstr2 == ".")
+				return;
+
+			cout << "Please enter the longitude coordinate of the beach\n";
+
+			getline(cin, tempstr3);
+			utilities::trimString(tempstr3);
+
+			if (tempstr3 == ".")
+				return;
+
+			try
+			{
+				gps = GPS(stod(tempstr2), stod(tempstr3));
+			}
+			catch (exception &e)
+			{
+				cout << "Wrong Coordinates!\n";
+				continue;
+			}
+			break;
+		}
+		it = gestor.findPraia(gps);
+	}
+	else
+	{
+		it = gestor.findPraia(tempstr);
+	}
+
+
+	if (gestor.isEnd(it))
+	{
+		cout << "Beach not found!\n";
+		cout << "Would you like to try again ? (Y/N)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			SearchPraia();
+		else
+			return;
+	}
+	else
+	{
+		while(true)
+		{
+			cout << "Set flag to true or false ? (T/F)\n";
+			getline(cin, tempstr);
+			utilities::trimString(tempstr);
+
+			if (tempstr == "T" || tempstr == "t")
+			{
+				praiaFluvial* foo = *it;
+				foo->setBandeira(true);
+				gestor.SavePraias(inputfilename);
+				break;
+			}
+
+			else if (tempstr == "F" || tempstr == "f")
+			{
+				praiaFluvial* foo = *it;
+				foo->setBandeira(false);
+				gestor.SavePraias(inputfilename);
+				break;
+			}
+
+			else
+			{
+				cout << "Invalid input!\n";
+				cout << "Would you like to try again ? (Y/N)\n";
+				getline(cin, tempstr);
+				utilities::trimString(tempstr);
+
+				if (tempstr == "Y" || tempstr == "y")
+					EditBandeira();
+				else
+					return;
+			}
+
+		}
+
+		cout << "Beach edited!\n";
+		getline(cin, tempstr);
+
+	}
+
+}
+
 void menu::ListPraias()
 {
 	ui_utilities::SetWindow(160, height);

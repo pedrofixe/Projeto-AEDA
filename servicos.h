@@ -4,6 +4,7 @@
 #include <string>
 #include "GPS.h"
 #include "data.h"
+#include <iostream>
 
 /**
  * @brief      Class for servico.
@@ -14,7 +15,7 @@ class servico
 	GPS gps;
 	std::string tipo;
 	bool aberto = true;
-	data dt;
+	data dt = data(0,0,0);
 public:
 	servico();
 	servico(std::string nome, GPS gps);
@@ -25,13 +26,19 @@ public:
 	std::string getNome() const;
 	bool getAberto() const;
 	data getData() const;
+	std::string getInfo() const;
 	
 	void setTipo(std::string tipo);
 
-	void open();
+	void makeInspection(bool state, data dt);
+
+	void open(data dt);
 	void close(data dt);
+
 };
 
+bool operator<(const servico& srvc1, const servico& srvc2);
+std::ostream& operator<<(std::ostream& os, const servico& srvc);
 
 /**
  * @brief      Class for nadador salvador. Derivates from servico.

@@ -24,6 +24,13 @@ unsigned int data::getAno() const {
 	return this->ano;
 }
 
+std::string data::getInfo() const {
+	string info;
+
+	info = to_string(dia) + "/" + to_string(mes) + "/" + to_string(ano);
+
+	return info; 
+}
 
 void data::setDia(unsigned int dia) {
 	this->dia = dia;
@@ -55,5 +62,5 @@ bool data::operator<(const data& data1) const {
 
 
 std::ostream& operator<<(std::ostream& os, const data& data1) {
-	return (os << data1.getDia() << '/' << data1.getMes() << '/' << data1.getAno());
+	return (os << data1.getInfo());
 }

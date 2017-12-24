@@ -18,9 +18,7 @@ servico::servico()
  * @param[in]  gps   The gps
  */
 servico::servico(string nome, GPS gps) : nome(nome), gps(gps)
-{
-	
-}
+{}
 
 /**
  * @brief      Destroys servico.
@@ -61,21 +59,44 @@ data servico::getData() const
 	return dt;
 }
 
+string servico::getInfo() const
+{
+	string info;
+
+	info += "Tipo do servico: " + tipo + ", ";
+	info += "nome do servico: " + nome + ", ";
+	info += "data da ultima inspecao: " + dt.getInfo();
+
+	return info;
+}
 
 void servico::setTipo(string tipo)
 {
 	this->tipo = tipo;
 }
 
-void servico::open()
+void servico::makeInspection(bool state, data dt)
 {
-	aberto = false;
+	this->aberto = state;
+	this->dt = dt;
+}
+
+void servico::open(data dt)
+{
+	makeInspection(true, dt);
 }
 
 void servico::close(data dt)
 {
-	this->dt = dt;
-	aberto = true;
+	makeInspection(false, dt);
+}
+
+bool operator<(const servico& srvc1, const servico& srvc2) {
+	return (srvc2.getData() < srvc2.getData());
+}
+
+std::ostream& operator<<(std::ostream& os, const servico& srvc){
+	return (os << srvc.getInfo());
 }
 
 

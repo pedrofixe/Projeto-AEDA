@@ -8,7 +8,8 @@
 #include <iostream>
 #include <set>
 #include <unordered_set>
-#include <priority_queue>
+#include <queue>
+#include <utility>
 
 /**
  * @brief      Class for praias fluviais.
@@ -22,7 +23,7 @@ class praiaFluvial
 	unsigned int capacidade;
 	std::vector<servico> servicosdapraia;
 	std::string tipo;
-	std::vector<std::priority_queue<servico>> inspecoes;
+	std::vector<std::pair<std::priority_queue<servico>, std::string>> inspecoes;
 
 public:
 	praiaFluvial();
@@ -44,6 +45,8 @@ public:
 	void setBandeira(bool bandeiraazul);
 	void setTipo(std::string tipo);
 
+	void listServicos() const;
+
 	bool operator<(const praiaFluvial& praia1) const;
 	bool operator==(const praiaFluvial& praia1) const;
 
@@ -53,8 +56,10 @@ public:
 
 	virtual unsigned int getArea() const;
 
+	void print(std::ostream& os) const;
+
 };
-std::ostream& operator<<(std::ostream & os, praiaFluvial praia); 
+std::ostream& operator<<(std::ostream & os, const praiaFluvial& praia); 
 
 
 /**

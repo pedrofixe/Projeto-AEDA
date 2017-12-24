@@ -24,7 +24,13 @@ praiaFluvial::praiaFluvial()
  * @param[in]  servicosdapraia  The servicosdapraia
  */
 praiaFluvial::praiaFluvial(string nome, string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, vector<servico> servicosdapraia) : nome(nome), concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
-{}
+{
+	priority_queue<servico> empty_queue;
+	inspecoes.push_back({make_pair(empty_queue, string("nadadorSalvador"))});
+	inspecoes.push_back({make_pair(empty_queue, string("cafe"))});
+	inspecoes.push_back({make_pair(empty_queue, string("restaurante"))});
+	inspecoes.push_back({make_pair(empty_queue, string("campoDesportivo"))});
+}
 
 praiaFluvial::praiaFluvial(const praiaFluvial& praia)
 {
@@ -128,6 +134,16 @@ void praiaFluvial::setTipo(string tipo) {
 }
 
 
+void praiaFluvial::listServicos() const
+{
+	for (int i = 0; i < servicosdapraia.size(); ++i)
+	{
+		cout << servicosdapraia[i].getInfo() << '\n';
+	}
+}
+
+
+
 bool praiaFluvial::operator<(const praiaFluvial& praia1) const {
 	if (this->concelho != praia1.getConcelho())
 		return (this->concelho < praia1.getConcelho());
@@ -154,6 +170,15 @@ unsigned int praiaFluvial::getProfundidade() const {
 
 unsigned int praiaFluvial::getArea() const {
 	return 0;
+}
+
+void praiaFluvial::print(ostream& os) const {
+	os << this->getInfo();
+}
+
+ostream& operator<<(ostream & os, const praiaFluvial& praia) {
+	praia.print(os);
+	return (os);
 }
 
 //------------------------------RIO------------------------------
@@ -273,6 +298,7 @@ void GestorPraias::addPraia(praiaFluvial praia) {
 }
 
 void GestorPraias::removePraia(set<praiaFluvial*, classcomp>::iterator it) {
+	delete (*it);
 	praias.erase(it);
 }
 
