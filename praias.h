@@ -94,15 +94,27 @@ struct classcomp {
   {return *lhs<*rhs;}
 };
 
-/**
-* @brief      Class for GestorPraias.
-*/
+
+struct servicoHash
+{
+	int operator() (const servico& srvc) const
+	{
+		return static_cast<int>(std::hash<std::string>()(srvc.getNome())); //Mudar para GPS
+	}
+
+	bool operator() (const servico& srvc1, const servico& srvc2) const
+	{
+		return (srvc1.getNome() == srvc2.getNome());
+	}
+};
 
 
 //2
-typedef unordered_set<servico> tabHS;
+typedef std::unordered_set<servico, servicoHash, servicoHash> tabHS;
 
-
+/**
+* @brief      Class for GestorPraias.
+*/
 class GestorPraias
 {
 	std::set<praiaFluvial*, classcomp> praias;

@@ -18,10 +18,12 @@ public:
 	servico();
 	servico(std::string nome, GPS gps);
 	~servico();
+
 	GPS getGPS() const;
 	std::string getTipo() const;
 	std::string getNome() const;
 	bool getAberto();
+	
 	void setTipo(std::string tipo);
 };
 
@@ -108,9 +110,9 @@ class ServicoPtr {
 	servico* servicoPtr;
 public:
 	ServicoPtr(servico* s) { servicoPtr = s; }
-	string getName() const { return servicoPtr->getNome(); } // gps tipo aberto
+	std::string getName() const { return servicoPtr->getNome(); } // gps tipo aberto
 	GPS getGPS() const { return servicoPtr->getGPS(); }
-	string getType() const { return servicoPtr->getTipo(); }
+	std::string getType() const { return servicoPtr->getTipo(); }
 	bool getAberto() const { return servicoPtr->getAberto(); }
 	//void setName(string n) { servicoPtr->nome = n; }
 	// falta funcao que altera a data
