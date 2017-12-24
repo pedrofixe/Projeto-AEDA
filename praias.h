@@ -8,6 +8,7 @@
 #include <iostream>
 #include <set>
 #include <unordered_set>
+#include <priority_queue>
 
 /**
  * @brief      Class for praias fluviais.
@@ -21,9 +22,12 @@ class praiaFluvial
 	unsigned int capacidade;
 	std::vector<servico> servicosdapraia;
 	std::string tipo;
+	std::vector<std::priority_queue<servico>> inspecoes;
+
 public:
 	praiaFluvial();
 	praiaFluvial(std::string nome, std::string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, std::vector<servico> servicosdapraia);
+	praiaFluvial(const praiaFluvial& praia);
 	~praiaFluvial();
 
 	std::string getNome() const;
@@ -37,6 +41,7 @@ public:
 
 	void setNome(std::string nome);
 	void setGPS(GPS gps);
+	void setBandeira(bool bandeiraazul);
 	void setTipo(std::string tipo);
 
 	bool operator<(const praiaFluvial& praia1) const;
@@ -130,7 +135,7 @@ public:
 	int praiaInfo(std::string praia);
 	int praiaInfoGPS(GPS gps);
 
-	void addPraia(praiaFluvial *praia);
+	void addPraia(praiaFluvial praia);
 	void removePraia(std::set<praiaFluvial*, classcomp>::iterator it);
 	void setPraias(std::set<praiaFluvial*, classcomp> input);
 

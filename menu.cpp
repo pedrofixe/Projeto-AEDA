@@ -71,16 +71,17 @@ void menu::MainMenu()
 	{
 		ui_utilities::SetWindow(width, height);
 		ui_utilities::ClearScreen();
-		PrintBanner(width);
+		PrintBanner();
 
 		cout << "Enter a number to choose the sub-menu that you want to go !\n\n";
 		cout << "1- Add a river beach \n";
 		cout << "2- Remove a river beach \n";
-		cout << "3- List all river beaches \n";
-		cout << "4- List river beaches of specific county\n";
-		cout << "5- Search river beach \n";
-		cout << "6- Search nearest river beach \n";
-		cout << "7- Search services near river beach \n";
+		cout << "3- Edit a river beach's flag \n";
+		cout << "4- List all river beaches \n";
+		cout << "5- List river beaches of specific county\n";
+		cout << "6- Search river beach \n";
+		cout << "7- Search nearest river beach \n";
+		cout << "8- Search services near river beach \n";
 		cout << "0- Quit \n\n";
 
 
@@ -108,29 +109,35 @@ void menu::MainMenu()
 
 			else if (input == "3")
 			{
-				ListPraias();
+				EditBandeira();
 				break;
 			}
 
 			else if (input == "4")
 			{
-				ListByConcelho();
+				ListPraias();
 				break;
 			}
 
 			else if (input == "5")
 			{
-				SearchPraia();
+				ListByConcelho();
 				break;
 			}
 
 			else if (input == "6")
 			{
-				SearchNearestPraia();
+				SearchPraia();
 				break;
 			}
 
 			else if (input == "7")
+			{
+				SearchNearestPraia();
+				break;
+			}
+
+			else if (input == "8")
 			{
 				SearchServices();
 				break;
@@ -139,6 +146,7 @@ void menu::MainMenu()
 			else if (input == "0")
 			{
 				gestor.SavePraias(inputfilename);
+				ui_utilities::ClearScreen();
 				return;
 			}
 
@@ -153,7 +161,7 @@ void menu::AddPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner(width);
+	PrintBanner();
 
 	string tempstr, tipo, nome, concelho;
 	GPS gps;
@@ -499,9 +507,11 @@ void menu::AddPraia()
 
 endinput: 
 	if (tipo == "rio")
-		gestor.addPraia(new rio(nome, concelho, gps, bandeiraazul, capacidade, tempServicos, larguraMax, caudalMax, profundidadeMax));
+		gestor.addPraia(rio(nome, concelho, gps, bandeiraazul, capacidade, tempServicos, larguraMax, caudalMax, profundidadeMax));
 	else
-		gestor.addPraia(new albufeira(nome, concelho, gps, bandeiraazul, capacidade, tempServicos, area));
+		gestor.addPraia(albufeira(nome, concelho, gps, bandeiraazul, capacidade, tempServicos, area));
+
+	gestor.SavePraias(inputfilename);
 
 	cout << "River beach added!\n";
 }
@@ -511,7 +521,7 @@ void menu::RemovePraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner(width);
+	PrintBanner();
 
 	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead)\n";
 
@@ -576,16 +586,131 @@ void menu::RemovePraia()
 	else
 	{
 		gestor.removePraia(it);
+		gestor.SavePraias(inputfilename);
 		cout << "Beach removed!\n";
 		getline(cin, tempstr);
 	}
+}
+
+void menu::EditBandeira()
+{
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+
+	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead):\n";
+
+	string tempstr;
+	GPS gps;
+	set<praiaFluvial*, classcomp>::iterator it;
+
+	getline(cin, tempstr);
+	utilities::trimString(tempstr);
+
+	if (tempstr == ".")
+	{
+		while(1)
+		{
+			string tempstr2, tempstr3;
+
+			cout << "Please enter the latitude coordinate of the beach\n";
+
+			getline(cin, tempstr2);
+			utilities::trimString(tempstr2);
+
+			if (tempstr2 == ".")
+				return;
+
+			cout << "Please enter the longitude coordinate of the beach\n";
+
+			getline(cin, tempstr3);
+			utilities::trimString(tempstr3);
+
+			if (tempstr3 == ".")
+				return;
+
+			try
+			{
+				gps = GPS(stod(tempstr2), stod(tempstr3));
+			}
+			catch (exception &e)
+			{
+				cout << "Wrong Coordinates!\n";
+				continue;
+			}
+			break;
+		}
+		it = gestor.findPraia(gps);
+	}
+	else
+	{
+		it = gestor.findPraia(tempstr);
+	}
+
+
+	if (gestor.isEnd(it))
+	{
+		cout << "Beach not found!\n";
+		cout << "Would you like to try again ? (Y/N)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			SearchPraia();
+		else
+			return;
+	}
+	else
+	{
+		while(true)
+		{
+			cout << "Set flag to true or false ? (T/F)\n";
+			getline(cin, tempstr);
+			utilities::trimString(tempstr);
+
+			if (tempstr == "T" || tempstr == "t")
+			{
+				praiaFluvial* foo = *it;
+				foo->setBandeira(true);
+				gestor.SavePraias(inputfilename);
+				break;
+			}
+
+			else if (tempstr == "F" || tempstr == "f")
+			{
+				praiaFluvial* foo = *it;
+				foo->setBandeira(false);
+				gestor.SavePraias(inputfilename);
+				break;
+			}
+
+			else
+			{
+				cout << "Invalid input!\n";
+				cout << "Would you like to try again ? (Y/N)\n";
+				getline(cin, tempstr);
+				utilities::trimString(tempstr);
+
+				if (tempstr == "Y" || tempstr == "y")
+					EditBandeira();
+				else
+					return;
+			}
+
+		}
+
+		cout << "Beach edited!\n";
+		getline(cin, tempstr);
+
+	}
+
 }
 
 void menu::ListPraias()
 {
 	ui_utilities::SetWindow(160, height);
 	ui_utilities::ClearScreen();
-	PrintBanner(width);
+	PrintBanner(160);
 
 	string tempstr;
 
@@ -654,7 +779,7 @@ void menu::SearchPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner(width);
+	PrintBanner();
 
 	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead):\n";
 
@@ -731,7 +856,7 @@ void menu::SearchNearestPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner(width);
+	PrintBanner();
 
 	double latitude, longitude;
 	GPS gps;
@@ -793,7 +918,7 @@ void menu::SearchServices()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
-	PrintBanner(width);
+	PrintBanner();
 
 	cout << "Enter the praia's name (write \".\" to enter the GPS coordinates instead):\n";
 
@@ -910,6 +1035,16 @@ bool menu::LoadBanner(string filename) {
 	}
 
 	return true;
+}
+
+void menu::PrintBanner() {
+
+	for (int i = 0; i < banner.size(); ++i)
+	{
+		cout << string((width - banner[i].size())/2, ' ') << banner[i] << '\n';
+	}
+
+	cout << '\n';
 }
 
 void menu::PrintBanner(unsigned int width) {

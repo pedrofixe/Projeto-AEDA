@@ -18,7 +18,9 @@ servico::servico()
  * @param[in]  gps   The gps
  */
 servico::servico(string nome, GPS gps) : nome(nome), gps(gps)
-{}
+{
+	
+}
 
 /**
  * @brief      Destroys servico.
@@ -47,18 +49,34 @@ string servico::getTipo() const {
 	return tipo;
 }
 
+//2 parte trabalho
+
+bool servico::getAberto() const
+{
+	return aberto;
+}
+
+data servico::getData() const
+{
+	return dt;
+}
+
+
 void servico::setTipo(string tipo)
 {
 	this->tipo = tipo;
 }
 
-//2 parte trabalho
-
-bool servico::getAberto()
+void servico::open()
 {
-	return aberto;
+	aberto = false;
 }
 
+void servico::close(data dt)
+{
+	this->dt = dt;
+	aberto = true;
+}
 
 
 //------------------------------NADADOR------------------------------

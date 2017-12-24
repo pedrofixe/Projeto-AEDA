@@ -26,6 +26,11 @@ praiaFluvial::praiaFluvial()
 praiaFluvial::praiaFluvial(string nome, string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, vector<servico> servicosdapraia) : nome(nome), concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
 {}
 
+praiaFluvial::praiaFluvial(const praiaFluvial& praia)
+{
+	(*this) = praia;
+}
+
 praiaFluvial::~praiaFluvial()
 {}
 
@@ -106,17 +111,22 @@ string praiaFluvial::getInfo() const
 }
 
 
+void praiaFluvial::setNome(string nome) {
+	this->nome = nome;
+}
+
 void praiaFluvial::setGPS(GPS gps) {
 	this->gps = gps;
 }
 
-void praiaFluvial::setNome(string nome) {
-	this->nome = nome;
+void praiaFluvial::setBandeira(bool bandeiraazul) {
+	this->bandeiraazul = bandeiraazul;
 }
 
 void praiaFluvial::setTipo(string tipo) {
 	this->tipo = tipo;
 }
+
 
 bool praiaFluvial::operator<(const praiaFluvial& praia1) const {
 	if (this->concelho != praia1.getConcelho())
@@ -258,8 +268,8 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
 	return 1;
 }
 
-void GestorPraias::addPraia(praiaFluvial *praia) {
-	praias.insert(praia);
+void GestorPraias::addPraia(praiaFluvial praia) {
+	praias.insert(new praiaFluvial(praia));
 }
 
 void GestorPraias::removePraia(set<praiaFluvial*, classcomp>::iterator it) {

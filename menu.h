@@ -22,6 +22,7 @@ public:
 	void MainMenu();
 	void AddPraia();
 	void RemovePraia();
+	void EditBandeira();
 	void ListPraias();
 	void ListByConcelho();
 	void SearchPraia();
@@ -36,6 +37,7 @@ public:
 	void setHeight(unsigned int height);
 	
 	bool LoadBanner(std::string filename);
+	void PrintBanner();
 	void PrintBanner(unsigned int width);
 
 };

@@ -3,6 +3,7 @@
 
 #include <string>
 #include "GPS.h"
+#include "data.h"
 
 /**
  * @brief      Class for servico.
@@ -12,8 +13,8 @@ class servico
 	std::string nome;
 	GPS gps;
 	std::string tipo;
-	bool aberto;
-	//falta data em que fecha
+	bool aberto = true;
+	data dt;
 public:
 	servico();
 	servico(std::string nome, GPS gps);
@@ -22,9 +23,13 @@ public:
 	GPS getGPS() const;
 	std::string getTipo() const;
 	std::string getNome() const;
-	bool getAberto();
+	bool getAberto() const;
+	data getData() const;
 	
 	void setTipo(std::string tipo);
+
+	void open();
+	void close(data dt);
 };
 
 
