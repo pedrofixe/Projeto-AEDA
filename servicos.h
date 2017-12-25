@@ -92,6 +92,7 @@ public:
 
 class servicoForaDaPraia : public servico
 {
+	bool permanente;
 public:
 	servicoForaDaPraia();
 	servicoForaDaPraia(std::string nome, GPS gps);

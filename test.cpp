@@ -8,8 +8,10 @@ int main()
 {
 	cout << "\n";
 
-	menu main;
-	main.Begin();
+	// menu main;
+	// main.Begin();
+
+	cout << sizeof(servico) << " " << sizeof(servico*);
 
 	cout << "\n\n";
 	return 0;

@@ -3,6 +3,7 @@
 #include "utilities.h"
 #include <fstream>
 #include "GPS.h"
+#include <sstream>
 
 using namespace std;
 
@@ -167,7 +168,7 @@ void menu::AddPraia()
 	GPS gps;
 	bool bandeiraazul;
 	int capacidade, larguraMax, caudalMax, profundidadeMax, area;
-	vector<servico> tempServicos;
+	vector<servico*> tempServicos;
 
 	cout << "\n\nEnter the information of the river beach that you want to add! (write \".\" at any time to go back)\n";
 
@@ -496,13 +497,13 @@ void menu::AddPraia()
 		}
 
 		if (tipo == "nadadorSalvador")
-			tempServicos.push_back(nadadorSalvador(nome2));
+			tempServicos.push_back(new nadadorSalvador(nome2));
 		else if (tipo == "cafe")
-			tempServicos.push_back(cafe(nome2, gps2));
+			tempServicos.push_back(new cafe(nome2, gps2));
 		else if (tipo == "restaurante")
-			tempServicos.push_back(restaurante(nome2, gps2));
+			tempServicos.push_back(new restaurante(nome2, gps2));
 		else if (tipo == "campoDesportivo")
-			tempServicos.push_back(campoDesportivo(nome2, gps2));
+			tempServicos.push_back(new campoDesportivo(nome2, gps2));
 	}
 
 endinput: 
@@ -527,7 +528,7 @@ void menu::RemovePraia()
 
 	string tempstr;
 	GPS gps;
-	set<praiaFluvial*, classcomp>::iterator it;
+	set<praiaFluvial*, comparePraia>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
@@ -602,7 +603,7 @@ void menu::EditBandeira()
 
 	string tempstr;
 	GPS gps;
-	set<praiaFluvial*, classcomp>::iterator it;
+	set<praiaFluvial*, comparePraia>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
@@ -716,7 +717,7 @@ void menu::MakeInspection()
 
 	string tempstr;
 	GPS gps;
-	set<praiaFluvial*, classcomp>::iterator it;
+	set<praiaFluvial*, comparePraia>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
@@ -778,42 +779,88 @@ void menu::MakeInspection()
 	{
 		while(true)
 		{
-			cout << "Set flag to true or false ? (T/F)\n";
+			cout << "\n\n";
+
+			vector<servico*> foo = (*it)->getServicos();
+
+			for (int i = 0; i < foo.size(); ++i)
+			{
+				cout << "\n" << (*foo[i]);
+			}
+
+			cout << "\n\nEnter the service's name:\n";
+
 			getline(cin, tempstr);
 			utilities::trimString(tempstr);
 
-			if (tempstr == "T" || tempstr == "t")
+			int index = -1;
+
+			for (int i = 0; i < foo.size(); ++i)
 			{
-				praiaFluvial* foo = *it;
-				foo->setBandeira(true);
-				gestor.SavePraias(inputfilename);
-				break;
+				if (foo[i]->getNome() == tempstr)
+				{
+					index = i;
+					break;
+				}
 			}
 
-			else if (tempstr == "F" || tempstr == "f")
+			if (index == -1) //fail
 			{
-				praiaFluvial* foo = *it;
-				foo->setBandeira(false);
-				gestor.SavePraias(inputfilename);
-				break;
-			}
-
-			else
-			{
-				cout << "Invalid input!\n";
+				cout << "Service not found!!\n";
 				cout << "Would you like to try again ? (Y/N)\n";
 				getline(cin, tempstr);
 				utilities::trimString(tempstr);
 
 				if (tempstr == "Y" || tempstr == "y")
-					EditBandeira();
+					continue;
 				else
 					return;
 			}
+			else //sucess
+			{
+				cout << "\nEnter the date of the inspection: (dd/mm/yyyy)\n";
+				getline(cin, tempstr);
+				utilities::trimString(tempstr);
+
+				unsigned int dia,mes,ano;
+
+				while (true)
+				{
+					try
+					{
+						tempstr += '/';
+						stringstream ss(tempstr);
+
+						getline(ss, tempstr, '/');
+						dia = stoi(tempstr);
+						getline(ss, tempstr, '/');
+						mes = stoi(tempstr);
+						getline(ss, tempstr, '/');
+						ano = stoi(tempstr);
+
+					}
+					catch (exception &e)
+					{
+						cout << "Invalid input!!\n";
+						cout << "Would you like to try again ? (Y/N)\n";
+						getline(cin, tempstr);
+						utilities::trimString(tempstr);
+
+						if (tempstr == "Y" || tempstr == "y")
+							continue;
+						else
+							return;
+					}
+
+
+
+				}
+			}
+
 
 		}
 
-		cout << "Beach edited!\n";
+		cout << "\nInspection registered!\n";
 		getline(cin, tempstr);
 
 	}
@@ -830,11 +877,11 @@ void menu::ListPraias()
 
 	cout << "As praias sao:\n";
 
-	set<praiaFluvial*, classcomp> p = gestor.getPraias();
+	set<praiaFluvial*, comparePraia> p = gestor.getPraias();
 
-	for (set<praiaFluvial*, classcomp>::iterator it = p.begin(); it != p.end(); it++)
+	for (set<praiaFluvial*, comparePraia>::iterator it = p.begin(); it != p.end(); it++)
 	{
-		cout << (*it)->getInfo() << '\n';
+		cout << (**it) << '\n';
 	}
 
 	getline(cin, tempstr);
@@ -861,15 +908,15 @@ void menu::ListByConcelho()
 		return;
 	}
 
-	set<praiaFluvial*, classcomp> p = gestor.getPraias();
+	set<praiaFluvial*, comparePraia> p = gestor.getPraias();
 	vector<praiaFluvial*> foo;
 
-	for (set<praiaFluvial*, classcomp>::iterator it = p.begin(); it != p.end(); it++)
+	for (set<praiaFluvial*, comparePraia>::iterator it = p.begin(); it != p.end(); it++)
 	{
 		if ((*it)->getConcelho() == tempstr)
 		{
 			found = true;
-			cout << '\n' << (*it)->getInfo(); 
+			cout << '\n' << (**it); 
 		}
 	}
 
@@ -899,7 +946,7 @@ void menu::SearchPraia()
 
 	string tempstr;
 	GPS gps;
-	set<praiaFluvial*, classcomp>::iterator it;
+	set<praiaFluvial*, comparePraia>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);
@@ -959,7 +1006,7 @@ void menu::SearchPraia()
 	}
 	else
 	{
-		cout << '\n' << (*it)->getInfo() << '\n';
+		cout << '\n' << (**it) << '\n';
 		getline(cin, tempstr);
 	}
 
@@ -1020,7 +1067,7 @@ void menu::SearchNearestPraia()
 		break;
 	}
 
-	set<praiaFluvial*, classcomp>::iterator it= gestor.getClosestPraia(gps);
+	set<praiaFluvial*, comparePraia>::iterator it= gestor.getClosestPraia(gps);
 
 	cout << "The nearest beach is " << (*it)->getNome();
 
@@ -1038,7 +1085,7 @@ void menu::SearchServices()
 
 	string tempstr;
 	GPS gps;
-	set<praiaFluvial*, classcomp>::iterator it;
+	set<praiaFluvial*, comparePraia>::iterator it;
 
 	getline(cin, tempstr);
 	utilities::trimString(tempstr);

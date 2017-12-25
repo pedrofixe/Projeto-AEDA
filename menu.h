@@ -31,7 +31,7 @@ public:
 	void SearchServices();
 	//void DisplayPraiaServices();
 
-	std::set<praiaFluvial*, classcomp>::iterator getPraia();
+	std::set<praiaFluvial*, comparePraia>::iterator getPraia();
 
 	unsigned int getWidth();
 	unsigned int getHeight();
