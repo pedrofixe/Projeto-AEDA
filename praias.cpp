@@ -252,10 +252,14 @@ string albufeira::getInfo() const
  * @brief      Constructs the Gestor .
  */
 GestorPraias::GestorPraias()
-{}
+{
+	inspecoes.resize(4);
+}
 
 GestorPraias::GestorPraias(set<praiaFluvial*, comparePraia> praias, vector<servicoForaDaPraia*> servicosdefora) : praias(praias), servicosdefora(servicosdefora)
-{}
+{
+	inspecoes.resize(4);
+}
 
 GestorPraias::~GestorPraias()
 {}
