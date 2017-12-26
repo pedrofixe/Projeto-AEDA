@@ -78,11 +78,14 @@ void menu::MainMenu()
 		cout << "1- Add a river beach \n";
 		cout << "2- Remove a river beach \n";
 		cout << "3- Edit a river beach's flag \n";
-		cout << "4- List all river beaches \n";
-		cout << "5- List river beaches of specific county\n";
-		cout << "6- Search river beach \n";
-		cout << "7- Search nearest river beach \n";
-		cout << "8- Search services near river beach \n";
+		cout << "4- Register an inspection of a river beach \n";
+		cout << "5- Close a service \n";
+		cout << "6- Open a service \n";
+		cout << "7- List all river beaches \n";
+		cout << "8- List river beaches of specific county\n";
+		cout << "9- Search river beach \n";
+		cout << "10- Search nearest river beach \n";
+		cout << "11- Search services near river beach \n";
 		cout << "0- Quit \n\n";
 
 
@@ -116,29 +119,47 @@ void menu::MainMenu()
 
 			else if (input == "4")
 			{
-				ListPraias();
+				MakeInspectionPraia();
 				break;
 			}
 
 			else if (input == "5")
 			{
-				ListByConcelho();
+				CloseService();
 				break;
 			}
 
 			else if (input == "6")
 			{
-				SearchPraia();
+				OpenService();
 				break;
 			}
 
 			else if (input == "7")
 			{
-				SearchNearestPraia();
+				ListPraias();
 				break;
 			}
 
 			else if (input == "8")
+			{
+				ListByConcelho();
+				break;
+			}
+
+			else if (input == "9")
+			{
+				SearchPraia();
+				break;
+			}
+
+			else if (input == "10")
+			{
+				SearchNearestPraia();
+				break;
+			}
+
+			else if (input == "11")
 			{
 				SearchServices();
 				break;
@@ -707,7 +728,7 @@ void menu::EditBandeira()
 
 }
 
-void menu::MakeInspection()
+void menu::MakeInspectionPraia()
 {
 	ui_utilities::SetWindow(width, height);
 	ui_utilities::ClearScreen();
@@ -793,18 +814,19 @@ void menu::MakeInspection()
 			getline(cin, tempstr);
 			utilities::trimString(tempstr);
 
-			int index = -1;
+			string nome = "", tipo;
 
 			for (int i = 0; i < foo.size(); ++i)
 			{
 				if (foo[i]->getNome() == tempstr)
 				{
-					index = i;
+					nome = foo[i]->getNome();
+					tipo = foo[i]->getTipo();
 					break;
 				}
 			}
 
-			if (index == -1) //fail
+			if (nome == "") //fail
 			{
 				cout << "Service not found!!\n";
 				cout << "Would you like to try again ? (Y/N)\n";
@@ -852,19 +874,162 @@ void menu::MakeInspection()
 							return;
 					}
 
+					gestor.makePraiaInspection(nome, tipo, data(dia,mes,ano));
 
-
+					break;
 				}
+
 			}
 
-
+			break;
 		}
-
-		cout << "\nInspection registered!\n";
-		getline(cin, tempstr);
 
 	}
 
+	cout << "\nInspection registered!\n";
+	getline(cin, tempstr);
+}
+
+void menu::CloseService()
+{
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+	
+	gestor.listServicosDeFora();
+	
+	bool found;
+	string tempstr;
+	
+	try
+	{
+		string srvcname;
+		cout << "\n\nEnter the service's name:\n";
+
+		getline(cin, srvcname);
+		utilities::trimString(srvcname);
+
+		cout << "\nEnter the date: (dd/mm/yyyy)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		unsigned int dia,mes,ano;
+
+		tempstr += '/';
+		stringstream ss(tempstr);
+
+		getline(ss, tempstr, '/');
+		dia = stoi(tempstr);
+		getline(ss, tempstr, '/');
+		mes = stoi(tempstr);
+		getline(ss, tempstr, '/');
+		ano = stoi(tempstr);
+
+		cout << "\nIs the closure of the service permanent ? (Y/N)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+		bool permanente = (bool)stod(tempstr);
+
+		found = gestor.closeService(srvcname, permanente, data(dia,mes,ano));
+
+	}
+	catch (exception &e)
+	{
+		cout << "Invalid input!!\n";
+		cout << "Would you like to try again ? (Y/N)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			CloseService();
+		else
+			return;
+	}
+
+	if (!found)
+	{
+		cout << "Service not found!!\n";
+		cout << "Would you like to try again ? (Y/N)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			CloseService();
+		else
+			return;
+	}
+
+	cout << "\nService closed!\n";
+	getline(cin, tempstr);
+}
+
+
+void menu::OpenService()
+{
+	ui_utilities::SetWindow(width, height);
+	ui_utilities::ClearScreen();
+	PrintBanner();
+	
+	gestor.listServicosNaoAtivos();
+	
+	bool found;
+	string tempstr;
+
+	try
+	{
+		string srvcname;
+		cout << "\n\nEnter the service's name:\n";
+
+		getline(cin, srvcname);
+		utilities::trimString(srvcname);
+
+		cout << "\nEnter the date: (dd/mm/yyyy)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		unsigned int dia,mes,ano;
+
+		tempstr += '/';
+		stringstream ss(tempstr);
+
+		getline(ss, tempstr, '/');
+		dia = stoi(tempstr);
+		getline(ss, tempstr, '/');
+		mes = stoi(tempstr);
+		getline(ss, tempstr, '/');
+		ano = stoi(tempstr);
+
+		found = gestor.openService(srvcname, data(dia,mes,ano));
+
+	}
+	catch (exception &e)
+	{
+		cout << "Invalid input!!\n";
+		cout << "Would you like to try again ? (Y/N)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			CloseService();
+		else
+			return;
+	}
+
+	if (!found)
+	{
+		cout << "Service not found!!\n";
+		cout << "Would you like to try again ? (Y/N)\n";
+		getline(cin, tempstr);
+		utilities::trimString(tempstr);
+
+		if (tempstr == "Y" || tempstr == "y")
+			OpenService();
+		else
+			return;
+	}
+
+	cout << "\nService open!\n";
+	getline(cin, tempstr);
 }
 
 void menu::ListPraias()
@@ -1144,17 +1309,17 @@ void menu::SearchServices()
 
 	vector<servicoForaDaPraia*> s = gestor.getServicos();
 
-	bool exite = false;
+	bool existe = false;
 	for (int i = 0; i < s.size(); ++i)
 	{
 		if ((*it)->getGPS().distance(s[i]->getGPS()) < 5000) //Menor que 5km
 		{
-			exite = true;
+			existe = true;
 			cout << "Existe um " << s[i]->getTipo() << " com nome " << s[i]->getNome() << " nas coordenadas " << s[i]->getGPS() << "\n"; 
 		}
 	}
 
-	if (!exite)
+	if (!existe)
 		cout << "Nao exite nenhum servico a menos de 5km da praia\n";
 
 	getline(cin,tempstr);

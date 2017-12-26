@@ -418,33 +418,85 @@ bool lesserConcelho(praiaFluvial praia1, praiaFluvial praia2) {
 }*/
 
 
-void GestorPraias::makeInspection(string srvcname, data dt)
+void GestorPraias::makePraiaInspection(string srvcname, string tipo, data dt)
 {
 	vector<servico*> temp;
+	int index = -1;
+	
+	if (tipo == "nadadorSalvador")
+		index = 0;
+	else if (tipo == "cafe")
+		index = 1;
+	else if (tipo == "restaurante")
+		index = 2;
+	else if (tipo == "campoDesportivo")
+		index = 3;
 
-	// for (int i = 0; i < inspecoes.size(); ++i)
-	// {
-	// 	while (inspecoes.size() != 0)
-	// 	{
-	// 		temp.push_back(inspecoes.top());
+	while (inspecoes[index].size() != 0)
+	{
+		temp.push_back(inspecoes[index].top());
 
-	// 		if (inspecoes.top()->getNome() == srvcname)
-	// 		{
+		if (inspecoes[index].top()->getNome() == srvcname)
+		{
+			temp.back()->makeInspection(dt);
+			break;
+		}
 
-	// 		}
+		inspecoes[index].pop();
+	}
 
-	// 	}
+	for (int i = 0; i < temp.size(); ++i)
+	{
+		inspecoes[index].push(temp[i]);
+	}
 
-	// 	for (int i = 0; i < temp.; ++i)
-	// 	{
-	// 	/* code */
-	// 	}
-
-
-	// }
 }
 
+bool GestorPraias::closeService(string srvcname, bool permanente, data dt)
+{
+	for (int i = 0; i < servicosdefora.size(); ++i)
+	{
+		if (servicosdefora[i]->getNome() == srvcname)
+		{
+			servicosdefora[i]->close(permanente, dt);
+			servicosnaoativos.insert(servicosdefora[i]);
+			servicosdefora.erase(servicosdefora.begin() + i);
+			return true;
+		}
+	}
+	return false;
+}
 
+bool GestorPraias::openService(string srvcname, data dt)
+{
+	for (tabHS::iterator it = servicosnaoativos.begin(); it != servicosnaoativos.end(); it++)
+	{
+		if ((*it)->getNome() == srvcname)
+		{
+			(*it)->open(dt);
+			servicosdefora.push_back(*it);
+			servicosnaoativos.erase(it);
+			return true;
+		}
+	}
+	return false;
+}
+
+void GestorPraias::listServicosDeFora() const
+{
+	for (int i = 0; i < servicosdefora.size(); ++i)
+	{
+		cout << servicosdefora[i] << "\n";
+	}
+}
+
+void GestorPraias::listServicosNaoAtivos() const
+{
+	for (auto it = servicosnaoativos.begin(); it != servicosnaoativos.end(); it++)
+	{
+		cout << (**it) << "\n";
+	}
+}
 
 bool GestorPraias::LoadPraias(string filename) 
 {
@@ -670,5 +722,5 @@ bool GestorPraias::SavePraias(string filename) {
 //2
 tabHS GestorPraias::getServicosNaoAtivos() const
 {
-	return servicosNaoAtivos;
+	return servicosnaoativos;
 }

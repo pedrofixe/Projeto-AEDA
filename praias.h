@@ -109,12 +109,12 @@ struct comparePraia
 
 struct servicoHash
 {
-	int operator() (const servico* srvc) const
+	int operator() (const servicoForaDaPraia* srvc) const
 	{
 		return static_cast<int>(std::hash<std::string>()(srvc->getNome())); //Mudar para GPS
 	}
 
-	bool operator() (const servico* srvc1, const servico* srvc2) const
+	bool operator() (const servicoForaDaPraia* srvc1, const servicoForaDaPraia* srvc2) const
 	{
 		return (srvc1->getNome() == srvc2->getNome());
 	}
@@ -130,7 +130,7 @@ struct compareServico
 
 
 //2
-typedef std::unordered_set<servico*, servicoHash, servicoHash> tabHS;
+typedef std::unordered_set<servicoForaDaPraia*, servicoHash, servicoHash> tabHS;
 
 /**
 * @brief      Class for GestorPraias.
@@ -139,7 +139,7 @@ class GestorPraias
 {
 	std::set<praiaFluvial*, comparePraia> praias;
 	std::vector<servicoForaDaPraia*> servicosdefora;
-	tabHS servicosNaoAtivos;		
+	tabHS servicosnaoativos;		
 	std::vector<std::priority_queue<servico*, std::vector<servico*>, compareServico>> inspecoes; // 0 = nadadorSalvador, 1 = cafe, 2 = restaurante, 3 = campoDesportivo
 
 public:
@@ -156,6 +156,7 @@ public:
 
 	std::set<praiaFluvial*, comparePraia> getPraias();
 	std::vector<servicoForaDaPraia*> getServicos();
+
 	praiaFluvial getPraia(std::set<praiaFluvial*, comparePraia>::iterator it);
 
 	std::set<praiaFluvial*, comparePraia>::iterator getClosestPraia(GPS gps);
@@ -163,7 +164,13 @@ public:
 	std::set<praiaFluvial*, comparePraia>::iterator findPraia(GPS gps);
 	bool isEnd(std::set<praiaFluvial*, comparePraia>::iterator &it);
 
-	void makeInspection(std::string srvcname, data dt);
+	void makePraiaInspection(std::string srvcname, std::string tipo, data dt);
+
+	bool closeService(std::string srvcname, bool permanente, data dt);
+	bool openService(std::string srvcname, data dt);
+
+	void listServicosDeFora() const;
+	void listServicosNaoAtivos() const;
 
 	void servicosInfo(praiaFluvial praia);
 

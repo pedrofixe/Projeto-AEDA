@@ -29,11 +29,10 @@ public:
 	std::string getInfo() const;
 	
 	void setTipo(std::string tipo);
+	void setAberto(bool aberto);
+	void setData(data dt);
 
-	void makeInspection(bool state, data dt);
-
-	void open(data dt);
-	void close(data dt);
+	void makeInspection(data dt);
 
 };
 
@@ -97,6 +96,9 @@ public:
 	servicoForaDaPraia();
 	servicoForaDaPraia(std::string nome, GPS gps);
 	~servicoForaDaPraia();
+
+	void close(bool permanente, data dt);
+	void open(data dt);
 };
 
 

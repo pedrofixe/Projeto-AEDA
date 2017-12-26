@@ -23,7 +23,9 @@ public:
 	void AddPraia();
 	void RemovePraia();
 	void EditBandeira();
-	void MakeInspection();
+	void MakeInspectionPraia();
+	void CloseService();
+	void OpenService();
 	void ListPraias();
 	void ListByConcelho();
 	void SearchPraia();

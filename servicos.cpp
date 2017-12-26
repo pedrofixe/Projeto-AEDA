@@ -75,21 +75,21 @@ void servico::setTipo(string tipo)
 	this->tipo = tipo;
 }
 
-void servico::makeInspection(bool state, data dt)
+void servico::setAberto(bool aberto)
 {
-	this->aberto = state;
+	this->aberto = aberto;
+}
+
+void servico::setData(data dt)
+{
 	this->dt = dt;
 }
 
-void servico::open(data dt)
+void servico::makeInspection(data dt)
 {
-	makeInspection(true, dt);
+	this->dt = dt;
 }
 
-void servico::close(data dt)
-{
-	makeInspection(false, dt);
-}
 
 bool operator<(const servico& srvc1, const servico& srvc2) {
 	return (srvc2.getData() < srvc2.getData());
@@ -185,6 +185,19 @@ servicoForaDaPraia::servicoForaDaPraia(string nome, GPS gps) : servico(nome, gps
 
 servicoForaDaPraia::~servicoForaDaPraia()
 {}
+
+void servicoForaDaPraia::close(bool permanente, data dt)
+{
+	setAberto(false);
+	this->permanente = permanente;
+	setData(dt);
+}
+
+void servicoForaDaPraia::open(data dt)
+{
+	setAberto(true);
+	setData(dt);
+}
 
 //------------------------------PONTOTURISTICO------------------------------
 
