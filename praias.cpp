@@ -271,7 +271,7 @@ int GestorPraias::praiaInfo(string praia) {
 
 	if (it != praias.end())
 	{
-		cout << (*it)->getInfo();
+		cout << (**it);
 		return 0;
 	}
 
@@ -284,7 +284,7 @@ int GestorPraias::praiaInfoGPS(GPS gps) {
 
 	if (it != praias.end())
 	{
-		cout << (*it)->getInfo();
+		cout << (**it);
 		return 0;
 	}
 
@@ -486,11 +486,19 @@ bool GestorPraias::openService(string srvcname, data dt)
 	return false;
 }
 
+void GestorPraias::listPraias() const
+{
+	for (set<praiaFluvial*, comparePraia>::iterator it = praias.begin(); it != praias.end(); it++)
+	{
+		cout << (**it) << '\n';
+	}
+}
+
 void GestorPraias::listServicosDeFora() const
 {
 	for (int i = 0; i < servicosdefora.size(); ++i)
 	{
-		cout << servicosdefora[i] << "\n";
+		cout << *servicosdefora[i] << "\n";
 	}
 }
 

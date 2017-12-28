@@ -107,6 +107,14 @@ struct comparePraia
 
 };
 
+struct compareServico
+{
+	bool operator() (const servico* lhs, const servico* rhs) const
+  {
+  	return !(*lhs<*rhs);
+  }
+};
+
 struct servicoHash
 {
 	int operator() (const servicoForaDaPraia* srvc) const
@@ -120,14 +128,6 @@ struct servicoHash
 	}
 };
 
-struct compareServico
-{
-	bool operator() (const servico* lhs, const servico* rhs) const
-  {
-  	return *lhs<*rhs;
-  }
-};
-
 
 //2
 typedef std::unordered_set<servicoForaDaPraia*, servicoHash, servicoHash> tabHS;
@@ -137,10 +137,10 @@ typedef std::unordered_set<servicoForaDaPraia*, servicoHash, servicoHash> tabHS;
 */
 class GestorPraias
 {
-	std::set<praiaFluvial*, comparePraia> praias;
+	std::set<praiaFluvial*, comparePraia> praias; // BST
 	std::vector<servicoForaDaPraia*> servicosdefora;
-	tabHS servicosnaoativos;		
 	std::vector<std::priority_queue<servico*, std::vector<servico*>, compareServico>> inspecoes; // 0 = nadadorSalvador, 1 = cafe, 2 = restaurante, 3 = campoDesportivo
+	tabHS servicosnaoativos;
 
 public:
 	GestorPraias();
@@ -169,6 +169,7 @@ public:
 	bool closeService(std::string srvcname, bool permanente, data dt);
 	bool openService(std::string srvcname, data dt);
 
+	void listPraias() const;
 	void listServicosDeFora() const;
 	void listServicosNaoAtivos() const;
 

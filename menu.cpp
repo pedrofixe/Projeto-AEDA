@@ -928,7 +928,15 @@ void menu::CloseService()
 		cout << "\nIs the closure of the service permanent ? (Y/N)\n";
 		getline(cin, tempstr);
 		utilities::trimString(tempstr);
-		bool permanente = (bool)stod(tempstr);
+		bool permanente;
+
+		if (tempstr == "Y" || tempstr == "y")
+			bool permanente = true;
+
+		else if (tempstr == "N" || tempstr == "n")
+			bool permanente = false;
+		else
+			throw;
 
 		found = gestor.closeService(srvcname, permanente, data(dia,mes,ano));
 
@@ -1042,12 +1050,7 @@ void menu::ListPraias()
 
 	cout << "As praias sao:\n";
 
-	set<praiaFluvial*, comparePraia> p = gestor.getPraias();
-
-	for (set<praiaFluvial*, comparePraia>::iterator it = p.begin(); it != p.end(); it++)
-	{
-		cout << (**it) << '\n';
-	}
+	gestor.listPraias();
 
 	getline(cin, tempstr);
 
