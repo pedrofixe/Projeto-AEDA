@@ -1,8 +1,0 @@
-digraph "/mnt/B09E79689E7927CC/Users/yurby/Desktop/Estudos/2º ano/1º Semestre/AEDA/Projeto-AEDA/GPS.h"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="/mnt/B09E79689E7927CC\l/Users/yurby/Desktop\l/Estudos/2º ano/1º Semestre\l/AEDA/Projeto-AEDA/GPS.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="iostream",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-}
