@@ -7,7 +7,7 @@
 #include <iostream>
 
 /**
- * @brief      Class for servico.
+ * @brief      Class for services inside a river beach area.
  */
 class servico
 {	
@@ -129,7 +129,7 @@ bool operator<(const servico& srvc1, const servico& srvc2);
 std::ostream& operator<<(std::ostream& os, const servico& srvc);
 
 /**
- * @brief      Class for nadador salvador. Derivates from servico.
+ * @brief      Class for lifeguard. Derivates from servico.
  */
 class nadadorSalvador : public servico
 {
@@ -183,7 +183,7 @@ public:
 };
 
 /**
- * @brief      Class for restaurante. Derivates from servico.
+ * @brief      Class for restaurant. Derivates from servico.
  */
 class restaurante : public servico
 {
@@ -210,7 +210,7 @@ public:
 };
 
 /**
- * @brief      Class for campo. Derivates from servico.
+ * @brief      Class for sports field. Derivates from servico.
  */
 class campoDesportivo : public servico
 {
@@ -237,7 +237,9 @@ public:
 };
 
 
-
+/**
+ * @brief      Class for services out of the river beach area. Derivates from servico.
+ */
 class servicoForaDaPraia : public servico
 {
 	bool permanente;
@@ -276,7 +278,9 @@ public:
 	void open(data dt);
 };
 
-
+/**
+ * @brief      Class for tourism stops. Derivates from servicoForaDaPraia.
+ */
 class pontoTuristico: public servicoForaDaPraia
 {
 public:
@@ -300,6 +304,9 @@ public:
 	~pontoTuristico();
 };
 
+/**
+ * @brief      Class for hotels. Derivates from servicoForaDaPraia.
+ */
 class alojamento : public servicoForaDaPraia
 {
 public:

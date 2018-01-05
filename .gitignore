@@ -1,3 +1,4 @@
 makefile
 main
-input*
+doxygen/html
+doxygen/latex

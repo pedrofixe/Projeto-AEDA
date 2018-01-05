@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/**
+ * @brief      Class with functions that facilitates both the clearing as well as resizing of the console/terminal.
+ */
 class ui_utilities{
 
 	unsigned int width = 100;
