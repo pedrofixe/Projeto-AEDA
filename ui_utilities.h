@@ -13,8 +13,20 @@ class ui_utilities{
 
 public:
 	
+	/**
+	 * @brief      Clears the console/terminal.
+	 */
 	static void ClearScreen();
-	static bool SetWindow(const int&, const int&);
+
+	/**
+	 * @brief      Sets the console/terminal window size.
+	 *
+	 * @param[in]  width   The width
+	 * @param[in]  height  The height
+	 *
+	 * @return     True if sucessful and False otherwise
+	 */
+	static bool SetWindow(const int& width, const int& height);
 
 };
 

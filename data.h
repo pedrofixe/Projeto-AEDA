@@ -23,9 +23,9 @@ public:
 	/**
 	 * @brief      Contructor of the data object with specification of the date.
 	 *
-	 * @param[in]  dia   The dia
-	 * @param[in]  mes   The mes
-	 * @param[in]  ano   The ano
+	 * @param[in]  dia   The day
+	 * @param[in]  mes   The month
+	 * @param[in]  ano   The year
 	 */
 	data(unsigned int dia, unsigned int mes, unsigned int ano);
 	

@@ -8,21 +8,11 @@ using namespace std;
 
 //------------------------------PRAIAFLUVIAL------------------------------
 
-/**
- * @brief      Constructs the object.
- */
+
 praiaFluvial::praiaFluvial()
 {}
 
-/**
- * @brief      Constructs the object.
- *
- * @param[in]  concelho         The concelho
- * @param[in]  gps              The gps
- * @param[in]  bandeirazul      The bandeirazul
- * @param[in]  capacidade       The capacidade
- * @param[in]  servicosdapraia  The servicosdapraia
- */
+
 praiaFluvial::praiaFluvial(string nome, string concelho, GPS gps, bool bandeiraazul, unsigned int capacidade, vector<servico*> servicosdapraia) : nome(nome), concelho(concelho), gps(gps), bandeiraazul(bandeiraazul), capacidade(capacidade), servicosdapraia(servicosdapraia)
 {}
 
@@ -248,9 +238,7 @@ string albufeira::getInfo() const
 
 //------------------------------GESTORPRAIAS------------------------------
 
-/**
- * @brief      Constructs the Gestor .
- */
+
 GestorPraias::GestorPraias()
 {
 	inspecoes.resize(4);
@@ -264,32 +252,6 @@ GestorPraias::GestorPraias(set<praiaFluvial*, comparePraia> praias, vector<servi
 GestorPraias::~GestorPraias()
 {}
 
-
-int GestorPraias::praiaInfo(string praia) {
-
-	set<praiaFluvial*, comparePraia>::iterator it = this->findPraia(praia);
-
-	if (it != praias.end())
-	{
-		cout << (**it);
-		return 0;
-	}
-
-	return 1;
-}
-
-int GestorPraias::praiaInfoGPS(GPS gps) {
-
-	set<praiaFluvial*, comparePraia>::iterator it = this->findPraia(gps);
-
-	if (it != praias.end())
-	{
-		cout << (**it);
-		return 0;
-	}
-
-	return 1;
-}
 
 void GestorPraias::addPraia(praiaFluvial praia) {
 	praias.insert(new praiaFluvial(praia));

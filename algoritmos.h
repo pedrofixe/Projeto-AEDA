@@ -3,6 +3,10 @@
 
 #include <vector>
 
+/** @defgroup algoritmos algoritmos
+ * @{
+ * Functions to search or other vectors.
+ */
 
 template<class T>
 int sequentialSearch(std::vector<T> & v, T target) {
@@ -145,5 +149,6 @@ void selectionSort(std::vector<T*> & v, bool (*f)(T a, T b)) {
 
 }
 
+/**@}*/
 
 #endif
