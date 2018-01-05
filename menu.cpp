@@ -31,7 +31,7 @@ void menu::PreMenu()
 		getline(cin, tempstr);
 		utilities::trimString(tempstr);
 		if (tempstr == "")
-			tempstr = "inputfile2";
+			tempstr = "inputfile";
 
 		if (gestor.LoadPraias(tempstr))
 		{
