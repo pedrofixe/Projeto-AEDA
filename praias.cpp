@@ -1,5 +1,5 @@
 #include "praias.h"
-#include "algoritmos.h"
+#include "algoritmos.cpp"
 #include "utilities.h"
 #include <sstream>
 #include <fstream>

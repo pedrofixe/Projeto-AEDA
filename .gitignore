@@ -1,4 +1,6 @@
 makefile
 main
+main.exe
 doxygen/html
 doxygen/latex
+*.o
